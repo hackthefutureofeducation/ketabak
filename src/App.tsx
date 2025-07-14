@@ -2,10 +2,12 @@ import { useState } from "react";
 import reactLogo from "./assets/react.svg";
 import { invoke } from "@tauri-apps/api/core";
 import "./App.css";
+import { useDarkMode } from "./DarkModeProvider";
 
 function App() {
   const [greetMsg, setGreetMsg] = useState("");
   const [name, setName] = useState("");
+  const { darkMode, toggleDarkMode } = useDarkMode();
 
   async function greet() {
     // Learn more about Tauri commands at https://tauri.app/develop/calling-rust/
@@ -13,8 +15,15 @@ function App() {
   }
 
   return (
-    <main className="min-h-screen flex flex-col items-center justify-center bg-gray-50 px-4">
-      <h1 className="text-3xl font-bold mb-8 text-gray-800">
+    <main className="min-h-screen flex flex-col items-center justify-center bg-gray-50 dark:bg-gray-900 px-4">
+      <button
+        className="absolute top-4 right-4 px-3 py-1 rounded bg-gray-200 dark:bg-gray-700 text-gray-800 dark:text-gray-200 shadow hover:bg-gray-300 dark:hover:bg-gray-600 transition"
+        onClick={toggleDarkMode}
+        aria-label="Toggle dark mode"
+      >
+        {darkMode ? "🌙 Dark" : "☀️ Light"}
+      </button>
+      <h1 className="text-3xl font-bold mb-8 text-gray-800 dark:text-white">
         Welcome to Tauri + React
       </h1>
 
@@ -41,7 +50,7 @@ function App() {
           />
         </a>
       </div>
-      <p className="mb-8 text-gray-600">
+      <p className="mb-8 text-gray-600 dark:text-white">
         Click on the Tauri, Vite, and React logos to learn more.
       </p>
 
@@ -54,7 +63,7 @@ function App() {
       >
         <input
           id="greet-input"
-          className="px-4 py-2 rounded border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-400"
+          className="px-4 py-2 rounded border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-400 dark:text-white"
           onChange={(e) => setName(e.currentTarget.value)}
           placeholder="Enter a name..."
         />
