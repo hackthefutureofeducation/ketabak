@@ -1,3 +1,19 @@
 @import 'tailwindcss';
 @tailwind utilities;
 @custom-variant dark (&:where(.dark, .dark *));
+@theme {
+  --color-background: #ffffff;
+  --color-foreground: #1f2937;
+  --color-primary: #f97316;
+  --color-primary-hover: #c2410c;
+}
+@layer theme {
+  :root {
+    @variant dark {
+      --color-background: #0f172a;
+      --color-foreground: #f8fafc;
+      --color-primary: #fdba74;
+      --color-primary-hover: #ea580c;
+    }
+  }
+}
