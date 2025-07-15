@@ -30,7 +30,7 @@ const NavBar: React.FC = () => {
           px-3 py-1 rounded
           bg-primary
           shadow
-          hover:bg-primary
+          hover:bg-primary-hover
           transition-colors flex items-center gap-2
         "
       >
