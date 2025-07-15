@@ -43,4 +43,4 @@ export const DarkModeProvider = ({ children }: { children: ReactNode }) => {
       {children}
     </DarkModeContext.Provider>
   );
-}; 
+};

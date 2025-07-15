@@ -1,17 +1,17 @@
-import { useState } from "react";
-import reactLogo from "./assets/react.svg";
-import { invoke } from "@tauri-apps/api/core";
-import "./App.css";
-import { useDarkMode } from "./DarkModeProvider";
+import { useState } from 'react';
+import reactLogo from './assets/react.svg';
+import { invoke } from '@tauri-apps/api/core';
+import './App.css';
+import { useDarkMode } from './DarkModeProvider';
 
 function App() {
-  const [greetMsg, setGreetMsg] = useState("");
-  const [name, setName] = useState("");
+  const [greetMsg, setGreetMsg] = useState('');
+  const [name, setName] = useState('');
   const { darkMode, toggleDarkMode } = useDarkMode();
 
   async function greet() {
     // Learn more about Tauri commands at https://tauri.app/develop/calling-rust/
-    setGreetMsg(await invoke("greet", { name }));
+    setGreetMsg(await invoke('greet', { name }));
   }
 
   return (
@@ -21,7 +21,7 @@ function App() {
         onClick={toggleDarkMode}
         aria-label="Toggle dark mode"
       >
-        {darkMode ? "🌙 Dark" : "☀️ Light"}
+        {darkMode ? '🌙 Dark' : '☀️ Light'}
       </button>
       <h1 className="text-3xl font-bold mb-8 text-gray-800 dark:text-white">
         Welcome to Tauri + React
