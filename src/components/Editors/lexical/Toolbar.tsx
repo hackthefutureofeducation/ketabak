@@ -11,6 +11,7 @@ import {
   $createTextNode,
   TextFormatType,
 } from 'lexical';
+import { $setBlocksType } from '@lexical/selection';
 import { $createHeadingNode, $isHeadingNode, HeadingTagType } from '@lexical/rich-text';
 import { INSERT_ORDERED_LIST_COMMAND, INSERT_UNORDERED_LIST_COMMAND } from '@lexical/list';
 import {
@@ -80,15 +81,7 @@ const Toolbar: React.FC<ToolbarProps> = ({ wordCount, charCount, isAutoSaved }) 
     editor.update(() => {
       const selection = $getSelection();
       if ($isRangeSelection(selection)) {
-        const nodes = selection.getNodes();
-        nodes.forEach((node) => {
-          const parent = node.getParent();
-          if (parent && !$isHeadingNode(parent)) {
-            const heading = $createHeadingNode(headingSize);
-            parent.replace(heading);
-            heading.append($createTextNode(node.getTextContent()));
-          }
-        });
+        $setBlocksType(selection, () => $createHeadingNode(headingSize));
       }
     });
   };

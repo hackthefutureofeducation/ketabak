@@ -4,9 +4,9 @@ import { ListItemNode, ListNode } from '@lexical/list';
 export const theme = {
   paragraph: 'mb-2 leading-relaxed',
   heading: {
-    h1: 'text-3xl font-bold mb-4 mt-6 text-gray-900',
-    h2: 'text-2xl font-semibold mb-3 mt-5 text-gray-800',
-    h3: 'text-xl font-medium mb-2 mt-4 text-gray-700',
+    h1: 'text-3xl font-bold mb-4 mt-6',
+    h2: 'text-2xl font-semibold mb-3 mt-5',
+    h3: 'text-xl font-medium mb-2 mt-4',
   },
   list: {
     nested: {
