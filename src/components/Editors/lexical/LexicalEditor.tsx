@@ -1,5 +1,5 @@
-import React, { useCallback, useState } from 'react';
-import { EditorState } from 'lexical';
+import React, { useCallback, useState, useRef, useEffect } from 'react';
+import { EditorState, $getRoot } from 'lexical';
 import { LexicalComposer } from '@lexical/react/LexicalComposer';
 import { RichTextPlugin } from '@lexical/react/LexicalRichTextPlugin';
 import { ContentEditable } from '@lexical/react/LexicalContentEditable';
@@ -12,21 +12,31 @@ import { initialConfig } from './theme';
 import { FileText } from 'lucide-react';
 
 const LexicalEditor: React.FC = () => {
-  const [editorState, setEditorState] = useState<EditorState | null>(null);
   const [wordCount, setWordCount] = useState(0);
   const [charCount, setCharCount] = useState(0);
   const [isAutoSaved, setIsAutoSaved] = useState(false);
+  const autoSaveTimeoutRef = useRef<number | null>(null);
 
   const onChange = useCallback((editorState: EditorState) => {
-    setEditorState(editorState);
     editorState.read(() => {
-      const root = editorState._nodeMap.get('root');
+      const root = $getRoot();
       const text = root ? root.getTextContent() : '';
       setCharCount(text.length);
       setWordCount(text.trim() === '' ? 0 : text.trim().split(/\s+/).length);
     });
     setIsAutoSaved(false);
-    setTimeout(() => setIsAutoSaved(true), 1000);
+    if (autoSaveTimeoutRef.current) {
+      clearTimeout(autoSaveTimeoutRef.current);
+    }
+    autoSaveTimeoutRef.current = setTimeout(() => setIsAutoSaved(true), 1000);
+  }, []);
+
+  useEffect(() => {
+    return () => {
+      if (autoSaveTimeoutRef.current) {
+        clearTimeout(autoSaveTimeoutRef.current);
+      }
+    };
   }, []);
 
   const placeholder = (
