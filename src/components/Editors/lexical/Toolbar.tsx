@@ -42,8 +42,6 @@ const Toolbar: React.FC<ToolbarProps> = ({ wordCount, charCount, isAutoSaved }) 
   const [isItalic, setIsItalic] = useState(false);
   const [isUnderline, setIsUnderline] = useState(false);
   const [isStrikethrough, setIsStrikethrough] = useState(false);
-  const [canUndo, setCanUndo] = useState(false);
-  const [canRedo, setCanRedo] = useState(false);
 
   const updateToolbar = useCallback(() => {
     const selection = $getSelection();
@@ -62,17 +60,6 @@ const Toolbar: React.FC<ToolbarProps> = ({ wordCount, charCount, isAutoSaved }) 
       });
     });
   }, [editor, updateToolbar]);
-
-  useEffect(() => {
-    return editor.registerCommand(
-      UNDO_COMMAND,
-      () => {
-        setCanUndo(true);
-        return false;
-      },
-      1
-    );
-  }, [editor]);
 
   const formatText = (format: TextFormatType) => {
     editor.dispatchCommand(FORMAT_TEXT_COMMAND, format);
