@@ -10,6 +10,7 @@ import {
   $createParagraphNode,
   $createTextNode,
   TextFormatType,
+  $getRoot,
 } from 'lexical';
 import { $setBlocksType } from '@lexical/selection';
 import { $createHeadingNode, $isHeadingNode, HeadingTagType } from '@lexical/rich-text';
@@ -96,10 +97,10 @@ const Toolbar: React.FC<ToolbarProps> = ({ wordCount, charCount, isAutoSaved }) 
 
   const clearContent = () => {
     editor.update(() => {
-      const root = editor.getRootElement();
-      if (root) {
-        root.innerHTML = '';
-      }
+      const root = $getRoot();
+      root.clear();
+      const paragraph = $createParagraphNode();
+      root.append(paragraph);
     });
     editor.dispatchCommand(CLEAR_HISTORY_COMMAND, undefined);
   };
