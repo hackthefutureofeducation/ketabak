@@ -11,15 +11,8 @@ import {
   $createTextNode,
   TextFormatType,
 } from 'lexical';
-import {
-  $createHeadingNode,
-  $isHeadingNode,
-  HeadingTagType,
-} from '@lexical/rich-text';
-import {
-  INSERT_ORDERED_LIST_COMMAND,
-  INSERT_UNORDERED_LIST_COMMAND,
-} from '@lexical/list';
+import { $createHeadingNode, $isHeadingNode, HeadingTagType } from '@lexical/rich-text';
+import { INSERT_ORDERED_LIST_COMMAND, INSERT_UNORDERED_LIST_COMMAND } from '@lexical/list';
 import {
   Bold,
   Italic,
@@ -123,11 +116,7 @@ const Toolbar: React.FC<ToolbarProps> = ({ wordCount, charCount, isAutoSaved }) 
       <div className="px-4 py-3">
         <div className="flex flex-wrap items-center gap-1 mb-3">
           <div className="flex items-center gap-1 mr-4">
-            <ToolbarButton
-              onClick={() => formatText('bold')}
-              active={isBold}
-              title="Bold (Ctrl+B)"
-            >
+            <ToolbarButton onClick={() => formatText('bold')} active={isBold} title="Bold (Ctrl+B)">
               <Bold size={16} />
             </ToolbarButton>
             <ToolbarButton
@@ -172,16 +161,10 @@ const Toolbar: React.FC<ToolbarProps> = ({ wordCount, charCount, isAutoSaved }) 
           </div>
 
           <div className="flex items-center gap-1 mr-4">
-            <ToolbarButton
-              onClick={() => insertList('bullet')}
-              title="Bullet List"
-            >
+            <ToolbarButton onClick={() => insertList('bullet')} title="Bullet List">
               <List size={16} />
             </ToolbarButton>
-            <ToolbarButton
-              onClick={() => insertList('number')}
-              title="Numbered List"
-            >
+            <ToolbarButton onClick={() => insertList('number')} title="Numbered List">
               <ListOrdered size={16} />
             </ToolbarButton>
           </div>
@@ -201,10 +184,7 @@ const Toolbar: React.FC<ToolbarProps> = ({ wordCount, charCount, isAutoSaved }) 
             </ToolbarButton>
           </div>
 
-          <ToolbarButton
-            onClick={clearContent}
-            title="Clear Document"
-          >
+          <ToolbarButton onClick={clearContent} title="Clear Document">
             <RotateCcw size={16} />
           </ToolbarButton>
         </div>
@@ -228,4 +208,4 @@ const Toolbar: React.FC<ToolbarProps> = ({ wordCount, charCount, isAutoSaved }) 
   );
 };
 
-export default Toolbar; 
+export default Toolbar;

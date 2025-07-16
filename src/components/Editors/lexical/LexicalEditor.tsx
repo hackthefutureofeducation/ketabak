@@ -38,15 +38,11 @@ const LexicalEditor: React.FC = () => {
   return (
     <div className="w-full mx-auto bg-background border-primary border rounded-lg shadow-lg overflow-hidden">
       <LexicalComposer initialConfig={initialConfig}>
-        <Toolbar 
-          wordCount={wordCount} 
-          charCount={charCount} 
-          isAutoSaved={isAutoSaved}
-        />
+        <Toolbar wordCount={wordCount} charCount={charCount} isAutoSaved={isAutoSaved} />
         <div className="relative">
           <RichTextPlugin
             contentEditable={
-              <ContentEditable 
+              <ContentEditable
                 className="min-h-[500px] p-6 text-foreground leading-relaxed focus:outline-none resize-none"
                 style={{ caretColor: '#3B82F6' }}
               />
@@ -63,4 +59,4 @@ const LexicalEditor: React.FC = () => {
   );
 };
 
-export default LexicalEditor; 
+export default LexicalEditor;

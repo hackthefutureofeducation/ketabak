@@ -8,12 +8,12 @@ export interface ToolbarButtonProps {
   title: string;
 }
 
-const ToolbarButton: React.FC<ToolbarButtonProps> = ({ 
-  onClick, 
-  active = false, 
-  disabled = false, 
-  children, 
-  title 
+const ToolbarButton: React.FC<ToolbarButtonProps> = ({
+  onClick,
+  active = false,
+  disabled = false,
+  children,
+  title,
 }) => (
   <button
     onClick={onClick}
@@ -21,14 +21,12 @@ const ToolbarButton: React.FC<ToolbarButtonProps> = ({
     title={title}
     className={`
       p-2 rounded-md transition-all duration-200 ease-in-out
-      ${active 
-        ? 'bg-blue-100 text-blue-700 shadow-sm' 
-        : 'text-primary hover:bg-gray-100 hover:text-gray-900'
+      ${
+        active
+          ? 'bg-blue-100 text-blue-700 shadow-sm'
+          : 'text-primary hover:bg-gray-100 hover:text-gray-900'
       }
-      ${disabled 
-        ? 'opacity-50 cursor-not-allowed' 
-        : 'hover:shadow-sm active:scale-95'
-      }
+      ${disabled ? 'opacity-50 cursor-not-allowed' : 'hover:shadow-sm active:scale-95'}
       focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2
     `}
   >
@@ -36,4 +34,4 @@ const ToolbarButton: React.FC<ToolbarButtonProps> = ({
   </button>
 );
 
-export default ToolbarButton; 
+export default ToolbarButton;
