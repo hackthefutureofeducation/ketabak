@@ -5,6 +5,8 @@ import { invoke } from '@tauri-apps/api/core';
 interface FileContextProps {
   fileUrl: string | null;
   content: string | null;
+  loading: boolean;
+  error: string | null;
   selectFile: () => Promise<void>;
 }
 
@@ -21,18 +23,57 @@ export const useFile = () => {
 export const FileProvider = ({ children }: { children: ReactNode }) => {
   const [fileUrl, setFileUrl] = useState<string | null>(null);
   const [content, setContent] = useState<string | null>(null);
+  const [loading, setLoading] = useState<boolean>(false);
+  const [error, setError] = useState<string | null>(null);
+
   const selectFile = async () => {
-    const selectedPath = await open({
-      multiple: false,
-      filters: [
-        { extensions: ['ketabi'], name: '' }, // customize as needed
-      ],
-    });
-    setFileUrl(selectedPath);
-    const fileContent = await invoke('read_file', { path: selectedPath });
-    setContent(fileContent as string);
+    setLoading(true);
+    setError(null);
+    try {
+      const selectedPath = await open({
+        multiple: false,
+        filters: [
+          { extensions: ['ketabi'], name: '' }, // customize as needed
+        ],
+      });
+
+      if (!selectedPath || typeof selectedPath !== 'string') {
+        setLoading(false);
+        setError(null);
+        return; // User cancelled or invalid path
+      }
+
+      setFileUrl(selectedPath);
+
+      let fileContent;
+      try {
+        fileContent = await invoke('read_file', { path: selectedPath });
+      } catch (err) {
+        setContent(null);
+        setError('Failed to read file.');
+        setLoading(false);
+        return;
+      }
+
+      if (typeof fileContent === 'string') {
+        setContent(fileContent);
+        setError(null);
+      } else {
+        setContent(null);
+        setError('Invalid file content.');
+      }
+    } catch (error) {
+      setFileUrl(null);
+      setContent(null);
+      setError('An unexpected error occurred.');
+    } finally {
+      setLoading(false);
+    }
   };
+
   return (
-    <FileContext.Provider value={{ fileUrl, selectFile, content }}>{children}</FileContext.Provider>
+    <FileContext.Provider value={{ fileUrl, selectFile, content, loading, error }}>
+      {children}
+    </FileContext.Provider>
   );
 };
