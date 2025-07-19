@@ -1,5 +1,5 @@
 import React from 'react';
-import { useDarkMode } from '../DarkModeProvider';
+import { useDarkMode } from '../providers/DarkModeProvider';
 import { Sun, Moon } from 'lucide-react';
 
 const NavBar: React.FC = () => {
