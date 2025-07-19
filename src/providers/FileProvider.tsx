@@ -20,6 +20,31 @@ export const useFile = () => {
   return context;
 };
 
+const readFileContent = async (
+  path: string,
+  setContent: (content: string | null) => void,
+  setError: (error: string | null) => void,
+  setLoading: (loading: boolean) => void
+) => {
+  let fileContent;
+  try {
+    fileContent = await invoke('read_file', { path });
+  } catch (err) {
+    setContent(null);
+    setError('Failed to read file.');
+    setLoading(false);
+    return;
+  }
+
+  if (typeof fileContent === 'string') {
+    setContent(fileContent);
+    setError(null);
+  } else {
+    setContent(null);
+    setError('Invalid file content.');
+  }
+};
+
 export const FileProvider = ({ children }: { children: ReactNode }) => {
   const [fileUrl, setFileUrl] = useState<string | null>(null);
   const [content, setContent] = useState<string | null>(null);
@@ -45,23 +70,7 @@ export const FileProvider = ({ children }: { children: ReactNode }) => {
 
       setFileUrl(selectedPath);
 
-      let fileContent;
-      try {
-        fileContent = await invoke('read_file', { path: selectedPath });
-      } catch (err) {
-        setContent(null);
-        setError('Failed to read file.');
-        setLoading(false);
-        return;
-      }
-
-      if (typeof fileContent === 'string') {
-        setContent(fileContent);
-        setError(null);
-      } else {
-        setContent(null);
-        setError('Invalid file content.');
-      }
+      await readFileContent(selectedPath, setContent, setError, setLoading);
     } catch (error) {
       setFileUrl(null);
       setContent(null);
