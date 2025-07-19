@@ -2,9 +2,6 @@ use std::fs;
 use std::path::PathBuf;
 
 #[tauri::command]
-use std::path::Path;
-
-#[tauri::command]
 pub fn read_file(path: String) -> Result<String, String> {
     let path_buf = PathBuf::from(path);
     
