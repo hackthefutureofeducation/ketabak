@@ -7,7 +7,7 @@ export const Start = () => {
   return (
     <main className="min-h-screen flex flex-col items-center justify-center px-6 w-full text-center">
       <h1 className="text-3xl font-extrabold text-gray-800 dark:text-gray-100">
-        Welcome to Ketabi
+        Welcome to Ketabak
       </h1>
       <p className="mt-3 text-gray-600 dark:text-gray-400 text-base max-w-md">
         Your journey to better writing starts here.
