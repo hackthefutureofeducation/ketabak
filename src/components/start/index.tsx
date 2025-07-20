@@ -1,4 +1,4 @@
-import { File } from 'lucide-react';
+import { File, FilePlus } from 'lucide-react';
 import { useFile } from '../../providers/FileProvider';
 
 export const Start = () => {
@@ -13,13 +13,19 @@ export const Start = () => {
         Your journey to better writing starts here.
       </p>
 
-      <button
-        onClick={selectFile}
-        className="mt-10 flex items-center gap-3 px-6 py-3 bg-primary text-white rounded-xl hover:bg-primary/90 transition-colors cursor-pointer"
-      >
-        <File size={24} />
-        <span className="text-lg font-medium">Open File</span>
-      </button>
+      <div className="grid grid-cols-2 gap-2">
+        <button
+          onClick={selectFile}
+          className="mt-10 flex items-center gap-3 px-6 py-3 bg-primary text-white rounded-xl hover:bg-primary/90 transition-colors cursor-pointer"
+        >
+          <File size={24} />
+          <span className="text-lg font-medium">Open File</span>
+        </button>
+        <button className="mt-10 flex items-center gap-3 px-6 py-3 bg-primary text-white rounded-xl hover:bg-primary/90 transition-colors cursor-pointer">
+          <FilePlus size={24} />
+          <span className="text-lg font-medium">New Project</span>
+        </button>
+      </div>
     </main>
   );
 };
