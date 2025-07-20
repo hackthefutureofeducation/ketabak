@@ -32,8 +32,8 @@ jobs:
         uses: TriPSs/conventional-changelog-action@v5
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
-          version-file: "./package.json,./package-lock.json"
-          git-branch: "release-from-${{ github.sha }}"
+          version-file: './package.json'
+          git-branch: 'release-from-${{ github.sha }}'
           skip-git-pull: true
 
       # Create PR using GitHub CLI
