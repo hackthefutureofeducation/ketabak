@@ -88,13 +88,13 @@ export const FileProvider = ({ children }: { children: ReactNode }) => {
         filters: [{ name: 'Ketabi Project', extensions: ['ketabi'] }],
         defaultPath: `${project}.ketabi`,
       });
-  
+
       if (!filePath) return; // User cancelled the dialog
-  
+
       const initialContent = JSON.stringify({ projectName: project });
-  
+
       await writeTextFile(filePath, initialContent);
-  
+
       setFileUrl(filePath);
       setContent(initialContent);
       setError(null);
@@ -102,7 +102,7 @@ export const FileProvider = ({ children }: { children: ReactNode }) => {
       console.error('Error creating file:', err);
       setError('Failed to create file.');
     }
-  };  
+  };
 
   return (
     <FileContext.Provider value={{ fileUrl, selectFile, content, loading, error, createFile }}>
