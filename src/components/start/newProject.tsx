@@ -1,4 +1,5 @@
 import { useState, FormEvent, ChangeEvent } from 'react';
+import { z } from 'zod';
 import { useFile } from '../../providers/FileProvider';
 import { ArrowLeft } from 'lucide-react';
 import Button from '../ui/Button';
@@ -6,6 +7,16 @@ import Button from '../ui/Button';
 interface NewProjectProps {
   onBack: () => void;
 }
+// Zod schema for project name
+const INVALID_FILENAME_CHARS = /[\\/:*?"<>|]/;
+const projectNameSchema = z
+  .string()
+  .min(3, 'Project name must be at least 3 characters')
+  .max(100, 'Project name must be at most 100 characters')
+  .transform((s) => s.trim())
+  .refine((name) => !INVALID_FILENAME_CHARS.test(name), {
+    message: 'Project name contains invalid characters: \\ / : * ? " < > |',
+  });
 
 export const NewProject = ({ onBack }: NewProjectProps) => {
   const [projectName, setProjectName] = useState<string>('');
@@ -17,8 +28,10 @@ export const NewProject = ({ onBack }: NewProjectProps) => {
     e.preventDefault();
     setError('');
 
-    if (!projectName.trim()) {
-      setError('Project name is required');
+    // Zod validation
+    const result = projectNameSchema.safeParse(projectName);
+    if (!result.success) {
+      setError(result.error.issues[0].message);
       return;
     }
 
