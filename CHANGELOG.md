@@ -1,4 +1,13 @@
-# 0.2.0 (2025-07-19)
+# [0.3.0](https://github.com/hackthefutureofeducation/ketabak/compare/v0.2.0...v0.3.0) (2025-07-24)
+
+
+### Features
+
+* New Project ([176f3ac](https://github.com/hackthefutureofeducation/ketabak/commit/176f3ac2887335b1b6419541f91fb9acd594a161))
+
+
+
+# [0.2.0](https://github.com/hackthefutureofeducation/ketabak/compare/7517d0da37ba996148efc01c4c9b12c0aa070f21...v0.2.0) (2025-07-19)
 
 
 ### Features
