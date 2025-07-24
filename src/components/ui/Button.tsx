@@ -10,7 +10,7 @@ const variantClasses = {
   default:
     'px-3 py-1 rounded bg-primary shadow hover:bg-primary-hover transition-colors flex items-center gap-2 cursor-pointer',
   secondary:
-    'mt-10 flex items-center gap-3 px-6 py-3 bg-primary text-white rounded-xl hover:bg-primary-hover transition-colors cursor-pointer text-black w-full justify-center',
+    'mt-10 flex items-center gap-3 px-6 py-3 bg-primary text-white rounded-xl hover:bg-primary-hover transition-colors cursor-pointer text-black w-full justify-center disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:bg-primary',
 } as const;
 
 const Button = forwardRef<HTMLButtonElement, ButtonProps>(
