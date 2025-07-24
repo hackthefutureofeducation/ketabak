@@ -1,3 +1,12 @@
+# [0.5.0](https://github.com/hackthefutureofeducation/ketabak/compare/v0.4.1...v0.5.0) (2025-07-24)
+
+
+### Features
+
+* Add Zod validation for project name in New Project component ([776db78](https://github.com/hackthefutureofeducation/ketabak/commit/776db783805086d31811a5aa7fc730c668667cdd))
+
+
+
 ## [0.4.1](https://github.com/hackthefutureofeducation/ketabak/compare/v0.4.0...v0.4.1) (2025-07-24)
 
 
