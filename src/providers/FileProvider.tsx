@@ -1,5 +1,6 @@
 import React, { createContext, useContext, useState, ReactNode } from 'react';
-import { open } from '@tauri-apps/plugin-dialog';
+import { open, save } from '@tauri-apps/plugin-dialog';
+import { writeTextFile } from '@tauri-apps/plugin-fs';
 import { invoke } from '@tauri-apps/api/core';
 
 interface FileContextProps {
@@ -8,6 +9,7 @@ interface FileContextProps {
   loading: boolean;
   error: string | null;
   selectFile: () => Promise<void>;
+  createFile: (project: string) => Promise<void>;
 }
 
 const FileContext = createContext<FileContextProps | undefined>(undefined);
@@ -80,8 +82,30 @@ export const FileProvider = ({ children }: { children: ReactNode }) => {
     }
   };
 
+  const createFile = async (project: string) => {
+    try {
+      const filePath = await save({
+        filters: [{ name: 'Ketabi Project', extensions: ['ketabi'] }],
+        defaultPath: `${project}.ketabi`,
+      });
+  
+      if (!filePath) return; // User cancelled the dialog
+  
+      const initialContent = JSON.stringify({ projectName: project });
+  
+      await writeTextFile(filePath, initialContent);
+  
+      setFileUrl(filePath);
+      setContent(initialContent);
+      setError(null);
+    } catch (err: unknown) {
+      console.error('Error creating file:', err);
+      setError('Failed to create file.');
+    }
+  };  
+
   return (
-    <FileContext.Provider value={{ fileUrl, selectFile, content, loading, error }}>
+    <FileContext.Provider value={{ fileUrl, selectFile, content, loading, error, createFile }}>
       {children}
     </FileContext.Provider>
   );
