@@ -1,3 +1,12 @@
+# [0.4.0](https://github.com/hackthefutureofeducation/ketabak/compare/v0.3.0...v0.4.0) (2025-07-24)
+
+
+### Features
+
+* Add clsx and tailwind-merge dependencies; refactor button components ([0f25729](https://github.com/hackthefutureofeducation/ketabak/commit/0f25729c1dc097af17781f405cca0e1e312cc89d))
+
+
+
 # [0.3.0](https://github.com/hackthefutureofeducation/ketabak/compare/v0.2.0...v0.3.0) (2025-07-24)
 
 
