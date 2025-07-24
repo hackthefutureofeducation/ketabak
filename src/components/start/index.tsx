@@ -8,9 +8,10 @@ export const Start = () => {
   const [showNewProject, setShowNewProject] = useState(false);
 
   if (showNewProject) {
+    const handleBackToStart = () => setShowNewProject(false);
     return (
       <main className="min-h-screen flex flex-col items-center justify-center px-6 w-full text-center">
-        <NewProject />
+        <NewProject onBack={handleBackToStart} />
       </main>
     );
   }

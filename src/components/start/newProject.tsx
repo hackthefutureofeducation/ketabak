@@ -1,7 +1,12 @@
 import { useState, FormEvent, ChangeEvent } from 'react';
 import { useFile } from '../../providers/FileProvider';
+import { ArrowLeft } from 'lucide-react';
 
-export const NewProject = () => {
+interface NewProjectProps {
+  onBack: () => void;
+}
+
+export const NewProject = ({ onBack }: NewProjectProps) => {
   const [projectName, setProjectName] = useState<string>('');
   const [isSubmitting, setIsSubmitting] = useState<boolean>(false);
   const [error, setError] = useState<string>('');
@@ -38,6 +43,14 @@ export const NewProject = () => {
 
   return (
     <div className="max-w-md mx-auto p-6">
+      <button
+        type="button"
+        onClick={onBack}
+        className="mb-4 flex items-center gap-2 px-2 py-1 bg-primary text-white rounded-lg hover:bg-primary/90 transition-colors cursor-pointer text-sm"
+      >
+        <ArrowLeft size={16} /> Back
+      </button>
+
       <div className="text-center mb-8">
         <h1 className="text-3xl font-bold text-gray-900 dark:text-white mb-2">
           Create New Project
