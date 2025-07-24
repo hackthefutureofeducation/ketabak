@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { File, FilePlus } from 'lucide-react';
 import { useFile } from '../../providers/FileProvider';
 import { NewProject } from './newProject';
+import Button from '../ui/Button';
 
 export const Start = () => {
   const { selectFile } = useFile();
@@ -26,20 +27,14 @@ export const Start = () => {
       </p>
 
       <div className="grid grid-cols-2 gap-2">
-        <button
-          onClick={selectFile}
-          className="mt-10 flex items-center gap-3 px-6 py-3 bg-primary text-white rounded-xl hover:bg-primary/90 transition-colors cursor-pointer"
-        >
+        <Button onClick={selectFile} variant="secondary">
           <File size={24} />
           <span className="text-lg font-medium">Open File</span>
-        </button>
-        <button
-          onClick={() => setShowNewProject(true)}
-          className="mt-10 flex items-center gap-3 px-6 py-3 bg-primary text-white rounded-xl hover:bg-primary/90 transition-colors cursor-pointer"
-        >
+        </Button>
+        <Button onClick={() => setShowNewProject(true)} variant="secondary">
           <FilePlus size={24} />
           <span className="text-lg font-medium">New Project</span>
-        </button>
+        </Button>
       </div>
     </main>
   );

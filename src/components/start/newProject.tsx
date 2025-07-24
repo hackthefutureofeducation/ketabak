@@ -1,6 +1,7 @@
 import { useState, FormEvent, ChangeEvent } from 'react';
 import { useFile } from '../../providers/FileProvider';
 import { ArrowLeft } from 'lucide-react';
+import Button from '../ui/Button';
 
 interface NewProjectProps {
   onBack: () => void;
@@ -40,13 +41,9 @@ export const NewProject = ({ onBack }: NewProjectProps) => {
 
   return (
     <div className="max-w-md mx-auto p-6">
-      <button
-        type="button"
-        onClick={onBack}
-        className="mb-4 flex items-center gap-2 px-2 py-1 bg-primary text-white rounded-lg hover:bg-primary/90 transition-colors cursor-pointer text-sm"
-      >
+      <Button type="button" onClick={onBack}>
         <ArrowLeft size={16} /> Back
-      </button>
+      </Button>
 
       <div className="text-center mb-8">
         <h1 className="text-3xl font-bold text-gray-900 dark:text-white mb-2">
@@ -97,16 +94,11 @@ export const NewProject = ({ onBack }: NewProjectProps) => {
           )}
         </div>
 
-        <button
+        <Button
           type="submit"
           disabled={isSubmitting || !projectName.trim()}
-          className="w-full flex items-center justify-center px-6 py-3 
-                             bg-primary hover:bg-primary-hover disabled:bg-gray-400 dark:disabled:bg-gray-600
-                             text-white font-medium rounded-lg
-                             focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 dark:focus:ring-offset-gray-800
-                             transition-all duration-200 transform hover:scale-[1.02] active:scale-[0.98]
-                             disabled:cursor-not-allowed disabled:transform-none disabled:hover:scale-100 cursor-pointer"
           aria-describedby="submit-help"
+          variant="secondary"
         >
           {isSubmitting ? (
             <>
@@ -136,7 +128,7 @@ export const NewProject = ({ onBack }: NewProjectProps) => {
           ) : (
             'Create Project'
           )}
-        </button>
+        </Button>
 
         <p id="submit-help" className="text-xs text-gray-500 dark:text-gray-400 text-center">
           You can change the project name later in settings

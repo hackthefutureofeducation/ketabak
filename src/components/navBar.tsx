@@ -1,6 +1,7 @@
 import React from 'react';
 import { useDarkMode } from '../providers/DarkModeProvider';
 import { Sun, Moon } from 'lucide-react';
+import Button from './ui/Button';
 
 const NavBar: React.FC = () => {
   const { darkMode, toggleDarkMode } = useDarkMode();
@@ -23,19 +24,9 @@ const NavBar: React.FC = () => {
       >
         Ketabak
       </div>
-      <button
-        onClick={toggleDarkMode}
-        aria-label="Toggle dark mode"
-        className="
-          px-3 py-1 rounded
-          bg-primary
-          shadow
-          hover:bg-primary-hover
-          transition-colors flex items-center gap-2
-        "
-      >
+      <Button onClick={toggleDarkMode} aria-label="Toggle dark mode">
         {darkMode ? <Moon size={20} /> : <Sun size={20} />}
-      </button>
+      </Button>
     </nav>
   );
 };
