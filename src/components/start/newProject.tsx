@@ -27,9 +27,6 @@ export const NewProject = ({ onBack }: NewProjectProps) => {
       // Simulate API call
       await createFile(projectName);
       console.log('Creating project:', projectName);
-      // Reset form on success
-      setProjectName('');
-      // You would typically redirect or show success message here
     } catch (err) {
       setError('Failed to create project. Please try again.');
     } finally {
