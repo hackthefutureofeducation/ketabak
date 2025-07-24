@@ -1,3 +1,12 @@
+## [0.4.1](https://github.com/hackthefutureofeducation/ketabak/compare/v0.4.0...v0.4.1) (2025-07-24)
+
+
+### Bug Fixes
+
+* **Button:** add disabled state styles to secondary variant ([40bc91d](https://github.com/hackthefutureofeducation/ketabak/commit/40bc91d1864af3794fe61dbe69491855432a0fbd))
+
+
+
 # [0.4.0](https://github.com/hackthefutureofeducation/ketabak/compare/v0.3.0...v0.4.0) (2025-07-24)
 
 
