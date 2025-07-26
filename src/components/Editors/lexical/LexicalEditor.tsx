@@ -1,6 +1,13 @@
-import React, { useCallback, useState, useRef, useEffect } from 'react';
-import { EditorState, $getRoot } from 'lexical';
+import React, { useCallback, useState, useRef, useEffect, useMemo } from 'react';
+import {
+  EditorState,
+  $getRoot,
+  SerializedEditorState,
+  CLEAR_HISTORY_COMMAND,
+  $createParagraphNode,
+} from 'lexical';
 import { LexicalComposer } from '@lexical/react/LexicalComposer';
+import { useLexicalComposerContext } from '@lexical/react/LexicalComposerContext';
 import { RichTextPlugin } from '@lexical/react/LexicalRichTextPlugin';
 import { ContentEditable } from '@lexical/react/LexicalContentEditable';
 import { HistoryPlugin } from '@lexical/react/LexicalHistoryPlugin';
@@ -9,40 +16,77 @@ import { ListPlugin } from '@lexical/react/LexicalListPlugin';
 import { LexicalErrorBoundary } from '@lexical/react/LexicalErrorBoundary';
 import Toolbar from './Toolbar';
 import { initialConfig } from './theme';
-import { FileText } from 'lucide-react';
+import { EpubPage, useEpubManager } from '../../../providers/EpubManager';
+
+const ContentUpdaterPlugin: React.FC<{ initialEditorState: EpubPage }> = ({
+  initialEditorState,
+}) => {
+  const [editor] = useLexicalComposerContext();
+  const lastSetPageId = useRef<string | null>(null);
+
+  useEffect(() => {
+    if (initialEditorState.id === lastSetPageId.current) return;
+
+    try {
+      if (!initialEditorState.content) {
+        editor.update(() => {
+          const root = $getRoot();
+          root.clear();
+          const paragraph = $createParagraphNode();
+          root.append(paragraph);
+        });
+        editor.dispatchCommand(CLEAR_HISTORY_COMMAND, undefined);
+      } else {
+        const newState = editor.parseEditorState(initialEditorState.content);
+        editor.setEditorState(newState);
+      }
+      lastSetPageId.current = initialEditorState.id;
+    } catch (err) {
+      console.error('Failed to parse editor state:', err);
+    }
+  }, [editor, initialEditorState.id, initialEditorState.content]);
+
+  return null;
+};
 
 const LexicalEditor: React.FC = () => {
   const [wordCount, setWordCount] = useState(0);
   const [charCount, setCharCount] = useState(0);
   const [isAutoSaved, setIsAutoSaved] = useState(false);
   const autoSaveTimeoutRef = useRef<number | null>(null);
+  const { editPage, activePage } = useEpubManager();
 
-  const onChange = useCallback((editorState: EditorState) => {
-    editorState.read(() => {
-      const root = $getRoot();
-      const text = root ? root.getTextContent() : '';
-      setCharCount(text.length);
-      setWordCount(text.trim() === '' ? 0 : text.trim().split(/\s+/).length);
-    });
-    setIsAutoSaved(false);
-    if (autoSaveTimeoutRef.current) {
-      clearTimeout(autoSaveTimeoutRef.current);
-    }
-    autoSaveTimeoutRef.current = setTimeout(() => setIsAutoSaved(true), 1000);
-  }, []);
+  const onChange = useCallback(
+    (editorState: EditorState) => {
+      editorState.read(() => {
+        const root = $getRoot();
+        const text = root.getTextContent();
+        setCharCount(text.length);
+        setWordCount(text.trim() === '' ? 0 : text.trim().split(/\s+/).length);
+      });
 
-  useEffect(() => {
-    return () => {
+      editPage(editorState.toJSON());
+
+      setIsAutoSaved(false);
       if (autoSaveTimeoutRef.current) {
         clearTimeout(autoSaveTimeoutRef.current);
       }
-    };
+      autoSaveTimeoutRef.current = window.setTimeout(() => setIsAutoSaved(true), 1000);
+    },
+    [editPage]
+  );
+
+  useEffect(() => {
+    return () => clearTimeout(autoSaveTimeoutRef.current ?? undefined);
   }, []);
 
-  const placeholder = (
-    <div className="text-gray-400 pointer-events-none absolute top-0 left-0 select-none">
-      Start writing your content here...
-    </div>
+  const placeholder = useMemo(
+    () => (
+      <div className="text-gray-400 absolute top-6 left-6 select-none pointer-events-none">
+        Start writing your content here...
+      </div>
+    ),
+    []
   );
 
   return (
@@ -50,6 +94,7 @@ const LexicalEditor: React.FC = () => {
       <LexicalComposer initialConfig={initialConfig}>
         <Toolbar wordCount={wordCount} charCount={charCount} isAutoSaved={isAutoSaved} />
         <div className="relative">
+          {activePage && <ContentUpdaterPlugin initialEditorState={activePage} />}
           <RichTextPlugin
             contentEditable={
               <ContentEditable
