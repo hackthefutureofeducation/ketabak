@@ -54,6 +54,7 @@ const LexicalEditor: React.FC = () => {
   const [charCount, setCharCount] = useState(0);
   const [isAutoSaved, setIsAutoSaved] = useState(false);
   const autoSaveTimeoutRef = useRef<number | null>(null);
+  const latestEditorStateRef = useRef<SerializedEditorState | null>(null);
   const { editPage, activePage } = useEpubManager();
 
   const onChange = useCallback(
@@ -65,13 +66,20 @@ const LexicalEditor: React.FC = () => {
         setWordCount(text.trim() === '' ? 0 : text.trim().split(/\s+/).length);
       });
 
-      editPage(editorState.toJSON());
+      // Store the latest serialized state in a ref
+      latestEditorStateRef.current = editorState.toJSON();
 
       setIsAutoSaved(false);
       if (autoSaveTimeoutRef.current) {
         clearTimeout(autoSaveTimeoutRef.current);
       }
-      autoSaveTimeoutRef.current = window.setTimeout(() => setIsAutoSaved(true), 1000);
+      autoSaveTimeoutRef.current = window.setTimeout(() => {
+        setIsAutoSaved(true);
+        // Call editPage (sync) only after debounce
+        if (latestEditorStateRef.current) {
+          editPage(latestEditorStateRef.current);
+        }
+      }, 1000);
     },
     [editPage]
   );
