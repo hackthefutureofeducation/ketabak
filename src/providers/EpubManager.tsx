@@ -1,5 +1,7 @@
+import { invoke } from '@tauri-apps/api/core';
 import { SerializedEditorState } from 'lexical';
 import { createContext, useContext, useState, useMemo, ReactNode } from 'react';
+import { useFile } from './FileProvider';
 
 export interface EpubPage {
   readonly id: string;
@@ -13,7 +15,7 @@ interface EpubManagerContextProps {
   activePage: EpubPage | null;
   setActivePage: (id: string) => void;
   createPage: (title: string) => void;
-  editPage: (content: SerializedEditorState) => boolean;
+  editPage: (content: SerializedEditorState) => Promise<boolean>;
   editPageTitle: (title: string) => boolean;
   uploadDump: (dump: EpubPage[]) => void;
 }
@@ -36,6 +38,7 @@ const generateId = (): string =>
 export const EpubManagerProvider = ({ children }: { children: ReactNode }) => {
   const [pages, setPages] = useState<EpubPage[]>([]);
   const [activePageId, setActivePageId] = useState<string | null>(null);
+  const {fileUrl} = useFile();
 
   const activePage = useMemo(
     () => pages.find((page) => page.id === activePageId) || null,
@@ -55,11 +58,15 @@ export const EpubManagerProvider = ({ children }: { children: ReactNode }) => {
     setActivePageId(newPage.id);
   };
 
-  const editPage = (content: SerializedEditorState): boolean => {
+  const editPage = async (content: SerializedEditorState): Promise<boolean> => {
     if (!activePageId) throw new Error('No active page to edit');
     setPages((prev) =>
       prev.map((page) => (page.id === activePageId ? { ...page, content } : page))
     );
+    await invoke('sync', {
+        json: pages,
+        path: fileUrl,
+    })
     return true;
   };
 

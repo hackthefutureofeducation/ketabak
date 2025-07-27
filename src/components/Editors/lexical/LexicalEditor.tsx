@@ -73,11 +73,11 @@ const LexicalEditor: React.FC = () => {
       if (autoSaveTimeoutRef.current) {
         clearTimeout(autoSaveTimeoutRef.current);
       }
-      autoSaveTimeoutRef.current = window.setTimeout(() => {
+      autoSaveTimeoutRef.current = window.setTimeout(async () => {
         setIsAutoSaved(true);
         // Call editPage (sync) only after debounce
         if (latestEditorStateRef.current) {
-          editPage(latestEditorStateRef.current);
+          await editPage(latestEditorStateRef.current);
         }
       }, 1000);
     },
