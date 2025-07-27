@@ -1,6 +1,14 @@
 import { invoke } from '@tauri-apps/api/core';
 import { SerializedEditorState } from 'lexical';
-import { createContext, useContext, useState, useMemo, ReactNode } from 'react';
+import {
+  createContext,
+  useContext,
+  useState,
+  useMemo,
+  useCallback,
+  useEffect,
+  ReactNode,
+} from 'react';
 import { useFile } from './FileProvider';
 
 export interface EpubPage {
@@ -45,38 +53,42 @@ export const EpubManagerProvider = ({ children }: { children: ReactNode }) => {
     [pages, activePageId]
   );
 
-  const setActivePage = (id: string) => {
+  const setActivePage = useCallback((id: string) => {
     setActivePageId(id);
-  };
+  }, []);
 
-  const createPage = (title: string) => {
+  const createPage = useCallback((title: string) => {
     const newPage: EpubPage = {
       id: generateId(),
       title,
     };
     setPages((prev) => [...prev, newPage]);
     setActivePageId(newPage.id);
-  };
+  }, []);
 
-  const editPage = async (content: SerializedEditorState): Promise<boolean> => {
-    if (!activePageId) throw new Error('No active page to edit');
-    setPages((prev) =>
-      prev.map((page) => (page.id === activePageId ? { ...page, content } : page))
-    );
-    await invoke('sync', {
-      json: pages,
-      path: fileUrl,
-    });
-    return true;
-  };
+  const editPage = useCallback(
+    async (content: SerializedEditorState): Promise<boolean> => {
+      if (!activePageId) throw new Error('No active page to edit');
+      setPages((prev) =>
+        prev.map((page) => (page.id === activePageId ? { ...page, content } : page))
+      );
+      return true;
+    },
+    [activePageId]
+  );
 
-  const editPageTitle = (title: string): boolean => {
-    if (!activePageId) return false;
-    setPages((prev) => prev.map((page) => (page.id === activePageId ? { ...page, title } : page)));
-    return true;
-  };
+  const editPageTitle = useCallback(
+    (title: string): boolean => {
+      if (!activePageId) return false;
+      setPages((prev) =>
+        prev.map((page) => (page.id === activePageId ? { ...page, title } : page))
+      );
+      return true;
+    },
+    [activePageId]
+  );
 
-  const uploadDump = (dump: EpubPage[]) => {
+  const uploadDump = useCallback((dump: EpubPage[]) => {
     const hasDuplicates = new Set(dump.map((p) => p.id)).size !== dump.length;
 
     if (hasDuplicates) {
@@ -85,7 +97,18 @@ export const EpubManagerProvider = ({ children }: { children: ReactNode }) => {
 
     setPages(dump);
     setActivePageId(dump[0]?.id ?? null);
-  };
+  }, []);
+
+  useEffect(() => {
+    if (!fileUrl) return;
+
+    invoke('sync', {
+      json: pages,
+      path: fileUrl,
+    }).catch((err) => {
+      console.error('Failed to sync pages:', err);
+    });
+  }, [pages, fileUrl]);
 
   const value = useMemo(
     () => ({
@@ -98,7 +121,16 @@ export const EpubManagerProvider = ({ children }: { children: ReactNode }) => {
       editPageTitle,
       uploadDump,
     }),
-    [pages, activePageId, activePage]
+    [
+      pages,
+      activePageId,
+      activePage,
+      setActivePage,
+      createPage,
+      editPage,
+      editPageTitle,
+      uploadDump,
+    ]
   );
 
   return <EpubManagerContext.Provider value={value}>{children}</EpubManagerContext.Provider>;
