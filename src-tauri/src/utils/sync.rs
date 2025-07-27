@@ -16,7 +16,8 @@ pub fn sync(json: Value, path: String) -> Result<(), String> {
     }
 
     // Serialize JSON object to string
-    let json_str = serde_json::to_string(&json).map_err(|_| "Failed to serialize JSON".to_string())?;
+    let json_str =
+        serde_json::to_string(&json).map_err(|_| "Failed to serialize JSON".to_string())?;
 
     // Compress JSON
     let mut encoder = GzEncoder::new(Vec::new(), Compression::default());
@@ -27,4 +28,4 @@ pub fn sync(json: Value, path: String) -> Result<(), String> {
     let mut file = File::create(path_buf).map_err(|_| "Failed to create file".to_string())?;
     file.write_all(&compressed).map_err(|_| "Failed to write file".to_string())?;
     Ok(())
-} 
+}

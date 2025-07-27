@@ -38,7 +38,7 @@ const generateId = (): string =>
 export const EpubManagerProvider = ({ children }: { children: ReactNode }) => {
   const [pages, setPages] = useState<EpubPage[]>([]);
   const [activePageId, setActivePageId] = useState<string | null>(null);
-  const {fileUrl} = useFile();
+  const { fileUrl } = useFile();
 
   const activePage = useMemo(
     () => pages.find((page) => page.id === activePageId) || null,
@@ -64,9 +64,9 @@ export const EpubManagerProvider = ({ children }: { children: ReactNode }) => {
       prev.map((page) => (page.id === activePageId ? { ...page, content } : page))
     );
     await invoke('sync', {
-        json: pages,
-        path: fileUrl,
-    })
+      json: pages,
+      path: fileUrl,
+    });
     return true;
   };
 
