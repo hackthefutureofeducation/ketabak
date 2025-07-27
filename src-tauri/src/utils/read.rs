@@ -1,8 +1,12 @@
-use std::fs;
+use std::fs::File;
+use std::io::{BufReader, Read};
 use std::path::PathBuf;
 
+use flate2::read::GzDecoder;
+use serde_json::Value;
+
 #[tauri::command]
-pub fn read_file(path: String) -> Result<String, String> {
+pub fn read_file(path: String) -> Result<Value, String> {
     let path_buf = PathBuf::from(path);
 
     // Validate file extension
@@ -10,16 +14,18 @@ pub fn read_file(path: String) -> Result<String, String> {
         return Err("Invalid file type. Only .ketabi files are allowed.".to_string());
     }
 
-    // Check file size before reading
-    if let Ok(metadata) = std::fs::metadata(&path_buf) {
-        const MAX_FILE_SIZE: u64 = 10 * 1024 * 1024; // 10MB limit
-        if metadata.len() > MAX_FILE_SIZE {
-            return Err("File too large. Maximum size is 10MB.".to_string());
-        }
-    }
+    // Open and read the file
+    let file = File::open(path_buf).map_err(|_| "Failed to open file".to_string())?;
+    let mut decoder = GzDecoder::new(BufReader::new(file));
+    let mut decompressed = String::new();
+    decoder
+        .read_to_string(&mut decompressed)
+        .map_err(|_| "Failed to decompress or read file".to_string())?;
 
-    match fs::read_to_string(path_buf) {
-        Ok(contents) => Ok(contents),
-        Err(_) => Err("Failed to read file.".to_string()),
-    }
+    // Parse JSON
+    let json: Value =
+        serde_json::from_str(&decompressed).map_err(|_| "Failed to parse JSON".to_string())?;
+
+    println!("{:?}", json);
+    Ok(json)
 }
