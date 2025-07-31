@@ -1,4 +1,3 @@
-import { invoke } from '@tauri-apps/api/core';
 import { SerializedEditorState } from 'lexical';
 import {
   createContext,
@@ -46,7 +45,8 @@ const generateId = (): string =>
 export const EpubManagerProvider = ({ children }: { children: ReactNode }) => {
   const [pages, setPages] = useState<EpubPage[]>([]);
   const [activePageId, setActivePageId] = useState<string | null>(null);
-  const { fileUrl } = useFile();
+  const [dirty, setDirty] = useState(false); // Track if user made changes
+  const { fileUrl, sync, content } = useFile();
 
   const activePage = useMemo(
     () => pages.find((page) => page.id === activePageId) || null,
@@ -64,6 +64,7 @@ export const EpubManagerProvider = ({ children }: { children: ReactNode }) => {
     };
     setPages((prev) => [...prev, newPage]);
     setActivePageId(newPage.id);
+    setDirty(true);
   }, []);
 
   const editPage = useCallback(
@@ -72,6 +73,7 @@ export const EpubManagerProvider = ({ children }: { children: ReactNode }) => {
       setPages((prev) =>
         prev.map((page) => (page.id === activePageId ? { ...page, content } : page))
       );
+      setDirty(true);
       return true;
     },
     [activePageId]
@@ -83,6 +85,7 @@ export const EpubManagerProvider = ({ children }: { children: ReactNode }) => {
       setPages((prev) =>
         prev.map((page) => (page.id === activePageId ? { ...page, title } : page))
       );
+      setDirty(true);
       return true;
     },
     [activePageId]
@@ -97,18 +100,26 @@ export const EpubManagerProvider = ({ children }: { children: ReactNode }) => {
 
     setPages(dump);
     setActivePageId(dump[0]?.id ?? null);
+    setDirty(false); // not dirty since it's a fresh load
   }, []);
 
+  // Load pages from file content when fileUrl changes
   useEffect(() => {
-    if (!fileUrl) return;
+    if (fileUrl && content) {
+      console.log('Loading pages from file content:', content);
+      setPages((content as any).pages);
+      setActivePageId((content as any).pages[0]?.id ?? null);
+      setDirty(false); // not dirty since it's a fresh load
+    }
+  }, [fileUrl, content]);
 
-    invoke('sync', {
-      json: pages,
-      path: fileUrl,
-    }).catch((err) => {
+  // Sync only when user has changed something
+  useEffect(() => {
+    if (!dirty) return;
+    sync({ pages }).catch((err) => {
       console.error('Failed to sync pages:', err);
     });
-  }, [pages, fileUrl]);
+  }, [pages, dirty, sync]);
 
   const value = useMemo(
     () => ({

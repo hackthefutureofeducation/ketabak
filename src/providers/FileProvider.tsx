@@ -5,11 +5,12 @@ import { invoke } from '@tauri-apps/api/core';
 
 interface FileContextProps {
   fileUrl: string | null;
-  content: string | null;
+  content: object | null;
   loading: boolean;
   error: string | null;
   selectFile: () => Promise<void>;
   createFile: (project: string) => Promise<void>;
+  sync: (data: object) => Promise<boolean>;
 }
 
 const FileContext = createContext<FileContextProps | undefined>(undefined);
@@ -24,32 +25,26 @@ export const useFile = () => {
 
 const readFileContent = async (
   path: string,
-  setContent: (content: string | null) => void,
+  setContent: (content: object | null) => void,
   setError: (error: string | null) => void,
   setLoading: (loading: boolean) => void
 ) => {
-  let fileContent;
   try {
-    fileContent = await invoke('read_file', { path });
+    const fileContent: object = await invoke('read_file', { path });
+    setContent(fileContent);
+    setError(null);
+    setLoading(false);
   } catch (err) {
     setContent(null);
     setError('Failed to read file.');
     setLoading(false);
     return;
   }
-
-  if (typeof fileContent === 'string') {
-    setContent(fileContent);
-    setError(null);
-  } else {
-    setContent(null);
-    setError('Invalid file content.');
-  }
 };
 
 export const FileProvider = ({ children }: { children: ReactNode }) => {
   const [fileUrl, setFileUrl] = useState<string | null>(null);
-  const [content, setContent] = useState<string | null>(null);
+  const [content, setContent] = useState<object | null>(null);
   const [loading, setLoading] = useState<boolean>(false);
   const [error, setError] = useState<string | null>(null);
 
@@ -91,10 +86,7 @@ export const FileProvider = ({ children }: { children: ReactNode }) => {
 
       if (!filePath) return; // User cancelled the dialog
 
-      const initialContent = JSON.stringify({ projectName: project });
-
-      await writeTextFile(filePath, initialContent);
-
+      const initialContent = { projectName: project };
       setFileUrl(filePath);
       setContent(initialContent);
       setError(null);
@@ -104,8 +96,45 @@ export const FileProvider = ({ children }: { children: ReactNode }) => {
     }
   };
 
+  const sync = async (data: any) => {
+    if (!fileUrl) {
+      setError('No file selected.');
+      return false;
+    }
+    try {
+      // Merge data with current content
+      let mergedData = data;
+      if (content) {
+        try {
+          const currentContentObj = content;
+          if (typeof currentContentObj === 'object' && currentContentObj !== null) {
+            mergedData = { ...currentContentObj, ...data };
+          }
+        } catch (e) {
+          // If content is not valid JSON, just use data
+          mergedData = data;
+        }
+      }
+
+      await invoke('sync', {
+        json: mergedData,
+        path: fileUrl,
+      });
+
+      setContent(mergedData);
+      setError(null);
+      return true;
+    } catch (err) {
+      setError('Failed to sync data.');
+      console.error('Failed to sync:', err);
+      return false;
+    }
+  };
+
   return (
-    <FileContext.Provider value={{ fileUrl, selectFile, content, loading, error, createFile }}>
+    <FileContext.Provider
+      value={{ fileUrl, selectFile, content, loading, error, createFile, sync }}
+    >
       {children}
     </FileContext.Provider>
   );
