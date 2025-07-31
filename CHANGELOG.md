@@ -1,3 +1,21 @@
+## [0.6.2](https://github.com/hackthefutureofeducation/ketabak/compare/v0.6.1...v0.6.2) (2025-07-31)
+
+
+### Bug Fixes
+
+* format ([0315eb1](https://github.com/hackthefutureofeducation/ketabak/commit/0315eb1ab2ecbe536008c681f025d55ca46b9b6d))
+
+
+
+## [0.6.1](https://github.com/hackthefutureofeducation/ketabak/compare/v0.6.0...v0.6.1) (2025-07-31)
+
+
+### Bug Fixes
+
+* update Cargo.toml version and commit changes for release ([f2963c1](https://github.com/hackthefutureofeducation/ketabak/commit/f2963c17d3c3f138c5894eef20100fc359bf3cef))
+
+
+
 # [0.6.0](https://github.com/hackthefutureofeducation/ketabak/compare/v0.5.0...v0.6.0) (2025-07-31)
 
 
@@ -22,24 +40,6 @@
 ### Bug Fixes
 
 * **Button:** add disabled state styles to secondary variant ([40bc91d](https://github.com/hackthefutureofeducation/ketabak/commit/40bc91d1864af3794fe61dbe69491855432a0fbd))
-
-
-
-# [0.4.0](https://github.com/hackthefutureofeducation/ketabak/compare/v0.3.0...v0.4.0) (2025-07-24)
-
-
-### Features
-
-* Add clsx and tailwind-merge dependencies; refactor button components ([0f25729](https://github.com/hackthefutureofeducation/ketabak/commit/0f25729c1dc097af17781f405cca0e1e312cc89d))
-
-
-
-# [0.3.0](https://github.com/hackthefutureofeducation/ketabak/compare/v0.2.0...v0.3.0) (2025-07-24)
-
-
-### Features
-
-* New Project ([176f3ac](https://github.com/hackthefutureofeducation/ketabak/commit/176f3ac2887335b1b6419541f91fb9acd594a161))
 
 
 
