@@ -1,3 +1,12 @@
+# [0.6.0](https://github.com/hackthefutureofeducation/ketabak/compare/v0.5.0...v0.6.0) (2025-07-31)
+
+
+### Features
+
+* Create an sync layer between the editor and the .ketabi file ([98eee4b](https://github.com/hackthefutureofeducation/ketabak/commit/98eee4b1ef0f273a150635cd8c540e893644a364))
+
+
+
 # [0.5.0](https://github.com/hackthefutureofeducation/ketabak/compare/v0.4.1...v0.5.0) (2025-07-24)
 
 
@@ -31,20 +40,6 @@
 ### Features
 
 * New Project ([176f3ac](https://github.com/hackthefutureofeducation/ketabak/commit/176f3ac2887335b1b6419541f91fb9acd594a161))
-
-
-
-# [0.2.0](https://github.com/hackthefutureofeducation/ketabak/compare/7517d0da37ba996148efc01c4c9b12c0aa070f21...v0.2.0) (2025-07-19)
-
-
-### Features
-
-* Add GitHub Actions workflow for automated release process ([2915829](https://github.com/hackthefutureofeducation/ketabak/commit/2915829852ec6a322ef812c850fd9a3110feaa49))
-* Initial commit ([7517d0d](https://github.com/hackthefutureofeducation/ketabak/commit/7517d0da37ba996148efc01c4c9b12c0aa070f21))
-* Install deps ([5fdbcf9](https://github.com/hackthefutureofeducation/ketabak/commit/5fdbcf99b92f148f191aa4b3db435ffade78bb53))
-* Integrate Features ([288d5a4](https://github.com/hackthefutureofeducation/ketabak/commit/288d5a48de7bc7c67047d3912cda8dc58da2cf6a))
-* Integrate Lexical Editor ([#5](https://github.com/hackthefutureofeducation/ketabak/issues/5)) ([ec26890](https://github.com/hackthefutureofeducation/ketabak/commit/ec26890f721f0aa5496d79262f3cc8147ad25b73))
-* Open files ([c1b376d](https://github.com/hackthefutureofeducation/ketabak/commit/c1b376d40c9d981b56c5a6d83f907647562fed6c))
 
 
 
