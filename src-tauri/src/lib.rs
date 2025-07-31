@@ -1,6 +1,7 @@
 mod utils;
 
 use utils::read::read_file;
+use utils::sync::sync;
 
 #[cfg_attr(mobile, tauri::mobile_entry_point)]
 pub fn run() {
@@ -8,7 +9,7 @@ pub fn run() {
         .plugin(tauri_plugin_fs::init())
         .plugin(tauri_plugin_dialog::init())
         .plugin(tauri_plugin_opener::init())
-        .invoke_handler(tauri::generate_handler![read_file])
+        .invoke_handler(tauri::generate_handler![read_file, sync])
         .run(tauri::generate_context!())
         .expect("error while running tauri application");
 }
