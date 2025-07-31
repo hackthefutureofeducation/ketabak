@@ -112,9 +112,8 @@ export const FileProvider = ({ children }: { children: ReactNode }) => {
       let mergedData = data;
       if (content) {
         try {
-          const currentContentObj = content;
-          if (typeof currentContentObj === 'object' && currentContentObj !== null) {
-            mergedData = { ...currentContentObj, ...data };
+          if (typeof content === 'object' && content !== null) {
+            mergedData = { ...content, ...data };
           }
         } catch (e) {
           // If content is not valid JSON, just use data
