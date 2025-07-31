@@ -72,7 +72,7 @@ export const Sidebar: React.FC<EpubSidebarProps> = ({ className = '' }) => {
             placeholder="Page title..."
             className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 text-sm"
             autoFocus
-            onKeyPress={(e) => {
+            onKeyDown={(e) => {
               if (e.key === 'Enter') {
                 handleCreatePage();
               } else if (e.key === 'Escape') {
