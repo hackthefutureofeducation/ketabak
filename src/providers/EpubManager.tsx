@@ -1,4 +1,4 @@
-import { SerializedEditorState } from 'lexical';
+import type { SerializedEditorState } from 'lexical';
 import {
   createContext,
   useContext,
@@ -10,11 +10,6 @@ import {
 } from 'react';
 import { useFile } from './FileProvider';
 
-export interface EpubPage {
-  readonly id: string;
-  title: string;
-  content?: SerializedEditorState;
-}
 
 interface EpubManagerContextProps {
   pages: EpubPage[];
@@ -106,8 +101,8 @@ export const EpubManagerProvider = ({ children }: { children: ReactNode }) => {
   // Load pages from file content when fileUrl changes
   useEffect(() => {
     if (fileUrl && content) {
-      setPages((content as any).pages);
-      setActivePageId((content as any).pages[0]?.id ?? null);
+      setPages(content.pages);
+      setActivePageId(content.pages[0]?.id ?? null);
       setDirty(false); // not dirty since it's a fresh load
     }
   }, [fileUrl, content]);

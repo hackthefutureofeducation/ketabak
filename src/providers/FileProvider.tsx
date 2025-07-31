@@ -6,12 +6,12 @@ import { isValidFileContent } from '../lib/utils';
 
 interface FileContextProps {
   fileUrl: string | null;
-  content: object | null;
+  content: Epub | null;
   loading: boolean;
   error: string | null;
   selectFile: () => Promise<void>;
   createFile: (project: string) => Promise<void>;
-  sync: (data: object) => Promise<boolean>;
+  sync: (data: Partial<Epub>) => Promise<boolean>;
 }
 
 const FileContext = createContext<FileContextProps | undefined>(undefined);
@@ -26,7 +26,7 @@ export const useFile = () => {
 
 const readFileContent = async (
   path: string,
-  setContent: (content: object | null) => void,
+  setContent: (content: Epub | null) => void,
   setError: (error: string | null) => void,
   setLoading: (loading: boolean) => void
 ) => {
@@ -50,7 +50,7 @@ const readFileContent = async (
 
 export const FileProvider = ({ children }: { children: ReactNode }) => {
   const [fileUrl, setFileUrl] = useState<string | null>(null);
-  const [content, setContent] = useState<object | null>(null);
+  const [content, setContent] = useState<Epub | null>(null);
   const [loading, setLoading] = useState<boolean>(false);
   const [error, setError] = useState<string | null>(null);
 
@@ -92,7 +92,7 @@ export const FileProvider = ({ children }: { children: ReactNode }) => {
 
       if (!filePath) return; // User cancelled the dialog
 
-      const initialContent = { projectName: project };
+      const initialContent = { projectName: project, pages: [] };
       setFileUrl(filePath);
       setContent(initialContent);
       setError(null);
@@ -102,24 +102,14 @@ export const FileProvider = ({ children }: { children: ReactNode }) => {
     }
   };
 
-  const sync = async (data: any) => {
+  const sync = async (data: Partial<Epub>) => {
     if (!fileUrl) {
       setError('No file selected.');
       return false;
     }
     try {
       // Merge data with current content
-      let mergedData = data;
-      if (content) {
-        try {
-          if (typeof content === 'object' && content !== null) {
-            mergedData = { ...content, ...data };
-          }
-        } catch (e) {
-          // If content is not valid JSON, just use data
-          mergedData = data;
-        }
-      }
+      let mergedData =  { ...content, ...data } as Epub;
 
       await invoke('sync', {
         json: mergedData,
