@@ -109,7 +109,7 @@ export const FileProvider = ({ children }: { children: ReactNode }) => {
     }
     try {
       // Merge data with current content
-      let mergedData =  { ...content, ...data } as Epub;
+      let mergedData = { ...content, ...data } as Epub;
 
       await invoke('sync', {
         json: mergedData,

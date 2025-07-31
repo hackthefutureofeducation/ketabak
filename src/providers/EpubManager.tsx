@@ -10,7 +10,6 @@ import {
 } from 'react';
 import { useFile } from './FileProvider';
 
-
 interface EpubManagerContextProps {
   pages: EpubPage[];
   activePageId: string | null;

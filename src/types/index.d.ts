@@ -1,4 +1,4 @@
-import type { SerializedEditorState } from "lexical";
+import type { SerializedEditorState } from 'lexical';
 
 declare global {
   interface EpubPage {
@@ -6,7 +6,7 @@ declare global {
     title: string;
     content?: SerializedEditorState;
   }
-  interface Epub{
+  interface Epub {
     projectName: string;
     pages: EpubPage[];
   }
