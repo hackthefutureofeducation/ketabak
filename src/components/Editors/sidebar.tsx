@@ -32,16 +32,7 @@ export const Sidebar: React.FC<EpubSidebarProps> = ({ className = '' }) => {
 
   const handleSaveTitle = () => {
     if (editTitle.trim() && editingPageId) {
-      // Temporarily set active page to the one being edited
-      const currentActiveId = activePageId;
-      setActivePage(editingPageId);
       editPageTitle(editTitle.trim());
-
-      // Restore previous active page if it was different
-      if (currentActiveId && currentActiveId !== editingPageId) {
-        setActivePage(currentActiveId);
-      }
-
       setEditingPageId(null);
       setEditTitle('');
     }
