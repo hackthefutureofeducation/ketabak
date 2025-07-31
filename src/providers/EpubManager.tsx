@@ -81,7 +81,7 @@ export const EpubManagerProvider = ({ children }: { children: ReactNode }) => {
 
   const editPageTitle = useCallback(
     (title: string): boolean => {
-      if (!activePageId) return false;
+      if (!activePageId) throw new Error('No active page to edit title');
       setPages((prev) =>
         prev.map((page) => (page.id === activePageId ? { ...page, title } : page))
       );
