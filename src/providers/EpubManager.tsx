@@ -106,7 +106,6 @@ export const EpubManagerProvider = ({ children }: { children: ReactNode }) => {
   // Load pages from file content when fileUrl changes
   useEffect(() => {
     if (fileUrl && content) {
-      console.log('Loading pages from file content:', content);
       setPages((content as any).pages);
       setActivePageId((content as any).pages[0]?.id ?? null);
       setDirty(false); // not dirty since it's a fresh load

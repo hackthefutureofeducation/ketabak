@@ -26,6 +26,5 @@ pub fn read_file(path: String) -> Result<Value, String> {
     let json: Value =
         serde_json::from_str(&decompressed).map_err(|_| "Failed to parse JSON".to_string())?;
 
-    println!("{:?}", json);
     Ok(json)
 }

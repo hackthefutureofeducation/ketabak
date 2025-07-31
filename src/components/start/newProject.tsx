@@ -40,7 +40,6 @@ export const NewProject = ({ onBack }: NewProjectProps) => {
     try {
       // Simulate API call
       await createFile(projectName);
-      console.log('Creating project:', projectName);
     } catch (err) {
       setError('Failed to create project. Please try again.');
     } finally {
