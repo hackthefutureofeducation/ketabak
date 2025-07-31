@@ -2,6 +2,7 @@ import React, { createContext, useContext, useState, ReactNode } from 'react';
 import { open, save } from '@tauri-apps/plugin-dialog';
 import { writeTextFile } from '@tauri-apps/plugin-fs';
 import { invoke } from '@tauri-apps/api/core';
+import { isValidFileContent } from '../lib/utils';
 
 interface FileContextProps {
   fileUrl: string | null;
@@ -30,9 +31,14 @@ const readFileContent = async (
   setLoading: (loading: boolean) => void
 ) => {
   try {
-    const fileContent: object = await invoke('read_file', { path });
-    setContent(fileContent);
-    setError(null);
+    const fileContent = await invoke('read_file', { path });
+    if (isValidFileContent(fileContent)) {
+      setContent(fileContent);
+      setError(null);
+    } else {
+      setContent(null);
+      setError('File content is invalid or corrupted.');
+    }
     setLoading(false);
   } catch (err) {
     setContent(null);
