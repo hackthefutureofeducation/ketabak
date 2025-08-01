@@ -1,4 +1,5 @@
 name: Release
+
 on:
   push:
     branches:
@@ -15,12 +16,11 @@ jobs:
         with:
           fetch-depth: 0
 
-      - name: Install dependencies (jq and gh CLI)
+      - name: Install jq and gh CLI
         run: |
           sudo apt-get update
           sudo apt-get install -y jq gh
 
-      # Get npm version from package.json
       - name: Get npm version
         id: package-version
         run: |
@@ -43,7 +43,6 @@ jobs:
         run: |
           jq --arg v "${{ steps.package-version.outputs.current-version }}" '.version = $v' src-tauri/tauri.conf.json > tmp.json && mv tmp.json src-tauri/tauri.conf.json
 
-      # Generate changelog (modifies package.json and creates CHANGELOG.md)
       - name: Generate Changelog
         id: changelog
         uses: TriPSs/conventional-changelog-action@v5
@@ -52,26 +51,25 @@ jobs:
           version-file: './package.json'
           git-branch: 'release-from-${{ github.sha }}'
           skip-git-pull: true
-          skip-commit: true # Don't auto-commit; we'll commit everything manually
+          skip-commit: true
 
-      # Commit all changes (changelog + package.json + Cargo.toml + tauri.conf.json)
       - name: Commit all changes
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
-          git add .
+          git add CHANGELOG.md package.json src-tauri/Cargo.toml src-tauri/tauri.conf.json
           if git diff --cached --quiet; then
             echo "No changes to commit"
+            exit 0
           else
             git commit -m "chore: release version ${{ steps.package-version.outputs.current-version }}"
-        continue-on-error: true
 
       - name: Push release branch
-        run: |
-          git push origin "release-from-${{ github.sha }}" || echo "Nothing to push"
+        if: success()
+        run: git push origin "release-from-${{ github.sha }}"
 
       - name: Create PR
-        if: steps.changelog.outputs.skipped == 'false'
+        if: success() && steps.changelog.outputs.skipped == 'false'
         run: |
           gh pr create \
             --base main \
@@ -82,7 +80,7 @@ jobs:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Merge PR
-        if: steps.changelog.outputs.skipped == 'false'
+        if: success() && steps.changelog.outputs.skipped == 'false'
         run: |
           gh pr merge \
             --admin \
@@ -93,7 +91,7 @@ jobs:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Create GitHub Release
-        if: steps.changelog.outputs.skipped == 'false'
+        if: success() && steps.changelog.outputs.skipped == 'false'
         uses: ncipollo/release-action@v1
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
