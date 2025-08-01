@@ -24,7 +24,7 @@ const NavBar: React.FC = () => {
       <div
         className="
         text-xl font-bold
-        text-foreground 
+        text-foreground
         transition-colors
       "
       >

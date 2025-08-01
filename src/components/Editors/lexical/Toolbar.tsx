@@ -8,12 +8,11 @@ import {
   REDO_COMMAND,
   CLEAR_HISTORY_COMMAND,
   $createParagraphNode,
-  $createTextNode,
   TextFormatType,
   $getRoot,
 } from 'lexical';
 import { $setBlocksType } from '@lexical/selection';
-import { $createHeadingNode, $isHeadingNode, HeadingTagType } from '@lexical/rich-text';
+import { $createHeadingNode, HeadingTagType } from '@lexical/rich-text';
 import { INSERT_ORDERED_LIST_COMMAND, INSERT_UNORDERED_LIST_COMMAND } from '@lexical/list';
 import {
   Bold,

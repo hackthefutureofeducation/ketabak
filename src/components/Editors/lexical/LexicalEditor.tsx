@@ -16,7 +16,7 @@ import { ListPlugin } from '@lexical/react/LexicalListPlugin';
 import { LexicalErrorBoundary } from '@lexical/react/LexicalErrorBoundary';
 import Toolbar from './Toolbar';
 import { initialConfig } from './theme';
-import { EpubPage, useEpubManager } from '../../../providers/EpubManager';
+import { useEpubManager } from '../../../providers/EpubManager';
 
 const ContentUpdaterPlugin: React.FC<{ initialEditorState: EpubPage }> = ({
   initialEditorState,
