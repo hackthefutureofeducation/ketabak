@@ -63,7 +63,7 @@ jobs:
             exit 0
           else
             git commit -m "chore: release version ${{ steps.package-version.outputs.current-version }}"
-
+          fi
       - name: Push release branch
         if: success()
         run: git push origin "release-from-${{ github.sha }}"
