@@ -1,3 +1,12 @@
+## [0.6.4](https://github.com/hackthefutureofeducation/ketabak/compare/v0.6.3...v0.6.4) (2025-08-01)
+
+
+### Bug Fixes
+
+* correct Tauri config version field in release workflow ([f99d543](https://github.com/hackthefutureofeducation/ketabak/commit/f99d54346b907063e8038ebbf36d38fdbe75c24f))
+
+
+
 ## [0.6.3](https://github.com/hackthefutureofeducation/ketabak/compare/v0.6.2...v0.6.3) (2025-08-01)
 
 
@@ -31,15 +40,6 @@
 ### Features
 
 * Create an sync layer between the editor and the .ketabi file ([98eee4b](https://github.com/hackthefutureofeducation/ketabak/commit/98eee4b1ef0f273a150635cd8c540e893644a364))
-
-
-
-# [0.5.0](https://github.com/hackthefutureofeducation/ketabak/compare/v0.4.1...v0.5.0) (2025-07-24)
-
-
-### Features
-
-* Add Zod validation for project name in New Project component ([776db78](https://github.com/hackthefutureofeducation/ketabak/commit/776db783805086d31811a5aa7fc730c668667cdd))
 
 
 
