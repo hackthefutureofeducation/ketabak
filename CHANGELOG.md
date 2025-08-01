@@ -1,3 +1,12 @@
+## [0.6.3](https://github.com/hackthefutureofeducation/ketabak/compare/v0.6.2...v0.6.3) (2025-08-01)
+
+
+### Bug Fixes
+
+* update the tauri config version ([a7dff6e](https://github.com/hackthefutureofeducation/ketabak/commit/a7dff6ede7fe0f517edf23ae9aea690f56e2078c))
+
+
+
 ## [0.6.2](https://github.com/hackthefutureofeducation/ketabak/compare/v0.6.1...v0.6.2) (2025-07-31)
 
 
@@ -31,15 +40,6 @@
 ### Features
 
 * Add Zod validation for project name in New Project component ([776db78](https://github.com/hackthefutureofeducation/ketabak/commit/776db783805086d31811a5aa7fc730c668667cdd))
-
-
-
-## [0.4.1](https://github.com/hackthefutureofeducation/ketabak/compare/v0.4.0...v0.4.1) (2025-07-24)
-
-
-### Bug Fixes
-
-* **Button:** add disabled state styles to secondary variant ([40bc91d](https://github.com/hackthefutureofeducation/ketabak/commit/40bc91d1864af3794fe61dbe69491855432a0fbd))
 
 
 
