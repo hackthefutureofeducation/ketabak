@@ -1,3 +1,12 @@
+# [0.7.0](https://github.com/hackthefutureofeducation/ketabak/compare/v0.6.5...v0.7.0) (2025-08-01)
+
+
+### Features
+
+* Display Version & Update the version in cargo.lock ([96291dc](https://github.com/hackthefutureofeducation/ketabak/commit/96291dc245a1e17727eba10af28286c7431d0cb2))
+
+
+
 ## [0.6.5](https://github.com/hackthefutureofeducation/ketabak/compare/v0.6.4...v0.6.5) (2025-08-01)
 
 
@@ -31,15 +40,6 @@
 ### Bug Fixes
 
 * format ([0315eb1](https://github.com/hackthefutureofeducation/ketabak/commit/0315eb1ab2ecbe536008c681f025d55ca46b9b6d))
-
-
-
-## [0.6.1](https://github.com/hackthefutureofeducation/ketabak/compare/v0.6.0...v0.6.1) (2025-07-31)
-
-
-### Bug Fixes
-
-* update Cargo.toml version and commit changes for release ([f2963c1](https://github.com/hackthefutureofeducation/ketabak/commit/f2963c17d3c3f138c5894eef20100fc359bf3cef))
 
 
 
