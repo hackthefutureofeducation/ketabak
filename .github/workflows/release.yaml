@@ -10,23 +10,28 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      # Check out the repository with all releases
-      - uses: actions/checkout@v4
+      - name: Checkout repository
+        uses: actions/checkout@v4
         with:
           fetch-depth: 0
 
-      # Create a temporary, uniquely named branch to push release info to
-      - name: Create temporary branch
-        run: git checkout -b "release-from-${{ github.sha }}" "${{ github.sha }}"
+      - name: Install dependencies (jq and gh CLI)
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y jq gh
 
       # Get npm version from package.json
       - name: Get npm version
         id: package-version
         run: |
-          LF_VERSION=$(jq -r '.version' package.json)
-          echo "current-version=$LF_VERSION" >> "$GITHUB_OUTPUT"
+          VERSION=$(jq -r '.version' package.json)
+          echo "current-version=$VERSION" >> $GITHUB_OUTPUT
 
-      # Update version in src-tauri/Cargo.toml and update Cargo.lock
+      - name: Create release branch
+        run: |
+          git checkout main
+          git checkout -b "release-from-${{ github.sha }}"
+
       - name: Update Cargo.toml version and Cargo.lock
         run: |
           sed -i "s/^version = \".*\"/version = \"${{ steps.package-version.outputs.current-version }}\"/" src-tauri/Cargo.toml
@@ -54,32 +59,40 @@ jobs:
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
-          git add CHANGELOG.md package.json src-tauri/Cargo.toml src-tauri/tauri.conf.json
+          git add .
           if git diff --cached --quiet; then
             echo "No changes to commit"
           else
             git commit -m "chore: release version ${{ steps.package-version.outputs.current-version }}"
-          fi
-      # Push the changes to the temporary branch
+        continue-on-error: true
+
       - name: Push release branch
-        run: git push origin "release-from-${{ github.sha }}"
+        run: |
+          git push origin "release-from-${{ github.sha }}" || echo "Nothing to push"
 
-      # Create PR using GitHub CLI
-      - name: Create PR with release info
+      - name: Create PR
         if: steps.changelog.outputs.skipped == 'false'
-        run: gh pr create --base main --head "release-from-${{ github.sha }}" --title 'Merge new release into main' --body 'Created by GitHub Action'
+        run: |
+          gh pr create \
+            --base main \
+            --head "release-from-${{ github.sha }}" \
+            --title "Merge new release into main" \
+            --body "Created by GitHub Action"
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
-      # Merge PR using GitHub CLI
-      - name: Merge PR with release info
+      - name: Merge PR
         if: steps.changelog.outputs.skipped == 'false'
-        run: gh pr merge --admin --merge --subject 'Merge release info' --delete-branch
+        run: |
+          gh pr merge \
+            --admin \
+            --merge \
+            --subject "Merge release info" \
+            --delete-branch
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
-      # Create a new release with the last commit
-      - name: Create release with the last commit
+      - name: Create GitHub Release
         if: steps.changelog.outputs.skipped == 'false'
         uses: ncipollo/release-action@v1
         with:
