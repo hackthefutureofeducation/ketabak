@@ -26,10 +26,13 @@ jobs:
           LF_VERSION=$(jq -r '.version' package.json)
           echo "current-version=$LF_VERSION" >> "$GITHUB_OUTPUT"
 
-      # Update version in src-tauri/Cargo.toml
-      - name: Update Cargo.toml version
+      # Update version in src-tauri/Cargo.toml and update Cargo.lock
+      - name: Update Cargo.toml version and Cargo.lock
         run: |
           sed -i "s/^version = \".*\"/version = \"${{ steps.package-version.outputs.current-version }}\"/" src-tauri/Cargo.toml
+          if [ -f src-tauri/Cargo.lock ]; then
+            cargo update --manifest-path src-tauri/Cargo.toml
+          fi
 
       - name: Update Tauri config version
         run: |
