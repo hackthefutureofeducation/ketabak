@@ -1,8 +1,8 @@
 [package]
 name = "ketabak"
 version = "0.6.0"
-description = "A Tauri App"
-authors = ["you"]
+description = "An open-source eBook creator that lets you write, design, and publish interactive digital books with ease."
+authors = ["Adam Naji"]
 edition = "2021"
 
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
