@@ -31,8 +31,5 @@
       "icons/icon.icns",
       "icons/icon.ico"
     ]
-  },
-  "package": {
-    "version": "0.6.0"
   }
 }

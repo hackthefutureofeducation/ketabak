@@ -33,7 +33,7 @@ jobs:
 
       - name: Update Tauri config version
         run: |
-          jq --arg v "${{ steps.package-version.outputs.current-version }}" '.package.version = $v' src-tauri/tauri.conf.json > tmp.json && mv tmp.json src-tauri/tauri.conf.json
+          jq --arg v "${{ steps.package-version.outputs.current-version }}" '.version = $v' src-tauri/tauri.conf.json > tmp.json && mv tmp.json src-tauri/tauri.conf.json
 
       # Generate changelog (modifies package.json and creates CHANGELOG.md)
       - name: Generate Changelog
