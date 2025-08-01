@@ -36,3 +36,6 @@ jobs:
 
       - name: Run format check
         run: yarn run format:check
+
+      - name: Run lint check
+        run: yarn run lint:check

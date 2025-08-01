@@ -1,6 +1,5 @@
 import React, { createContext, useContext, useState, ReactNode } from 'react';
 import { open, save } from '@tauri-apps/plugin-dialog';
-import { writeTextFile } from '@tauri-apps/plugin-fs';
 import { invoke } from '@tauri-apps/api/core';
 import { isValidFileContent } from '../lib/utils';
 
@@ -44,6 +43,7 @@ const readFileContent = async (
     setContent(null);
     setError('Failed to read file.');
     setLoading(false);
+    console.log(err);
     return;
   }
 };
@@ -78,6 +78,7 @@ export const FileProvider = ({ children }: { children: ReactNode }) => {
       setFileUrl(null);
       setContent(null);
       setError('An unexpected error occurred.');
+      console.log(error);
     } finally {
       setLoading(false);
     }
@@ -109,7 +110,7 @@ export const FileProvider = ({ children }: { children: ReactNode }) => {
     }
     try {
       // Merge data with current content
-      let mergedData = { ...content, ...data } as Epub;
+      const mergedData = { ...content, ...data } as Epub;
 
       await invoke('sync', {
         json: mergedData,

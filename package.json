@@ -13,7 +13,9 @@
     "format:rust": "cd ./src-tauri && cargo fmt",
     "format:rust:check": "cd ./src-tauri && cargo fmt -- --check",
     "format": "npm run format:js && npm run format:rust",
-    "format:check": "npm run format:js:check && npm run format:rust:check"
+    "format:check": "npm run format:js:check && npm run format:rust:check",
+    "lint": "eslint src --ext .js,.jsx,.ts,.tsx --fix",
+    "lint:check": "eslint src --ext .js,.jsx,.ts,.tsx --max-warnings 0"
   },
   "dependencies": {
     "@lexical/code": "^0.33.1",
@@ -37,15 +39,24 @@
     "react-dom": "^18.3.1",
     "tailwind-merge": "^3.3.1",
     "tailwindcss": "^4.1.11",
+    "typescript-eslint": "^8.38.0",
     "zod": "^4.0.8"
   },
   "devDependencies": {
     "@tauri-apps/cli": "^2",
     "@types/react": "^18.3.1",
     "@types/react-dom": "^18.3.1",
+    "@typescript-eslint/eslint-plugin": "^8.38.0",
+    "@typescript-eslint/parser": "^8.38.0",
     "@vitejs/plugin-react": "^4.3.4",
-    "prettier": "3.6.2",
-    "typescript": "~5.6.2",
+    "eslint": "^9",
+    "eslint-plugin-import": "^2.32.0",
+    "eslint-plugin-jsx-a11y": "^6.10.2",
+    "eslint-plugin-prettier": "^5.5.3",
+    "eslint-plugin-react": "^7.37.5",
+    "eslint-plugin-react-hooks": "^5.2.0",
+    "prettier": "^3.6.2",
+    "typescript": "^5.9.2",
     "vite": "^6.0.3"
   }
 }

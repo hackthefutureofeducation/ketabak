@@ -42,6 +42,7 @@ export const NewProject = ({ onBack }: NewProjectProps) => {
       await createFile(projectName);
     } catch (err) {
       setError('Failed to create project. Please try again.');
+      console.log(err);
     } finally {
       setIsSubmitting(false);
     }
@@ -80,7 +81,7 @@ export const NewProject = ({ onBack }: NewProjectProps) => {
             name="projectName"
             value={projectName}
             onChange={handleInputChange}
-            className="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-lg 
+            className="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-lg
                                  bg-white dark:bg-gray-800 text-gray-900 dark:text-white
                                  placeholder-gray-500 dark:placeholder-gray-400
                                  focus:ring-2 focus:ring-blue-500 focus:border-blue-500 dark:focus:ring-blue-400
