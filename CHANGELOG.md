@@ -1,3 +1,12 @@
+## [0.6.5](https://github.com/hackthefutureofeducation/ketabak/compare/v0.6.4...v0.6.5) (2025-08-01)
+
+
+### Bug Fixes
+
+* add newline at end of README.md and update release workflow to check for changes before committing ([e822801](https://github.com/hackthefutureofeducation/ketabak/commit/e822801cbc29f6a5aa4252f1a69d4715b448e7f8))
+
+
+
 ## [0.6.4](https://github.com/hackthefutureofeducation/ketabak/compare/v0.6.3...v0.6.4) (2025-08-01)
 
 
@@ -31,15 +40,6 @@
 ### Bug Fixes
 
 * update Cargo.toml version and commit changes for release ([f2963c1](https://github.com/hackthefutureofeducation/ketabak/commit/f2963c17d3c3f138c5894eef20100fc359bf3cef))
-
-
-
-# [0.6.0](https://github.com/hackthefutureofeducation/ketabak/compare/v0.5.0...v0.6.0) (2025-07-31)
-
-
-### Features
-
-* Create an sync layer between the editor and the .ketabi file ([98eee4b](https://github.com/hackthefutureofeducation/ketabak/commit/98eee4b1ef0f273a150635cd8c540e893644a364))
 
 
 
