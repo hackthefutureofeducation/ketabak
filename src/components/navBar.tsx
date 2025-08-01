@@ -1,10 +1,16 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { useDarkMode } from '../providers/DarkModeProvider';
 import { Sun, Moon } from 'lucide-react';
 import Button from './ui/Button';
+import { getVersion } from '@tauri-apps/api/app';
 
 const NavBar: React.FC = () => {
   const { darkMode, toggleDarkMode } = useDarkMode();
+  const [version, setVersion] = useState<string | null>(null);
+
+  useEffect(() => {
+    getVersion().then(setVersion).catch(console.error);
+  }, []);
 
   return (
     <nav
@@ -22,7 +28,7 @@ const NavBar: React.FC = () => {
         transition-colors
       "
       >
-        Ketabak
+        Ketabak {version && <span className="text-sm opacity-60 ml-2">v{version}</span>}
       </div>
       <Button onClick={toggleDarkMode} aria-label="Toggle dark mode">
         {darkMode ? <Moon size={20} /> : <Sun size={20} />}
