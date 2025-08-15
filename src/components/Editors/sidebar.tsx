@@ -44,24 +44,29 @@ export const Sidebar: React.FC<EpubSidebarProps> = ({ className = '' }) => {
   };
 
   return (
-    <div className={`w-64   flex flex-col h-full ${className}`}>
+    <div
+      className={`w-64 bg-gray-900 text-gray-200 flex flex-col h-full border-r border-gray-800 ${className}`}
+    >
       {/* Header */}
-      <div className="p-4 border-b border-gray-200">
+      <div className="p-4 border-b border-gray-800">
         <h2 className="text-lg font-semibold text-primary">Pages</h2>
-        <Button onClick={() => setIsCreating(true)} className="w-full">
+        <Button
+          onClick={() => setIsCreating(true)}
+          className="w-full mt-2 bg-primary hover:bg-primary/50 text-white"
+        >
           + Add Page
         </Button>
       </div>
 
       {/* Create new page form */}
       {isCreating && (
-        <div className="p-4 border-b border-gray-200 bg-blue-50">
+        <div className="p-4 border-b border-gray-800 bg-gray-800">
           <input
             type="text"
             value={newPageTitle}
             onChange={(e) => setNewPageTitle(e.target.value)}
             placeholder="Page title..."
-            className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 text-sm"
+            className="w-full px-3 py-2 bg-gray-700 text-gray-100 border border-gray-600 rounded-md focus:outline-none focus:ring-2 focus:ring-primary text-sm"
             autoFocus
             onKeyDown={(e) => {
               if (e.key === 'Enter') {
@@ -76,7 +81,7 @@ export const Sidebar: React.FC<EpubSidebarProps> = ({ className = '' }) => {
             <button
               onClick={handleCreatePage}
               disabled={!newPageTitle.trim()}
-              className="px-3 py-1 bg-blue-600 text-white rounded text-xs hover:bg-blue-700 disabled:bg-gray-400 disabled:cursor-not-allowed"
+              className="px-3 py-1 bg-primary text-white rounded text-xs hover:bg-primary/50 disabled:bg-gray-500 disabled:cursor-not-allowed cursor-pointer"
             >
               Create
             </button>
@@ -85,7 +90,7 @@ export const Sidebar: React.FC<EpubSidebarProps> = ({ className = '' }) => {
                 setIsCreating(false);
                 setNewPageTitle('');
               }}
-              className="px-3 py-1 bg-gray-500 text-white rounded text-xs hover:bg-gray-600"
+              className="px-3 py-1 bg-gray-600 text-white rounded text-xs hover:bg-gray-500"
             >
               Cancel
             </button>
@@ -100,16 +105,16 @@ export const Sidebar: React.FC<EpubSidebarProps> = ({ className = '' }) => {
             No pages yet. Create your first page!
           </div>
         ) : (
-          <ul className="divide-y divide-gray-200">
+          <ul className="divide-y divide-gray-800">
             {pages.map((page) => (
               <li key={page.id} className="group">
                 {editingPageId === page.id ? (
-                  <div className="p-3 bg-yellow-50">
+                  <div className="p-3 bg-gray-800">
                     <input
                       type="text"
                       value={editTitle}
                       onChange={(e) => setEditTitle(e.target.value)}
-                      className="w-full px-2 py-1 border border-gray-300 rounded text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
+                      className="w-full px-2 py-1 bg-gray-700 text-gray-100 border border-gray-600 rounded text-sm focus:outline-none focus:ring-2 focus:ring-primary"
                       onKeyPress={(e) => {
                         if (e.key === 'Enter') {
                           handleSaveTitle();
@@ -123,13 +128,13 @@ export const Sidebar: React.FC<EpubSidebarProps> = ({ className = '' }) => {
                       <button
                         onClick={handleSaveTitle}
                         disabled={!editTitle.trim()}
-                        className="px-2 py-1 bg-green-600 text-white rounded text-xs hover:bg-green-700 disabled:bg-gray-400"
+                        className="px-2 py-1 bg-green-600 text-white rounded text-xs hover:bg-green-700 disabled:bg-gray-500"
                       >
                         Save
                       </button>
                       <button
                         onClick={handleCancelEdit}
-                        className="px-2 py-1 bg-gray-500 text-white rounded text-xs hover:bg-gray-600"
+                        className="px-2 py-1 bg-gray-600 text-white rounded text-xs hover:bg-gray-500"
                       >
                         Cancel
                       </button>
@@ -137,13 +142,13 @@ export const Sidebar: React.FC<EpubSidebarProps> = ({ className = '' }) => {
                   </div>
                 ) : (
                   <div
-                    className={`p-3 cursor-pointer hover:bg-gray-100 transition-colors ${
-                      activePageId === page.id ? 'bg-blue-100 border-r-2 border-blue-600' : ''
+                    className={`p-3 cursor-pointer transition-colors ${
+                      activePageId === page.id ? 'bg-primary border-r-2' : 'hover:bg-gray-800'
                     }`}
                     onClick={() => setActivePage(page.id)}
                   >
                     <div className="flex items-center justify-between">
-                      <span className="text-sm font-medium text-gray-800 truncate flex-1">
+                      <span className={`text-sm font-medium truncate flex-1 text-white`}>
                         {page.title || 'Untitled'}
                       </span>
                       <button
@@ -151,14 +156,14 @@ export const Sidebar: React.FC<EpubSidebarProps> = ({ className = '' }) => {
                           e.stopPropagation();
                           handleEditTitle(page.id);
                         }}
-                        className="opacity-0 group-hover:opacity-100 ml-2 p-1 text-gray-500 hover:text-gray-700 transition-opacity"
+                        className="opacity-0 group-hover:opacity-100 ml-2 p-1 text-gray-400 hover:text-primary transition-opacity"
                         title="Edit title"
                       >
                         ✏️
                       </button>
                     </div>
                     {activePageId === page.id && (
-                      <div className="mt-1 text-xs text-blue-600">Currently active</div>
+                      <div className="mt-1 text-xs text-white">Currently active</div>
                     )}
                   </div>
                 )}
@@ -169,7 +174,7 @@ export const Sidebar: React.FC<EpubSidebarProps> = ({ className = '' }) => {
       </div>
 
       {/* Footer info */}
-      <div className="p-4 border-t border-gray-200 bg-gray-50">
+      <div className="p-4 border-t border-gray-800 bg-gray-900">
         <div className="text-xs text-gray-500">
           {pages.length} {pages.length === 1 ? 'page' : 'pages'}
         </div>
