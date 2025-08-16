@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import { useEpubManager } from '../../providers/EpubManager';
 import Button from '../ui/Button';
+import { Pen } from 'lucide-react';
+import { cn } from '../../lib/utils';
 
 interface EpubSidebarProps {
   className?: string;
@@ -156,10 +158,13 @@ export const Sidebar: React.FC<EpubSidebarProps> = ({ className = '' }) => {
                           e.stopPropagation();
                           handleEditTitle(page.id);
                         }}
-                        className="opacity-0 group-hover:opacity-100 ml-2 p-1 text-gray-400 hover:text-primary transition-opacity"
+                        className={cn(
+                          'opacity-0 group-hover:opacity-100 ml-2 p-1 text-gray-400 hover:text-white transition-opacity',
+                          activePageId === page.id && 'opacity-100 text-white'
+                        )}
                         title="Edit title"
                       >
-                        ✏️
+                        <Pen />
                       </button>
                     </div>
                     {activePageId === page.id && (
