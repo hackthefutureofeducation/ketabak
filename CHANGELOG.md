@@ -1,3 +1,12 @@
+## [0.9.1](https://github.com/hackthefutureofeducation/ketabak/compare/v0.9.0...v0.9.1) (2025-08-16)
+
+
+### Bug Fixes
+
+* failing builds ([5bd2b3d](https://github.com/hackthefutureofeducation/ketabak/commit/5bd2b3dd3051d59e957f407cd77d80544630d849))
+
+
+
 # [0.9.0](https://github.com/hackthefutureofeducation/ketabak/compare/v0.8.1...v0.9.0) (2025-08-16)
 
 
@@ -31,15 +40,6 @@
 ### Bug Fixes
 
 * streamline release workflow by refining commit conditions and improving clarity ([4608d9b](https://github.com/hackthefutureofeducation/ketabak/commit/4608d9b2eb2578c40b9069a5bc714083b1415370))
-
-
-
-## [0.7.1](https://github.com/hackthefutureofeducation/ketabak/compare/v0.7.0...v0.7.1) (2025-08-01)
-
-
-### Bug Fixes
-
-* Refactor release workflow to improve clarity and efficiency ([b98b7ea](https://github.com/hackthefutureofeducation/ketabak/commit/b98b7ea3a26d154e37a0e7a0f4871c64dca288fb))
 
 
 
