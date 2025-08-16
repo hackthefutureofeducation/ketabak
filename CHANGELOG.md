@@ -1,3 +1,12 @@
+## [0.9.3](https://github.com/hackthefutureofeducation/ketabak/compare/v0.9.2...v0.9.3) (2025-08-16)
+
+
+### Bug Fixes
+
+* format ([6675d35](https://github.com/hackthefutureofeducation/ketabak/commit/6675d3529d59e42d9c85e179015de7c9dc39772e))
+
+
+
 ## [0.9.2](https://github.com/hackthefutureofeducation/ketabak/compare/v0.9.1...v0.9.2) (2025-08-16)
 
 
@@ -31,15 +40,6 @@
 ### Bug Fixes
 
 * Failing workflow by using dtolnay/rust-toolchain ([19e1d30](https://github.com/hackthefutureofeducation/ketabak/commit/19e1d308906e9d0165c363fc50e192fe620cd6e6))
-
-
-
-# [0.8.0](https://github.com/hackthefutureofeducation/ketabak/compare/v0.7.2...v0.8.0) (2025-08-01)
-
-
-### Features
-
-* add ESLint configuration and update package scripts for linting ([#23](https://github.com/hackthefutureofeducation/ketabak/issues/23)) ([8e8fc0c](https://github.com/hackthefutureofeducation/ketabak/commit/8e8fc0c56833e12a149fcd13882f519189c2cb4b))
 
 
 
