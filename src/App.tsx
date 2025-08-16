@@ -5,11 +5,7 @@ import { useFile } from './providers/FileProvider';
 
 function App() {
   const { fileUrl } = useFile();
-  return (
-    <main className="flex flex-col items-center justify-center px-4 h-[calc(100%-60px)]">
-      {fileUrl ? <EditorLayout /> : <Start />}
-    </main>
-  );
+  return fileUrl ? <EditorLayout /> : <Start />;
 }
 
 export default App;
