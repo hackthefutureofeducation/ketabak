@@ -1,3 +1,12 @@
+## [0.9.4](https://github.com/hackthefutureofeducation/ketabak/compare/v0.9.3...v0.9.4) (2025-08-16)
+
+
+### Bug Fixes
+
+* add caching for Node modules, Cargo registry, and linuxdeploy in GitHub Actions workflow ([41f7853](https://github.com/hackthefutureofeducation/ketabak/commit/41f7853fb58dc390c5dd0bf76925f0f2017d193d))
+
+
+
 ## [0.9.3](https://github.com/hackthefutureofeducation/ketabak/compare/v0.9.2...v0.9.3) (2025-08-16)
 
 
@@ -31,15 +40,6 @@
 ### Features
 
 * automate Tauri app build and release via GitHub Actions ([0d36eb3](https://github.com/hackthefutureofeducation/ketabak/commit/0d36eb3b56203ff5f1b575ab25e4170c4c276571))
-
-
-
-## [0.8.1](https://github.com/hackthefutureofeducation/ketabak/compare/v0.8.0...v0.8.1) (2025-08-16)
-
-
-### Bug Fixes
-
-* Failing workflow by using dtolnay/rust-toolchain ([19e1d30](https://github.com/hackthefutureofeducation/ketabak/commit/19e1d308906e9d0165c363fc50e192fe620cd6e6))
 
 
 
