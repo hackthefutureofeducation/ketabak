@@ -1,3 +1,12 @@
+# [0.9.0](https://github.com/hackthefutureofeducation/ketabak/compare/v0.8.1...v0.9.0) (2025-08-16)
+
+
+### Features
+
+* automate Tauri app build and release via GitHub Actions ([0d36eb3](https://github.com/hackthefutureofeducation/ketabak/commit/0d36eb3b56203ff5f1b575ab25e4170c4c276571))
+
+
+
 ## [0.8.1](https://github.com/hackthefutureofeducation/ketabak/compare/v0.8.0...v0.8.1) (2025-08-16)
 
 
@@ -31,15 +40,6 @@
 ### Bug Fixes
 
 * Refactor release workflow to improve clarity and efficiency ([b98b7ea](https://github.com/hackthefutureofeducation/ketabak/commit/b98b7ea3a26d154e37a0e7a0f4871c64dca288fb))
-
-
-
-# [0.7.0](https://github.com/hackthefutureofeducation/ketabak/compare/v0.6.5...v0.7.0) (2025-08-01)
-
-
-### Features
-
-* Display Version & Update the version in cargo.lock ([96291dc](https://github.com/hackthefutureofeducation/ketabak/commit/96291dc245a1e17727eba10af28286c7431d0cb2))
 
 
 
