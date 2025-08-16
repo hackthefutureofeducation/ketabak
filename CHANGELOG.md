@@ -1,3 +1,12 @@
+## [0.9.5](https://github.com/hackthefutureofeducation/ketabak/compare/v0.9.4...v0.9.5) (2025-08-16)
+
+
+### Bug Fixes
+
+* **layout:** remove unnecessary height that triggered scrollbar ([#26](https://github.com/hackthefutureofeducation/ketabak/issues/26)) ([6c572f9](https://github.com/hackthefutureofeducation/ketabak/commit/6c572f9b28d10bba9bdb0021ba63524128be2be6))
+
+
+
 ## [0.9.4](https://github.com/hackthefutureofeducation/ketabak/compare/v0.9.3...v0.9.4) (2025-08-16)
 
 
@@ -31,15 +40,6 @@
 ### Bug Fixes
 
 * failing builds ([5bd2b3d](https://github.com/hackthefutureofeducation/ketabak/commit/5bd2b3dd3051d59e957f407cd77d80544630d849))
-
-
-
-# [0.9.0](https://github.com/hackthefutureofeducation/ketabak/compare/v0.8.1...v0.9.0) (2025-08-16)
-
-
-### Features
-
-* automate Tauri app build and release via GitHub Actions ([0d36eb3](https://github.com/hackthefutureofeducation/ketabak/commit/0d36eb3b56203ff5f1b575ab25e4170c4c276571))
 
 
 
