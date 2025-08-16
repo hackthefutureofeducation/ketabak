@@ -1,3 +1,12 @@
+## [0.9.6](https://github.com/hackthefutureofeducation/ketabak/compare/v0.9.5...v0.9.6) (2025-08-16)
+
+
+### Bug Fixes
+
+* version not updating ([7ca9d5e](https://github.com/hackthefutureofeducation/ketabak/commit/7ca9d5eb4d68af96a85ba7f433fe4bb3ce31dde1))
+
+
+
 ## [0.9.5](https://github.com/hackthefutureofeducation/ketabak/compare/v0.9.4...v0.9.5) (2025-08-16)
 
 
@@ -31,15 +40,6 @@
 ### Bug Fixes
 
 * add macOS Intel Rust target installation and update release name format ([b7031e1](https://github.com/hackthefutureofeducation/ketabak/commit/b7031e19ffefebc9ccdd825b09a45cdbb0b9594e))
-
-
-
-## [0.9.1](https://github.com/hackthefutureofeducation/ketabak/compare/v0.9.0...v0.9.1) (2025-08-16)
-
-
-### Bug Fixes
-
-* failing builds ([5bd2b3d](https://github.com/hackthefutureofeducation/ketabak/commit/5bd2b3dd3051d59e957f407cd77d80544630d849))
 
 
 
