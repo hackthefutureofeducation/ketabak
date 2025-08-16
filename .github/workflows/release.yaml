@@ -10,7 +10,7 @@ jobs:
     if: github.repository == 'hackthefutureofeducation/ketabak'
     runs-on: ubuntu-latest
     outputs:
-      version: ${{ steps.package-version.outputs.current-version }}
+      version: ${{ steps.changelog.outputs.version }}
       tag: ${{ steps.changelog.outputs.tag }}
       changelog: ${{ steps.changelog.outputs.clean_changelog }}
 
@@ -20,28 +20,10 @@ jobs:
         with:
           fetch-depth: 0
 
-      - name: Install jq and gh CLI
-        run: |
-          sudo apt-get update
-          sudo apt-get install -y jq gh
+      - name: Install jq
+        run: sudo apt-get install -y jq
 
-      - name: Get npm version
-        id: package-version
-        run: |
-          VERSION=$(jq -r '.version' package.json)
-          echo "current-version=$VERSION" >> $GITHUB_OUTPUT
-
-      - name: Update Cargo.toml version and Cargo.lock
-        run: |
-          sed -i "s/^version = \".*\"/version = \"${{ steps.package-version.outputs.current-version }}\"/" src-tauri/Cargo.toml
-          if [ -f src-tauri/Cargo.lock ]; then
-            cargo update --manifest-path src-tauri/Cargo.toml
-          fi
-
-      - name: Update Tauri config version
-        run: |
-          jq --arg v "${{ steps.package-version.outputs.current-version }}" '.version = $v' src-tauri/tauri.conf.json > tmp.json && mv tmp.json src-tauri/tauri.conf.json
-
+      # Generate changelog + get new version (but don’t commit)
       - name: Generate Changelog
         id: changelog
         uses: TriPSs/conventional-changelog-action@v5
@@ -51,6 +33,25 @@ jobs:
           skip-commit: true
           skip-git-pull: true
 
+      # Bump package.json version to match changelog
+      - name: Bump package.json version
+        run: |
+          jq --arg v "${{ steps.changelog.outputs.version }}" '.version = $v' package.json > tmp.json && mv tmp.json package.json
+
+      # Update Cargo.toml + Cargo.lock
+      - name: Update Cargo.toml version
+        run: |
+          sed -i "s/^version = \".*\"/version = \"${{ steps.changelog.outputs.version }}\"/" src-tauri/Cargo.toml
+          if [ -f src-tauri/Cargo.lock ]; then
+            cargo update --manifest-path src-tauri/Cargo.toml
+          fi
+
+      # Update Tauri config version
+      - name: Update Tauri config version
+        run: |
+          jq --arg v "${{ steps.changelog.outputs.version }}" '.version = $v' src-tauri/tauri.conf.json > tmp.json && mv tmp.json src-tauri/tauri.conf.json
+
+      # Commit everything together
       - name: Commit all changes
         run: |
           git config user.name "github-actions[bot]"
@@ -60,7 +61,7 @@ jobs:
             echo "No changes to commit"
             exit 0
           else
-            git commit -m "chore: release version ${{ steps.package-version.outputs.current-version }}"
+            git commit -m "chore: release version ${{ steps.changelog.outputs.version }}"
             git push origin main
           fi
 
