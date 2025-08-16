@@ -9,8 +9,12 @@ ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
   <React.StrictMode>
     <DarkModeProvider>
       <FileProvider>
-        <NavBar />
-        <App />
+        <div className="bg-gray-50 dark:bg-gray-900 flex flex-col min-h-screen overflow-auto">
+          <NavBar />
+          <main className="flex-1 overflow-auto h-full flex flex-col items-center justify-center px-6 w-full text-center">
+            <App />
+          </main>
+        </div>
       </FileProvider>
     </DarkModeProvider>
   </React.StrictMode>

@@ -11,14 +11,14 @@ export const Start = () => {
   if (showNewProject) {
     const handleBackToStart = () => setShowNewProject(false);
     return (
-      <main className="min-h-screen flex flex-col items-center justify-center px-6 w-full text-center">
+      <>
         <NewProject onBack={handleBackToStart} />
-      </main>
+      </>
     );
   }
 
   return (
-    <main className="min-h-screen flex flex-col items-center justify-center px-6 w-full text-center">
+    <>
       <h1 className="text-3xl font-extrabold text-gray-800 dark:text-gray-100">
         Welcome to Ketabak
       </h1>
@@ -36,6 +36,6 @@ export const Start = () => {
           <span className="text-lg font-medium">New Project</span>
         </Button>
       </div>
-    </main>
+    </>
   );
 };
