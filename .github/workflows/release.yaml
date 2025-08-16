@@ -115,7 +115,7 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           tagName: ${{ needs.changelog.outputs.tag }}
-          releaseName: "Ketabak ${{ needs.changelog.outputs.tag }}"
+          releaseName: 'Ketabak ${{ needs.changelog.outputs.tag }}'
           releaseDraft: true
           prerelease: false
           args: ${{ matrix.args }}
@@ -128,7 +128,7 @@ jobs:
         uses: softprops/action-gh-release@v2
         with:
           tag_name: ${{ needs.changelog.outputs.tag }}
-          name: "Ketabak ${{ needs.changelog.outputs.tag }}"
+          name: 'Ketabak ${{ needs.changelog.outputs.tag }}'
           body: ${{ needs.changelog.outputs.changelog }}
           draft: false
         env:
