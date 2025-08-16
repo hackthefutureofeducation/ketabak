@@ -83,6 +83,38 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
+      # Cache Node modules (Yarn)
+      - name: Cache Node modules
+        uses: actions/cache@v3
+        with:
+          path: |
+            ~/.yarn/cache
+            .yarn/cache
+            node_modules
+          key: ${{ runner.os }}-yarn-${{ hashFiles('**/yarn.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-yarn-
+
+      # Cache Cargo registry & git sources
+      - name: Cache Cargo registry
+        uses: actions/cache@v3
+        with:
+          path: |
+            ~/.cargo/registry
+            ~/.cargo/git
+          key: ${{ runner.os }}-cargo-${{ hashFiles('**/Cargo.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-cargo-
+
+      # Cache linuxdeploy for Linux
+      - name: Cache linuxdeploy (Linux only)
+        if: matrix.platform == 'ubuntu-22.04'
+        id: cache-linuxdeploy
+        uses: actions/cache@v3
+        with:
+          path: /usr/local/bin/linuxdeploy
+          key: linuxdeploy-v1
+
       - name: Install dependencies (Linux only)
         if: matrix.platform == 'ubuntu-22.04'
         run: |
@@ -93,6 +125,13 @@ jobs:
             libappindicator3-dev \
             librsvg2-dev \
             patchelf
+
+      - name: Download linuxdeploy if not cached
+        if: matrix.platform == 'ubuntu-22.04' && steps.cache-linuxdeploy.outputs.cache-hit != 'true'
+        run: |
+          wget https://github.com/tauri-apps/binary-releases/releases/download/linuxdeploy/linuxdeploy-x86_64.AppImage -O linuxdeploy
+          chmod +x linuxdeploy
+          sudo mv linuxdeploy /usr/local/bin/linuxdeploy
 
       - uses: actions/setup-node@v4
         with:
