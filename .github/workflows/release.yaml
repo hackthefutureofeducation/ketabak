@@ -9,6 +9,10 @@ jobs:
   changelog:
     if: github.repository == 'hackthefutureofeducation/ketabak'
     runs-on: ubuntu-latest
+    outputs:
+      version: ${{ steps.package-version.outputs.current-version }}
+      tag: ${{ steps.changelog.outputs.tag }}
+      changelog: ${{ steps.changelog.outputs.clean_changelog }}
 
     steps:
       - name: Checkout repository
@@ -27,11 +31,6 @@ jobs:
           VERSION=$(jq -r '.version' package.json)
           echo "current-version=$VERSION" >> $GITHUB_OUTPUT
 
-      - name: Create release branch
-        run: |
-          git checkout main
-          git checkout -b "release-from-${{ github.sha }}"
-
       - name: Update Cargo.toml version and Cargo.lock
         run: |
           sed -i "s/^version = \".*\"/version = \"${{ steps.package-version.outputs.current-version }}\"/" src-tauri/Cargo.toml
@@ -49,9 +48,8 @@ jobs:
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
           version-file: './package.json'
-          git-branch: 'release-from-${{ github.sha }}'
-          skip-git-pull: true
           skip-commit: true
+          skip-git-pull: true
 
       - name: Commit all changes
         run: |
@@ -63,38 +61,70 @@ jobs:
             exit 0
           else
             git commit -m "chore: release version ${{ steps.package-version.outputs.current-version }}"
+            git push origin main
           fi
-      - name: Push release branch
-        if: success()
-        run: git push origin "release-from-${{ github.sha }}"
 
-      - name: Create PR
-        if: success() && steps.changelog.outputs.skipped == 'false'
+  build-tauri:
+    needs: changelog
+    runs-on: ${{ matrix.platform }}
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - platform: macos-latest
+            args: --target aarch64-apple-darwin
+          - platform: macos-latest
+            args: --target x86_64-apple-darwin
+          - platform: ubuntu-22.04
+            args: ""
+          - platform: windows-latest
+            args: ""
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Install dependencies (Linux only)
+        if: matrix.platform == 'ubuntu-22.04'
         run: |
-          gh pr create \
-            --base main \
-            --head "release-from-${{ github.sha }}" \
-            --title "Merge new release into main" \
-            --body "Created by GitHub Action"
-        env:
-          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          sudo apt-get update
+          sudo apt-get install -y \
+            libwebkit2gtk-4.0-dev \
+            libwebkit2gtk-4.1-dev \
+            libappindicator3-dev \
+            librsvg2-dev \
+            patchelf
 
-      - name: Merge PR
-        if: success() && steps.changelog.outputs.skipped == 'false'
-        run: |
-          gh pr merge \
-            --admin \
-            --merge \
-            --subject "Merge release info" \
-            --delete-branch
-        env:
-          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-
-      - name: Create GitHub Release
-        if: success() && steps.changelog.outputs.skipped == 'false'
-        uses: ncipollo/release-action@v1
+      - uses: actions/setup-node@v4
         with:
-          token: ${{ secrets.GITHUB_TOKEN }}
-          tag: ${{ steps.changelog.outputs.tag }}
-          name: ${{ steps.changelog.outputs.tag }}
-          body: ${{ steps.changelog.outputs.clean_changelog }}
+          node-version: lts/*
+          cache: yarn
+
+      - uses: dtolnay/rust-toolchain@stable
+      - uses: swatinem/rust-cache@v2
+
+      - name: Install frontend deps
+        run: yarn install --frozen-lockfile
+
+      - name: Build Tauri app
+        uses: tauri-apps/tauri-action@v0
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          tagName: ${{ needs.changelog.outputs.tag }}
+          releaseDraft: true
+          prerelease: false
+          args: ${{ matrix.args }}
+
+  publish-release:
+    needs: [changelog, build-tauri]
+    runs-on: ubuntu-latest
+    steps:
+      - name: Publish GitHub Release
+        uses: softprops/action-gh-release@v2
+        with:
+          tag_name: ${{ needs.changelog.outputs.tag }}
+          name: ${{ needs.changelog.outputs.tag }}
+          body: ${{ needs.changelog.outputs.changelog }}
+          draft: false
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
