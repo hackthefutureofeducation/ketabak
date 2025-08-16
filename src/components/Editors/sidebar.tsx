@@ -47,7 +47,7 @@ export const Sidebar: React.FC<EpubSidebarProps> = ({ className = '' }) => {
 
   return (
     <div
-      className={`w-64 bg-gray-900 text-gray-200 flex flex-col h-full border-r border-gray-800 ${className}`}
+      className={`w-64 text-gray-200 flex flex-col h-full border-r border-gray-800 ${className}`}
     >
       {/* Header */}
       <div className="p-4 border-b border-gray-800">
@@ -179,7 +179,7 @@ export const Sidebar: React.FC<EpubSidebarProps> = ({ className = '' }) => {
       </div>
 
       {/* Footer info */}
-      <div className="p-4 border-t border-gray-800 bg-gray-900">
+      <div className="p-4 border-t border-gray-800">
         <div className="text-xs text-gray-500">
           {pages.length} {pages.length === 1 ? 'page' : 'pages'}
         </div>
