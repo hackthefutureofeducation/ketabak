@@ -2,7 +2,7 @@ export function generateEpubMetadata(
   title: string,
   language: string,
   options?: {
-    creator?: { name: string; role?: string };
+    creator?: Creator;
     publisher?: string;
     date?: string;
     subject?: string;
@@ -19,9 +19,9 @@ export function generateEpubMetadata(
     title,
     language,
     modified,
-    creator: options?.creator,
-    publisher: options?.publisher,
-    date: options?.date,
+    creator: options?.creator || {name: "Ketabak"},
+    publisher: options?.publisher || "Ketabak",
+    date: options?.date || modified,
     subject: options?.subject,
     description: options?.description,
     cover: options?.cover,
