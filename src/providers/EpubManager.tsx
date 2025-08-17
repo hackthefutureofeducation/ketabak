@@ -32,7 +32,6 @@ export const useEpubManager = (): EpubManagerContextProps => {
   return context;
 };
 
-
 export const EpubManagerProvider = ({ children }: { children: ReactNode }) => {
   const [pages, setPages] = useState<EpubPage[]>([]);
   const [activePageId, setActivePageId] = useState<string | null>(null);
