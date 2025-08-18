@@ -1,4 +1,3 @@
-
 // Start of Selection
 import React, { useEffect, useRef } from 'react';
 
@@ -60,12 +59,14 @@ const Modal: React.FC<ModalProps> = ({
       <div
         className={`
         relative w-full ${maxWidth} bg-background rounded-2xl shadow-2xl
-        transform transition-all duration-300 ease-out h-full w-full
+        transform transition-all duration-300 ease-out h-full w-full overflow-auto
       `}
-    >
+      >
         {/* Header */}
         <div className="flex items-center justify-between px-6 py-4 border-b border-gray-100">
-          <h2 id={titleId} className="text-xl font-semibold text-primary">{title}</h2>
+          <h2 id={titleId} className="text-xl font-semibold text-primary">
+            {title}
+          </h2>
           <button
             onClick={onClose}
             className="p-2 rounded-full hover:bg-gray-100 hover:text-black transition-colors duration-200 group text-white w-10"
