@@ -1868,7 +1868,7 @@ dependencies = [
 
 [[package]]
 name = "ketabak"
-version = "0.6.0"
+version = "0.9.6"
 dependencies = [
  "flate2",
  "serde",

@@ -47,8 +47,7 @@ const Modal: React.FC<ModalProps> = ({
       <div
         className={`
         relative w-full ${maxWidth} bg-background rounded-2xl shadow-2xl
-        transform transition-all duration-300 ease-out
-        animate-in fade-in-0 zoom-in-95 slide-in-from-bottom-2 h-full w-full
+        transform transition-all duration-300 ease-out h-full w-full
       `}
       >
         {/* Header */}
