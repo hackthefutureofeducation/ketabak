@@ -2,12 +2,14 @@ import { createContext, useContext, useState, ReactNode } from 'react';
 import { open, save } from '@tauri-apps/plugin-dialog';
 import { invoke } from '@tauri-apps/api/core';
 import { isValidFileContent } from '../lib/utils';
+import { generateEpubMetadata } from '../lib/generateMeta';
 
 interface FileContextProps {
   fileUrl: string | null;
   content: Epub | null;
   loading: boolean;
   error: string | null;
+  meta: EpubMetadata | undefined;
   selectFile: () => Promise<void>;
   createFile: (project: string) => Promise<void>;
   sync: (data: Partial<Epub>) => Promise<boolean>;
@@ -53,6 +55,7 @@ export const FileProvider = ({ children }: { children: ReactNode }) => {
   const [content, setContent] = useState<Epub | null>(null);
   const [loading, setLoading] = useState<boolean>(false);
   const [error, setError] = useState<string | null>(null);
+  const meta = content?.meta;
 
   const selectFile = async () => {
     setLoading(true);
@@ -92,8 +95,8 @@ export const FileProvider = ({ children }: { children: ReactNode }) => {
       });
 
       if (!filePath) return; // User cancelled the dialog
-
-      const initialContent = { projectName: project, pages: [] };
+      const meta = generateEpubMetadata(project, 'en');
+      const initialContent = { pages: [], meta };
       setFileUrl(filePath);
       setContent(initialContent);
       setError(null);
@@ -129,7 +132,7 @@ export const FileProvider = ({ children }: { children: ReactNode }) => {
 
   return (
     <FileContext.Provider
-      value={{ fileUrl, selectFile, content, loading, error, createFile, sync }}
+      value={{ fileUrl, selectFile, content, loading, error, createFile, sync, meta }}
     >
       {children}
     </FileContext.Provider>

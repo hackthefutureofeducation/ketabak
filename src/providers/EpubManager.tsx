@@ -1,13 +1,14 @@
 import type { SerializedEditorState } from 'lexical';
 import {
   createContext,
-  useContext,
-  useState,
-  useMemo,
-  useCallback,
-  useEffect,
   ReactNode,
+  useCallback,
+  useContext,
+  useEffect,
+  useMemo,
+  useState,
 } from 'react';
+import { safeRandomUUID } from '../lib/utils';
 import { useFile } from './FileProvider';
 
 interface EpubManagerContextProps {
@@ -31,11 +32,6 @@ export const useEpubManager = (): EpubManagerContextProps => {
   return context;
 };
 
-const generateId = (): string =>
-  typeof crypto !== 'undefined' && typeof crypto.randomUUID === 'function'
-    ? crypto.randomUUID()
-    : Math.random().toString(36).substr(2, 9);
-
 export const EpubManagerProvider = ({ children }: { children: ReactNode }) => {
   const [pages, setPages] = useState<EpubPage[]>([]);
   const [activePageId, setActivePageId] = useState<string | null>(null);
@@ -53,7 +49,7 @@ export const EpubManagerProvider = ({ children }: { children: ReactNode }) => {
 
   const createPage = useCallback((title: string) => {
     const newPage: EpubPage = {
-      id: generateId(),
+      id: safeRandomUUID(),
       title,
     };
     setPages((prev) => [...prev, newPage]);

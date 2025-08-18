@@ -3,6 +3,7 @@ import { useDarkMode } from '../providers/DarkModeProvider';
 import { Sun, Moon } from 'lucide-react';
 import Button from './ui/Button';
 import { getVersion } from '@tauri-apps/api/app';
+import { ProjectOptions } from './ProjectOptions';
 
 const NavBar: React.FC = () => {
   const { darkMode, toggleDarkMode } = useDarkMode();
@@ -30,9 +31,12 @@ const NavBar: React.FC = () => {
       >
         Ketabak {version && <span className="text-sm opacity-60 ml-2">v{version}</span>}
       </div>
-      <Button onClick={toggleDarkMode} aria-label="Toggle dark mode">
-        {darkMode ? <Moon size={20} /> : <Sun size={20} />}
-      </Button>
+      <div className="flex space-x-2">
+        <ProjectOptions />
+        <Button onClick={toggleDarkMode} aria-label="Toggle dark mode">
+          {darkMode ? <Moon size={20} /> : <Sun size={20} />}
+        </Button>
+      </div>
     </nav>
   );
 };
