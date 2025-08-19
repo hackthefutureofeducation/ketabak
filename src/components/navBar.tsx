@@ -5,7 +5,7 @@ import Button from './ui/Button';
 import { getVersion } from '@tauri-apps/api/app';
 import { ProjectOptions } from './ProjectOptions';
 
-const NavBar: React.FC = () => {
+const NavBar: React.FC<{ onNavigate: React.Dispatch<React.SetStateAction<"home" | "export">> }> = ({ onNavigate }) => {
   const { darkMode, toggleDarkMode } = useDarkMode();
   const [version, setVersion] = useState<string | null>(null);
 
@@ -27,12 +27,14 @@ const NavBar: React.FC = () => {
         text-xl font-bold
         text-foreground
         transition-colors
+        cursor-pointer
       "
+      onClick={() => onNavigate('home')}
       >
         Ketabak {version && <span className="text-sm opacity-60 ml-2">v{version}</span>}
       </div>
       <div className="flex space-x-2">
-        <ProjectOptions />
+        <ProjectOptions onNavigate={onNavigate} />
         <Button onClick={toggleDarkMode} aria-label="Toggle dark mode">
           {darkMode ? <Moon size={20} /> : <Sun size={20} />}
         </Button>

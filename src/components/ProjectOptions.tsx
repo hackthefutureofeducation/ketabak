@@ -1,13 +1,15 @@
 import { useFile } from '../providers/FileProvider';
 import { EpubSettings } from './EpubSettings';
+import Button from './ui/Button';
 
-export function ProjectOptions() {
+export function ProjectOptions({onNavigate}: { onNavigate: React.Dispatch<React.SetStateAction<"home" | "export">> }) {
   const { fileUrl } = useFile();
   return (
     fileUrl && (
-      <div>
+      <>
         <EpubSettings />
-      </div>
+        <Button onClick={()=>onNavigate("export")}>Export</Button>
+      </>
     )
   );
 }
