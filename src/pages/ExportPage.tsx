@@ -4,9 +4,14 @@ import { useFile } from '../providers/FileProvider';
 
 export default function ExportPage() {
   const { content } = useFile();
-  const exportEpub = () => {
+  const exportEpub = async () => {
     const epubContent = content
-      ? content.pages.map((page) => ({ ...page, content: lexicalTransformer(page.content) }))
+      ? await Promise.all(
+          content.pages.map(async (page) => ({
+            ...page,
+            content: await lexicalTransformer(page.content),
+          }))
+        )
       : [];
     console.log(epubContent);
   };
