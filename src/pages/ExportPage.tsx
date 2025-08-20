@@ -1,11 +1,21 @@
 import { Card, CardHeader, CardTitle, CardDescription } from '../components/ui/Card';
+import { lexicalTransformer } from '../lib/transformer';
+import { useFile } from '../providers/FileProvider';
 
 export default function ExportPage() {
+  const { content } = useFile();
+  const exportEpub = () => {
+    const epubContent = content
+      ? content.pages.map((page) => ({ ...page, content: lexicalTransformer(page.content) }))
+      : [];
+    console.log(epubContent);
+  };
+
   const exports = [
     {
       title: 'EPUB',
       description: 'Export your project as an EPUB file.',
-      onClick: () => alert('We are working on it!'),
+      onClick: exportEpub,
     },
   ];
 
