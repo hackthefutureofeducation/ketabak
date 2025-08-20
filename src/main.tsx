@@ -14,10 +14,12 @@ function Root() {
       <FileProvider>
         <div className="bg-gray-50 dark:bg-gray-900 flex flex-col min-h-screen overflow-auto">
           <NavBar onNavigate={setPage} />
-          <main className="flex-1 overflow-auto h-full flex flex-col items-center justify-center px-6 w-full text-center">
-            {page === 'home' && <App />}
-            {page === 'export' && <ExportPage />}
-          </main>
+          {page === 'home' && (
+            <main className="flex-1 overflow-auto h-full flex flex-col items-center justify-center px-6 w-full text-center">
+              <App />
+            </main>
+          )}
+          {page === 'export' && <ExportPage />}
         </div>
       </FileProvider>
     </DarkModeProvider>
