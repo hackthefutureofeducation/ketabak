@@ -1,6 +1,8 @@
+import { save } from '@tauri-apps/plugin-dialog';
 import { Card, CardHeader, CardTitle, CardDescription } from '../components/ui/Card';
 import { lexicalTransformer } from '../lib/transformer';
 import { useFile } from '../providers/FileProvider';
+import { invoke } from '@tauri-apps/api/core';
 
 export default function ExportPage() {
   const { content } = useFile();
@@ -13,7 +15,26 @@ export default function ExportPage() {
           }))
         )
       : [];
-    console.log(epubContent);
+    const book = { ...content, pages: epubContent };
+
+    // Ask user where to save
+    const filePath = await save({
+      title: 'Save your EPUB',
+      defaultPath: `${book.meta?.title}.epub`,
+      filters: [{ name: 'EPUB books', extensions: ['epub'] }],
+    });
+
+    if (!filePath) {
+      console.log('Save canceled');
+      return;
+    }
+
+    // Call Rust command
+    const output = await invoke<string>('generate_epub', {
+      json: JSON.stringify(book),
+      outputPath: filePath,
+    });
+    console.log('✅ EPUB written to:', output);
   };
 
   const exports = [
