@@ -1,6 +1,6 @@
-use anyhow::{bail, Context, Result};
 use chrono::{DateTime, Utc};
 use epub_builder::{EpubBuilder, EpubContent, ReferenceType, ZipLibrary};
+use eyre::{bail, Context, Result};
 use regex::Regex;
 use serde::Deserialize;
 use std::fs::File;
@@ -38,24 +38,25 @@ pub fn generate(data: &Input, output_path: &str) -> Result<()> {
         bail!("pages cannot be empty");
     }
 
-    let mut epub = EpubBuilder::new(ZipLibrary::new().context("zip lib")?)?;
+    let zip_library = ZipLibrary::new().context("Failed to create ZipLibrary")?;
+    let mut epub = EpubBuilder::new(zip_library)?;
 
     // ---- Metadata ----
-    epub.metadata("title", &data.meta.title).ok();
+    epub.metadata("title", &data.meta.title)?;
     if let Some(id) = &data.meta.identifier {
-        epub.metadata("identifier", id).ok();
+        epub.metadata("identifier", id)?;
     }
     if let Some(lang) = &data.meta.language {
-        epub.metadata("language", lang).ok();
+        epub.metadata("language", lang)?;
     }
     if let Some(publi) = &data.meta.publisher {
-        epub.metadata("publisher", publi).ok();
+        epub.metadata("publisher", publi)?;
     }
     if let Some(desc) = &data.meta.description {
-        epub.metadata("description", desc).ok();
+        epub.metadata("description", desc)?;
     }
-    let modified = data.meta.modified.unwrap_or_else(|| Utc::now());
-    epub.metadata("modified", &modified.to_rfc3339()).ok();
+    let modified = data.meta.modified.unwrap_or_else(Utc::now);
+    epub.metadata("modified", &modified.to_rfc3339())?;
 
     // ---- Pages ----
     for (idx, page) in data.pages.iter().enumerate() {
@@ -126,9 +127,11 @@ fn xml_escape(s: &str) -> String {
         .replace('\'', "&apos;")
 }
 
-#[command]
+#[tauri::command]
 pub async fn generate_epub(json: String, output_path: String) -> Result<String, String> {
-    let parsed: Input = serde_json::from_str(&json).map_err(|e| e.to_string())?;
-    generate(&parsed, &output_path).map_err(|e| e.to_string())?;
+    let parsed: Input = serde_json::from_str(&json).map_err(|e| format!("Invalid JSON: {}", e))?;
+
+    generate(&parsed, &output_path).map_err(|e| format!("EPUB generation failed: {e}"))?;
+
     Ok(output_path)
 }

@@ -29,4 +29,5 @@ epub-builder = "0.7"
 anyhow = "1.0.99"
 chrono = { version = "0.4.41", features = ["serde"] }
 regex = "1.11.1"
+eyre = "0.6.12"
 
