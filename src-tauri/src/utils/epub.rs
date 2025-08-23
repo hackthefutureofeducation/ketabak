@@ -1,4 +1,3 @@
-use chrono::{DateTime, Utc};
 use epub_builder::{EpubBuilder, EpubContent, ReferenceType, ZipLibrary};
 use eyre::{bail, Context, Result};
 use regex::Regex;
@@ -12,14 +11,11 @@ pub struct Meta {
     pub title: String,
     pub publisher: Option<String>,
     pub language: Option<String>,
-    pub identifier: Option<String>,
     pub description: Option<String>,
-    pub modified: Option<DateTime<Utc>>,
 }
 
 #[derive(Debug, Deserialize)]
 pub struct Page {
-    pub id: String,
     pub title: String,
     pub content: String,
 }
@@ -43,20 +39,16 @@ pub fn generate(data: &Input, output_path: &str) -> Result<()> {
 
     // ---- Metadata ----
     epub.metadata("title", &data.meta.title)?;
-    if let Some(id) = &data.meta.identifier {
-        epub.metadata("identifier", id)?;
-    }
+    epub.metadata("generator", "Ketabak")?;
     if let Some(lang) = &data.meta.language {
-        epub.metadata("language", lang)?;
+        epub.metadata("lang", lang)?;
     }
     if let Some(publi) = &data.meta.publisher {
-        epub.metadata("publisher", publi)?;
+        epub.metadata("author", publi)?;
     }
     if let Some(desc) = &data.meta.description {
         epub.metadata("description", desc)?;
     }
-    let modified = data.meta.modified.unwrap_or_else(Utc::now);
-    epub.metadata("modified", &modified.to_rfc3339())?;
 
     // ---- Pages ----
     for (idx, page) in data.pages.iter().enumerate() {

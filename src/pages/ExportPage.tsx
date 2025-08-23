@@ -16,6 +16,7 @@ export default function ExportPage() {
         )
       : [];
     const book = { ...content, pages: epubContent };
+    console.log(book);
 
     // Ask user where to save
     const filePath = await save({
