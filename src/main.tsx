@@ -5,6 +5,7 @@ import { DarkModeProvider } from './providers/DarkModeProvider';
 import NavBar from './components/navBar';
 import { FileProvider } from './providers/FileProvider';
 import ExportPage from './pages/ExportPage';
+import { Toaster } from './components/ui/Sonner';
 
 function Root() {
   const [page, setPage] = useState<'home' | 'export'>('home');
@@ -20,6 +21,7 @@ function Root() {
             </main>
           )}
           {page === 'export' && <ExportPage />}
+          <Toaster />
         </div>
       </FileProvider>
     </DarkModeProvider>
