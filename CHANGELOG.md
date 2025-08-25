@@ -1,3 +1,12 @@
+## [0.12.1](https://github.com/hackthefutureofeducation/ketabak/compare/v0.12.0...v0.12.1) (2025-08-25)
+
+
+### Bug Fixes
+
+* add readme ([#30](https://github.com/hackthefutureofeducation/ketabak/issues/30)) ([8ac10b2](https://github.com/hackthefutureofeducation/ketabak/commit/8ac10b2656c1fe0c53fa7d17af3d44192b373d9e))
+
+
+
 # [0.12.0](https://github.com/hackthefutureofeducation/ketabak/compare/v0.11.0...v0.12.0) (2025-08-23)
 
 
@@ -31,15 +40,6 @@
 ### Features
 
 * generate meta data for epub ([4d44fca](https://github.com/hackthefutureofeducation/ketabak/commit/4d44fca6395ad164473aa0082519d634311839b8))
-
-
-
-## [0.9.6](https://github.com/hackthefutureofeducation/ketabak/compare/v0.9.5...v0.9.6) (2025-08-16)
-
-
-### Bug Fixes
-
-* version not updating ([7ca9d5e](https://github.com/hackthefutureofeducation/ketabak/commit/7ca9d5eb4d68af96a85ba7f433fe4bb3ce31dde1))
 
 
 
