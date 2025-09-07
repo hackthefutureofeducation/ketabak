@@ -1,11 +1,11 @@
-import { createCommand, DecoratorNode, NodeKey } from "lexical";
+import { createCommand, DecoratorNode, NodeKey } from 'lexical';
 export class IframeNode extends DecoratorNode<JSX.Element> {
   __src: string;
   __width: string;
   __height: string;
 
   static getType(): string {
-    return "iframe";
+    return 'iframe';
   }
 
   static clone(node: IframeNode): IframeNode {
@@ -21,16 +21,12 @@ export class IframeNode extends DecoratorNode<JSX.Element> {
 
   // 👇 JSON serialization
   static importJSON(serializedNode: any): IframeNode {
-    return new IframeNode(
-      serializedNode.src,
-      serializedNode.width,
-      serializedNode.height
-    );
+    return new IframeNode(serializedNode.src, serializedNode.width, serializedNode.height);
   }
 
   exportJSON(): any {
     return {
-      type: "iframe",
+      type: 'iframe',
       version: 1,
       src: this.__src,
       width: this.__width,
@@ -40,7 +36,7 @@ export class IframeNode extends DecoratorNode<JSX.Element> {
 
   // 👇 required DOM methods
   createDOM(): HTMLElement {
-    return document.createElement("div");
+    return document.createElement('div');
   }
   updateDOM(): false {
     return false;
@@ -53,14 +49,14 @@ export class IframeNode extends DecoratorNode<JSX.Element> {
         src={this.__src}
         width={this.__width}
         height={this.__height}
-        style={{ border: "none" }}
+        style={{ border: 'none' }}
       />
     );
   }
 }
 
 // helper factory
-export function $createIframeNode(src: string, width = "560", height = "315") {
+export function $createIframeNode(src: string, width = '560', height = '315') {
   return new IframeNode(src, width, height);
 }
 
