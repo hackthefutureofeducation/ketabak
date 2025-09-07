@@ -26,8 +26,10 @@ import {
   RotateCcw,
   Type,
   Save,
+  MonitorPlay, // 👈 icon for iframe
 } from 'lucide-react';
 import ToolbarButton from './ToolbarButton';
+import { INSERT_IFRAME_COMMAND } from './plugins/Iframe'; // 👈 import your command
 
 export interface ToolbarProps {
   wordCount: number;
@@ -89,6 +91,19 @@ const Toolbar: React.FC<ToolbarProps> = ({ wordCount, charCount, isAutoSaved }) 
       root.append(paragraph);
     });
     editor.dispatchCommand(CLEAR_HISTORY_COMMAND, undefined);
+  };
+
+  const insertIframe = () => {
+    const src = prompt('Enter iframe URL:');
+    if (!src) return;
+    const width = prompt('Enter width (e.g. 600):', '600') || '600';
+    const height = prompt('Enter height (e.g. 400):', '400') || '400';
+
+    editor.dispatchCommand(INSERT_IFRAME_COMMAND, {
+      src,
+      width,
+      height,
+    });
   };
 
   return (
@@ -166,6 +181,11 @@ const Toolbar: React.FC<ToolbarProps> = ({ wordCount, charCount, isAutoSaved }) 
 
           <ToolbarButton onClick={clearContent} title="Clear Document">
             <RotateCcw size={16} />
+          </ToolbarButton>
+
+          {/* 👇 New iframe button */}
+          <ToolbarButton onClick={insertIframe} title="Insert Iframe">
+            <MonitorPlay size={16} />
           </ToolbarButton>
         </div>
 
