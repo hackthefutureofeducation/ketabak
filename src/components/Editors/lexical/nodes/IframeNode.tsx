@@ -47,13 +47,7 @@ function IframeComponent({
 }: IframeComponentProps) {
   return (
     <BlockWithAlignableContents className={className} format={format} nodeKey={nodeKey}>
-      <iframe
-        width={width}
-        height={height}
-        src={link}
-        frameBorder="0"
-        title="Iframe"
-      />
+      <iframe width={width} height={height} src={link} frameBorder="0" title="Iframe" />
     </BlockWithAlignableContents>
   );
 }
@@ -72,7 +66,7 @@ function $convertIframeElement(domNode: HTMLElement): null | DOMConversionOutput
   const width = domNode.getAttribute('width');
   const height = domNode.getAttribute('height');
   if (videoID) {
-    const node = $createIframeNode(videoID, width || "", height || "");
+    const node = $createIframeNode(videoID, width || '', height || '');
     return { node };
   }
   return null;
@@ -92,7 +86,11 @@ export class IframeNode extends DecoratorBlockNode {
   }
 
   static importJSON(serializedNode: SerializedIframeNode): IframeNode {
-    return $createIframeNode(serializedNode.videoID, serializedNode.width, serializedNode.height).updateFromJSON(serializedNode);
+    return $createIframeNode(
+      serializedNode.videoID,
+      serializedNode.width,
+      serializedNode.height
+    ).updateFromJSON(serializedNode);
   }
 
   exportJSON(): SerializedIframeNode {
@@ -104,7 +102,13 @@ export class IframeNode extends DecoratorBlockNode {
     };
   }
 
-  constructor(id: string, format?: ElementFormatType, key?: NodeKey, width?: string, height?: string) {
+  constructor(
+    id: string,
+    format?: ElementFormatType,
+    key?: NodeKey,
+    width?: string,
+    height?: string
+  ) {
     super(format, key);
     this.__link = id;
     this.__width = width || '560';
@@ -144,8 +148,6 @@ export class IframeNode extends DecoratorBlockNode {
   getId(): string {
     return this.__link;
   }
-
-
 
   decorate(_editor: LexicalEditor, config: EditorConfig): JSX.Element {
     const embedBlockTheme = config.theme.embedBlock || {};

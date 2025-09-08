@@ -171,7 +171,7 @@ const Toolbar: React.FC<ToolbarProps> = ({ wordCount, charCount, isAutoSaved }) 
             <RotateCcw size={16} />
           </ToolbarButton>
 
-          <ToolbarButton onClick={()=>setShowIframeModal(true)} title="Insert Iframe">
+          <ToolbarButton onClick={() => setShowIframeModal(true)} title="Insert Iframe">
             <Code size={16} />
           </ToolbarButton>
         </div>
@@ -191,7 +191,7 @@ const Toolbar: React.FC<ToolbarProps> = ({ wordCount, charCount, isAutoSaved }) 
           </div>
         </div>
       </div>
-      <IframeOptionsModal isOpen={showIframeModal} onClose={()=>setShowIframeModal(false)}/>
+      <IframeOptionsModal isOpen={showIframeModal} onClose={() => setShowIframeModal(false)} />
     </div>
   );
 };

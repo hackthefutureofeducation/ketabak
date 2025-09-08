@@ -10,10 +10,7 @@ interface IframeOptionsProps {
   onClose: () => void;
 }
 
-const IframeOptionsModal: React.FC<IframeOptionsProps> = ({
-  isOpen,
-  onClose,
-}) => {
+const IframeOptionsModal: React.FC<IframeOptionsProps> = ({ isOpen, onClose }) => {
   const [editor] = useLexicalComposerContext();
   const [url, setUrl] = useState('');
   const [width, setWidth] = useState('560');
@@ -27,20 +24,21 @@ const IframeOptionsModal: React.FC<IframeOptionsProps> = ({
   };
 
   return (
-    <Modal isOpen={isOpen} onClose={onClose} title="Insert Iframe" maxWidth="max-w-md" height='auto'>
+    <Modal
+      isOpen={isOpen}
+      onClose={onClose}
+      title="Insert Iframe"
+      maxWidth="max-w-md"
+      height="auto"
+    >
       <form onSubmit={handleSubmit} className="space-y-4">
-        <Input
-          label="URL"
-          value={url}
-          onChange={e => setUrl(e.target.value)}
-          type="input"
-        />
+        <Input label="URL" value={url} onChange={(e) => setUrl(e.target.value)} type="input" />
         <div className="flex space-x-4">
           <div className="flex-1">
             <Input
               label="Width"
               value={width}
-              onChange={e => {
+              onChange={(e) => {
                 // Only allow numbers
                 const val = e.target.value.replace(/[^0-9]/g, '');
                 setWidth(val);
@@ -52,7 +50,7 @@ const IframeOptionsModal: React.FC<IframeOptionsProps> = ({
             <Input
               label="Height"
               value={height}
-              onChange={e => {
+              onChange={(e) => {
                 // Only allow numbers
                 const val = e.target.value.replace(/[^0-9]/g, '');
                 setHeight(val);
@@ -69,9 +67,7 @@ const IframeOptionsModal: React.FC<IframeOptionsProps> = ({
           >
             Cancel
           </button>
-          <Button type="submit">
-            Insert
-          </Button>
+          <Button type="submit">Insert</Button>
         </div>
       </form>
     </Modal>
