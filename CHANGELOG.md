@@ -1,3 +1,12 @@
+# [0.13.0](https://github.com/hackthefutureofeducation/ketabak/compare/v0.12.1...v0.13.0) (2025-09-08)
+
+
+### Features
+
+* Iframe Plugin ([#31](https://github.com/hackthefutureofeducation/ketabak/issues/31)) ([d098f4a](https://github.com/hackthefutureofeducation/ketabak/commit/d098f4a16f5126e2baedb0ac08693f296845b54e))
+
+
+
 ## [0.12.1](https://github.com/hackthefutureofeducation/ketabak/compare/v0.12.0...v0.12.1) (2025-08-25)
 
 
@@ -31,15 +40,6 @@
 ### Bug Fixes
 
 * commit cargo lock ([2c5ee7f](https://github.com/hackthefutureofeducation/ketabak/commit/2c5ee7f8da3c029604bb7ef18ff57b83c9201ace))
-
-
-
-# [0.10.0](https://github.com/hackthefutureofeducation/ketabak/compare/v0.9.6...v0.10.0) (2025-08-18)
-
-
-### Features
-
-* generate meta data for epub ([4d44fca](https://github.com/hackthefutureofeducation/ketabak/commit/4d44fca6395ad164473aa0082519d634311839b8))
 
 
 
