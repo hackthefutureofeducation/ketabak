@@ -1,35 +1,35 @@
-import React, { useCallback, useEffect, useState } from 'react';
+import { INSERT_ORDERED_LIST_COMMAND, INSERT_UNORDERED_LIST_COMMAND } from '@lexical/list';
 import { useLexicalComposerContext } from '@lexical/react/LexicalComposerContext';
+import { $createHeadingNode, HeadingTagType } from '@lexical/rich-text';
+import { $setBlocksType } from '@lexical/selection';
 import {
+  $createParagraphNode,
+  $getRoot,
   $getSelection,
   $isRangeSelection,
-  FORMAT_TEXT_COMMAND,
-  UNDO_COMMAND,
-  REDO_COMMAND,
   CLEAR_HISTORY_COMMAND,
-  $createParagraphNode,
+  FORMAT_TEXT_COMMAND,
+  REDO_COMMAND,
   TextFormatType,
-  $getRoot,
+  UNDO_COMMAND,
 } from 'lexical';
-import { $setBlocksType } from '@lexical/selection';
-import { $createHeadingNode, HeadingTagType } from '@lexical/rich-text';
-import { INSERT_ORDERED_LIST_COMMAND, INSERT_UNORDERED_LIST_COMMAND } from '@lexical/list';
 import {
   Bold,
   Italic,
-  Underline,
-  Strikethrough,
   List,
   ListOrdered,
-  Undo,
+  MonitorPlay,
   Redo,
   RotateCcw,
-  Type,
   Save,
-  MonitorPlay, // 👈 icon for iframe
+  Strikethrough,
+  Type,
+  Underline,
+  Undo,
 } from 'lucide-react';
+import React, { useCallback, useEffect, useState } from 'react';
 import ToolbarButton from './ToolbarButton';
-import { INSERT_IFRAME_COMMAND } from './plugins/Iframe'; // 👈 import your command
+import { INSERT_YOUTUBE_COMMAND } from './plugins/YouTubePlugin'; // 👈 import your command
 
 export interface ToolbarProps {
   wordCount: number;
@@ -96,14 +96,7 @@ const Toolbar: React.FC<ToolbarProps> = ({ wordCount, charCount, isAutoSaved }) 
   const insertIframe = () => {
     const src = prompt('Enter iframe URL:');
     if (!src) return;
-    const width = prompt('Enter width (e.g. 600):', '600') || '600';
-    const height = prompt('Enter height (e.g. 400):', '400') || '400';
-
-    editor.dispatchCommand(INSERT_IFRAME_COMMAND, {
-      src,
-      width,
-      height,
-    });
+    editor.dispatchCommand(INSERT_YOUTUBE_COMMAND, src);
   };
 
   return (
