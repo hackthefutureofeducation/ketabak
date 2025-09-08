@@ -8,12 +8,17 @@ import {
   $getSelection,
   $isRangeSelection,
   CLEAR_HISTORY_COMMAND,
+  FORMAT_ELEMENT_COMMAND,
   FORMAT_TEXT_COMMAND,
   REDO_COMMAND,
   TextFormatType,
   UNDO_COMMAND,
 } from 'lexical';
 import {
+  AlignLeft,
+  AlignRight,
+  AlignCenter,
+  AlignJustify,
   Bold,
   Code,
   Italic,
@@ -149,6 +154,33 @@ const Toolbar: React.FC<ToolbarProps> = ({ wordCount, charCount, isAutoSaved }) 
             </ToolbarButton>
             <ToolbarButton onClick={() => insertList('number')} title="Numbered List">
               <ListOrdered size={16} />
+            </ToolbarButton>
+          </div>
+
+          <div className="flex items-center gap-1 mr-4">
+            <ToolbarButton
+              onClick={() => editor.dispatchCommand(FORMAT_ELEMENT_COMMAND, 'left')}
+              title="Align Left"
+            >
+              <AlignLeft size={16} />
+            </ToolbarButton>
+            <ToolbarButton
+              onClick={() => editor.dispatchCommand(FORMAT_ELEMENT_COMMAND, 'center')}
+              title="Align Center"
+            >
+              <AlignCenter size={16} />
+            </ToolbarButton>
+            <ToolbarButton
+              onClick={() => editor.dispatchCommand(FORMAT_ELEMENT_COMMAND, 'right')}
+              title="Align Right"
+            >
+              <AlignRight size={16} />
+            </ToolbarButton>
+            <ToolbarButton
+              onClick={() => editor.dispatchCommand(FORMAT_ELEMENT_COMMAND, 'justify')}
+              title="Justify"
+            >
+              <AlignJustify size={16} />
             </ToolbarButton>
           </div>
 
