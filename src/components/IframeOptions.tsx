@@ -43,7 +43,9 @@ const IframeOptionsModal: React.FC<IframeOptionsProps> = ({ isOpen, onClose }) =
       const parsed = new URL(normalizedUrl);
       domain = parsed.hostname;
     } catch (err) {
-      throw new Error('Invalid URL');
+      console.log(err);
+      toast.error('Invalid URL');
+      return;
     }
 
     // Simple domain name validation (RFC 1035/1123)
