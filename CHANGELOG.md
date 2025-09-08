@@ -1,3 +1,12 @@
+# [0.14.0](https://github.com/hackthefutureofeducation/ketabak/compare/v0.13.0...v0.14.0) (2025-09-08)
+
+
+### Features
+
+* add text alignment options to Toolbar component ([#32](https://github.com/hackthefutureofeducation/ketabak/issues/32)) ([6454fc9](https://github.com/hackthefutureofeducation/ketabak/commit/6454fc9c39ffed3156ec72fa1722a317e6ed7634))
+
+
+
 # [0.13.0](https://github.com/hackthefutureofeducation/ketabak/compare/v0.12.1...v0.13.0) (2025-09-08)
 
 
@@ -31,15 +40,6 @@
 ### Features
 
 * Export page ([#28](https://github.com/hackthefutureofeducation/ketabak/issues/28)) ([a9fdfc7](https://github.com/hackthefutureofeducation/ketabak/commit/a9fdfc76b8eef03be8fa93db6139437b6eecb6eb))
-
-
-
-## [0.10.1](https://github.com/hackthefutureofeducation/ketabak/compare/v0.10.0...v0.10.1) (2025-08-18)
-
-
-### Bug Fixes
-
-* commit cargo lock ([2c5ee7f](https://github.com/hackthefutureofeducation/ketabak/commit/2c5ee7f8da3c029604bb7ef18ff57b83c9201ace))
 
 
 
