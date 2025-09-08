@@ -5,10 +5,10 @@ interface InputProps {
   value: string;
   onChange: (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => void;
   type?: 'input' | 'textarea';
-  inputType?: string;
+  inputType?: React.HTMLInputTypeAttribute;
 }
 
-const Input: React.FC<InputProps> = ({ label, value, onChange, type = 'input' }) => {
+const Input: React.FC<InputProps> = ({ label, value, onChange, type = 'input', inputType }) => {
   return (
     <div>
       <label
@@ -33,7 +33,7 @@ const Input: React.FC<InputProps> = ({ label, value, onChange, type = 'input' })
       ) : (
         <input
           id={label}
-          type={type}
+          type={inputType || 'text'}
           value={value}
           onChange={onChange}
           className="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-lg
