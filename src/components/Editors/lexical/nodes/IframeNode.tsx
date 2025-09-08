@@ -33,14 +33,23 @@ type IframeComponentProps = Readonly<{
   format: ElementFormatType | null;
   nodeKey: NodeKey;
   link: string;
+  width: string;
+  height: string;
 }>;
 
-function IframeComponent({ className, format, nodeKey, link }: IframeComponentProps) {
+function IframeComponent({
+  className,
+  format,
+  nodeKey,
+  link,
+  width,
+  height,
+}: IframeComponentProps) {
   return (
     <BlockWithAlignableContents className={className} format={format} nodeKey={nodeKey}>
       <iframe
-        width="560"
-        height="315"
+        width={width}
+        height={height}
         src={link}
         frameBorder="0"
         title="Iframe"
@@ -52,14 +61,18 @@ function IframeComponent({ className, format, nodeKey, link }: IframeComponentPr
 export type SerializedIframeNode = Spread<
   {
     videoID: string;
+    width: string;
+    height: string;
   },
   SerializedDecoratorBlockNode
 >;
 
 function $convertIframeElement(domNode: HTMLElement): null | DOMConversionOutput {
   const videoID = domNode.getAttribute('data-lexical-Iframe');
+  const width = domNode.getAttribute('width');
+  const height = domNode.getAttribute('height');
   if (videoID) {
-    const node = $createIframeNode(videoID);
+    const node = $createIframeNode(videoID, width || "", height || "");
     return { node };
   }
   return null;
@@ -67,35 +80,41 @@ function $convertIframeElement(domNode: HTMLElement): null | DOMConversionOutput
 
 export class IframeNode extends DecoratorBlockNode {
   __link: string;
+  __width: string;
+  __height: string;
 
   static getType(): string {
     return 'Iframe';
   }
 
   static clone(node: IframeNode): IframeNode {
-    return new IframeNode(node.__link, node.__format, node.__key);
+    return new IframeNode(node.__link, node.__format, node.__key, node.__width, node.__height);
   }
 
   static importJSON(serializedNode: SerializedIframeNode): IframeNode {
-    return $createIframeNode(serializedNode.videoID).updateFromJSON(serializedNode);
+    return $createIframeNode(serializedNode.videoID, serializedNode.width, serializedNode.height).updateFromJSON(serializedNode);
   }
 
   exportJSON(): SerializedIframeNode {
     return {
       ...super.exportJSON(),
       videoID: this.__link,
+      width: this.__width,
+      height: this.__height,
     };
   }
 
-  constructor(id: string, format?: ElementFormatType, key?: NodeKey) {
+  constructor(id: string, format?: ElementFormatType, key?: NodeKey, width?: string, height?: string) {
     super(format, key);
     this.__link = id;
+    this.__width = width || '560';
+    this.__height = height || '315';
   }
 
   exportDOM(): DOMExportOutput {
     const element = document.createElement('iframe');
-    element.setAttribute('width', '560');
-    element.setAttribute('height', '315');
+    element.setAttribute('width', this.__width);
+    element.setAttribute('height', this.__height);
     element.setAttribute('src', this.__link);
     element.setAttribute('title', 'Iframe');
     element.setAttribute('frameborder', '0');
@@ -140,13 +159,15 @@ export class IframeNode extends DecoratorBlockNode {
         format={this.__format}
         nodeKey={this.getKey()}
         link={this.__link}
+        width={this.__width}
+        height={this.__height}
       />
     );
   }
 }
 
-export function $createIframeNode(link: string): IframeNode {
-  return new IframeNode(link);
+export function $createIframeNode(link: string, width: string, height: string): IframeNode {
+  return new IframeNode(link, undefined, undefined, width, height);
 }
 
 export function $isIframeNode(

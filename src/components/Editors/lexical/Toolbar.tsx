@@ -29,7 +29,7 @@ import {
 } from 'lucide-react';
 import React, { useCallback, useEffect, useState } from 'react';
 import ToolbarButton from './ToolbarButton';
-import { INSERT_IFRAME_COMMAND } from './plugins/IframePlugin';
+import IframeOptionsModal from '../../IframeOptions';
 
 export interface ToolbarProps {
   wordCount: number;
@@ -43,6 +43,7 @@ const Toolbar: React.FC<ToolbarProps> = ({ wordCount, charCount, isAutoSaved }) 
   const [isItalic, setIsItalic] = useState(false);
   const [isUnderline, setIsUnderline] = useState(false);
   const [isStrikethrough, setIsStrikethrough] = useState(false);
+  const [showIframeModal, setShowIframeModal] = useState(false);
 
   const updateToolbar = useCallback(() => {
     const selection = $getSelection();
@@ -91,12 +92,6 @@ const Toolbar: React.FC<ToolbarProps> = ({ wordCount, charCount, isAutoSaved }) 
       root.append(paragraph);
     });
     editor.dispatchCommand(CLEAR_HISTORY_COMMAND, undefined);
-  };
-
-  const insertIframe = () => {
-    const src = prompt('Enter iframe URL:');
-    if (!src) return;
-    editor.dispatchCommand(INSERT_IFRAME_COMMAND, src);
   };
 
   return (
@@ -176,7 +171,7 @@ const Toolbar: React.FC<ToolbarProps> = ({ wordCount, charCount, isAutoSaved }) 
             <RotateCcw size={16} />
           </ToolbarButton>
 
-          <ToolbarButton onClick={insertIframe} title="Insert Iframe">
+          <ToolbarButton onClick={()=>setShowIframeModal(true)} title="Insert Iframe">
             <Code size={16} />
           </ToolbarButton>
         </div>
@@ -196,6 +191,7 @@ const Toolbar: React.FC<ToolbarProps> = ({ wordCount, charCount, isAutoSaved }) 
           </div>
         </div>
       </div>
+      <IframeOptionsModal isOpen={showIframeModal} onClose={()=>setShowIframeModal(false)}/>
     </div>
   );
 };

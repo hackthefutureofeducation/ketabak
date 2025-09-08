@@ -15,7 +15,8 @@ import { useEffect } from 'react';
 
 import { $createIframeNode, IframeNode } from '../nodes/IframeNode';
 
-export const INSERT_IFRAME_COMMAND: LexicalCommand<string> =
+// Change the command type to accept a tuple of [string, string, string]
+export const INSERT_IFRAME_COMMAND: LexicalCommand<[string, string, string]> =
   createCommand('INSERT_IFRAME_COMMAND');
 
 export default function IframePlugin(): JSX.Element | null {
@@ -26,11 +27,12 @@ export default function IframePlugin(): JSX.Element | null {
       throw new Error('IframePlugin: IframeNode not registered on editor');
     }
 
-    return editor.registerCommand<string>(
+    return editor.registerCommand<[string, string, string]>(
       INSERT_IFRAME_COMMAND,
       (payload) => {
-        const IframeNode = $createIframeNode(payload);
-        $insertNodeToNearestRoot(IframeNode);
+        const [link, width, height] = payload;
+        const iframeNode = $createIframeNode(link, width, height);
+        $insertNodeToNearestRoot(iframeNode);
 
         return true;
       },
