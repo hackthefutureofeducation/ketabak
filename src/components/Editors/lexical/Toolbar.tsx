@@ -1,33 +1,35 @@
-import React, { useCallback, useEffect, useState } from 'react';
+import { INSERT_ORDERED_LIST_COMMAND, INSERT_UNORDERED_LIST_COMMAND } from '@lexical/list';
 import { useLexicalComposerContext } from '@lexical/react/LexicalComposerContext';
+import { $createHeadingNode, HeadingTagType } from '@lexical/rich-text';
+import { $setBlocksType } from '@lexical/selection';
 import {
+  $createParagraphNode,
+  $getRoot,
   $getSelection,
   $isRangeSelection,
-  FORMAT_TEXT_COMMAND,
-  UNDO_COMMAND,
-  REDO_COMMAND,
   CLEAR_HISTORY_COMMAND,
-  $createParagraphNode,
+  FORMAT_TEXT_COMMAND,
+  REDO_COMMAND,
   TextFormatType,
-  $getRoot,
+  UNDO_COMMAND,
 } from 'lexical';
-import { $setBlocksType } from '@lexical/selection';
-import { $createHeadingNode, HeadingTagType } from '@lexical/rich-text';
-import { INSERT_ORDERED_LIST_COMMAND, INSERT_UNORDERED_LIST_COMMAND } from '@lexical/list';
 import {
   Bold,
+  Code,
   Italic,
-  Underline,
-  Strikethrough,
   List,
   ListOrdered,
-  Undo,
   Redo,
   RotateCcw,
-  Type,
   Save,
+  Strikethrough,
+  Type,
+  Underline,
+  Undo,
 } from 'lucide-react';
+import React, { useCallback, useEffect, useState } from 'react';
 import ToolbarButton from './ToolbarButton';
+import IframeOptionsModal from '../../IframeOptions';
 
 export interface ToolbarProps {
   wordCount: number;
@@ -41,6 +43,7 @@ const Toolbar: React.FC<ToolbarProps> = ({ wordCount, charCount, isAutoSaved }) 
   const [isItalic, setIsItalic] = useState(false);
   const [isUnderline, setIsUnderline] = useState(false);
   const [isStrikethrough, setIsStrikethrough] = useState(false);
+  const [showIframeModal, setShowIframeModal] = useState(false);
 
   const updateToolbar = useCallback(() => {
     const selection = $getSelection();
@@ -167,6 +170,10 @@ const Toolbar: React.FC<ToolbarProps> = ({ wordCount, charCount, isAutoSaved }) 
           <ToolbarButton onClick={clearContent} title="Clear Document">
             <RotateCcw size={16} />
           </ToolbarButton>
+
+          <ToolbarButton onClick={() => setShowIframeModal(true)} title="Insert Iframe">
+            <Code size={16} />
+          </ToolbarButton>
         </div>
 
         <div className="flex items-center justify-between text-sm text-primary">
@@ -184,6 +191,7 @@ const Toolbar: React.FC<ToolbarProps> = ({ wordCount, charCount, isAutoSaved }) 
           </div>
         </div>
       </div>
+      <IframeOptionsModal isOpen={showIframeModal} onClose={() => setShowIframeModal(false)} />
     </div>
   );
 };

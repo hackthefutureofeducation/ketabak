@@ -1,22 +1,23 @@
-import React, { useCallback, useState, useRef, useEffect, useMemo } from 'react';
-import {
-  EditorState,
-  $getRoot,
-  SerializedEditorState,
-  CLEAR_HISTORY_COMMAND,
-  $createParagraphNode,
-} from 'lexical';
 import { LexicalComposer } from '@lexical/react/LexicalComposer';
 import { useLexicalComposerContext } from '@lexical/react/LexicalComposerContext';
-import { RichTextPlugin } from '@lexical/react/LexicalRichTextPlugin';
 import { ContentEditable } from '@lexical/react/LexicalContentEditable';
-import { HistoryPlugin } from '@lexical/react/LexicalHistoryPlugin';
-import { OnChangePlugin } from '@lexical/react/LexicalOnChangePlugin';
-import { ListPlugin } from '@lexical/react/LexicalListPlugin';
 import { LexicalErrorBoundary } from '@lexical/react/LexicalErrorBoundary';
-import Toolbar from './Toolbar';
-import { initialConfig } from './theme';
+import { HistoryPlugin } from '@lexical/react/LexicalHistoryPlugin';
+import { ListPlugin } from '@lexical/react/LexicalListPlugin';
+import { OnChangePlugin } from '@lexical/react/LexicalOnChangePlugin';
+import { RichTextPlugin } from '@lexical/react/LexicalRichTextPlugin';
+import {
+  $createParagraphNode,
+  $getRoot,
+  CLEAR_HISTORY_COMMAND,
+  EditorState,
+  SerializedEditorState,
+} from 'lexical';
+import React, { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import { useEpubManager } from '../../../providers/EpubManager';
+import Toolbar from './Toolbar';
+import IframePlugin from './plugins/IframePlugin';
+import { initialConfig } from './theme';
 
 const ContentUpdaterPlugin: React.FC<{ initialEditorState: EpubPage }> = ({
   initialEditorState,
@@ -116,6 +117,7 @@ const LexicalEditor: React.FC = () => {
           <OnChangePlugin onChange={onChange} />
           <HistoryPlugin />
           <ListPlugin />
+          <IframePlugin />
         </div>
       </LexicalComposer>
     </div>

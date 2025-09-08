@@ -7,6 +7,7 @@ interface ModalProps {
   title: string;
   children: React.ReactNode;
   maxWidth?: string;
+  height?: string;
 }
 
 const Modal: React.FC<ModalProps> = ({
@@ -15,6 +16,7 @@ const Modal: React.FC<ModalProps> = ({
   title,
   children,
   maxWidth = 'max-w-2xl',
+  height,
 }) => {
   const modalRef = useRef<HTMLDivElement>(null);
   const titleId = `modal-title-${Math.random().toString(36).substr(2, 9)}`;
@@ -61,6 +63,7 @@ const Modal: React.FC<ModalProps> = ({
         relative w-full ${maxWidth} bg-background rounded-2xl shadow-2xl
         transform transition-all duration-300 ease-out h-full w-full overflow-auto
       `}
+        style={height ? { height } : undefined}
       >
         {/* Header */}
         <div className="flex items-center justify-between px-6 py-4 border-b border-gray-100">

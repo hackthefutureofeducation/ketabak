@@ -1,5 +1,6 @@
-import { HeadingNode, QuoteNode } from '@lexical/rich-text';
 import { ListItemNode, ListNode } from '@lexical/list';
+import { HeadingNode, QuoteNode } from '@lexical/rich-text';
+import { IframeNode } from './nodes/IframeNode';
 
 export const theme = {
   paragraph: 'mb-2 leading-relaxed',
@@ -30,5 +31,5 @@ export const initialConfig = {
   onError: (error: Error) => {
     console.error(error);
   },
-  nodes: [HeadingNode, QuoteNode, ListNode, ListItemNode],
+  nodes: [HeadingNode, QuoteNode, ListNode, ListItemNode, IframeNode],
 };
