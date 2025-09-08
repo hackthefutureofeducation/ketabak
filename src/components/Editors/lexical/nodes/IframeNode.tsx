@@ -38,6 +38,18 @@ type IframeComponentProps = Readonly<{
   height: string;
 }>;
 
+function isSafeIframeUrl(url: string): { valid: boolean; origin?: string } {
+  try {
+    const parsed = new URL(url);
+    if (parsed.protocol === 'http:' || parsed.protocol === 'https:') {
+      return { valid: true, origin: parsed.origin };
+    }
+    return { valid: false };
+  } catch {
+    return { valid: false };
+  }
+}
+
 function IframeComponent({
   className,
   format,
@@ -46,9 +58,41 @@ function IframeComponent({
   width,
   height,
 }: IframeComponentProps) {
+  const { valid, origin } = isSafeIframeUrl(link);
+  if (!valid) {
+    return (
+      <BlockWithAlignableContents className={className} format={format} nodeKey={nodeKey}>
+        <div
+          style={{
+            width: width || '560px',
+            height: height || '315px',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            background: '#f8d7da',
+            color: '#721c24',
+            border: '1px solid #f5c6cb',
+            borderRadius: '6px',
+            fontSize: '1rem',
+          }}
+        >
+          Invalid or unsupported iframe source.
+        </div>
+      </BlockWithAlignableContents>
+    );
+  }
   return (
     <BlockWithAlignableContents className={className} format={format} nodeKey={nodeKey}>
-      <iframe width={width} height={height} src={link} frameBorder="0" title="Iframe" />
+      <iframe
+        width={width}
+        height={height}
+        src={link}
+        frameBorder="0"
+        title={`Embedded content — ${origin || 'external source'}`}
+        sandbox="allow-scripts allow-same-origin"
+        allow="fullscreen"
+        referrerPolicy="no-referrer"
+      />
     </BlockWithAlignableContents>
   );
 }
@@ -67,6 +111,11 @@ function $convertIframeElement(domNode: HTMLElement): null | DOMConversionOutput
   const width = domNode.getAttribute('width');
   const height = domNode.getAttribute('height');
   if (videoID) {
+    // Validate the src before creating the node
+    const { valid } = isSafeIframeUrl(videoID);
+    if (!valid) {
+      return null;
+    }
     const node = $createIframeNode(videoID, width || '', height || '');
     return { node };
   }
@@ -117,14 +166,33 @@ export class IframeNode extends DecoratorBlockNode {
   }
 
   exportDOM(): DOMExportOutput {
+    // Validate the src before exporting
+    const { valid, origin } = isSafeIframeUrl(this.__link);
+    if (!valid) {
+      // Export a placeholder div if invalid
+      const element = document.createElement('div');
+      element.textContent = 'Invalid or unsupported iframe source.';
+      element.style.width = this.__width;
+      element.style.height = this.__height;
+      element.style.display = 'flex';
+      element.style.alignItems = 'center';
+      element.style.justifyContent = 'center';
+      element.style.background = '#f8d7da';
+      element.style.color = '#721c24';
+      element.style.border = '1px solid #f5c6cb';
+      element.style.borderRadius = '6px';
+      element.style.fontSize = '1rem';
+      return { element };
+    }
     const element = document.createElement('iframe');
     element.setAttribute('width', this.__width);
     element.setAttribute('height', this.__height);
     element.setAttribute('src', this.__link);
-    element.setAttribute('title', 'Iframe');
+    element.setAttribute('title', `Embedded content — ${origin || 'external source'}`);
     element.setAttribute('frameborder', '0');
-    element.setAttribute('referrerpolicy', 'strict-origin-when-cross-origin');
-    element.setAttribute('allowfullscreen', 'true');
+    element.setAttribute('sandbox', 'allow-scripts allow-same-origin');
+    element.setAttribute('allow', 'fullscreen');
+    element.setAttribute('referrerpolicy', 'no-referrer');
     return { element };
   }
 
@@ -132,6 +200,11 @@ export class IframeNode extends DecoratorBlockNode {
     return {
       iframe: (domNode: HTMLElement) => {
         if (!domNode.hasAttribute('data-lexical-Iframe')) {
+          return null;
+        }
+        // Validate the src attribute
+        const src = domNode.getAttribute('src');
+        if (!src || !isSafeIframeUrl(src).valid) {
           return null;
         }
         return {
