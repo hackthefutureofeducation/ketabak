@@ -15,10 +15,10 @@ import {
 } from 'lexical';
 import {
   Bold,
+  Code,
   Italic,
   List,
   ListOrdered,
-  MonitorPlay,
   Redo,
   RotateCcw,
   Save,
@@ -29,7 +29,7 @@ import {
 } from 'lucide-react';
 import React, { useCallback, useEffect, useState } from 'react';
 import ToolbarButton from './ToolbarButton';
-import { INSERT_YOUTUBE_COMMAND } from './plugins/YouTubePlugin'; // 👈 import your command
+import { INSERT_IFRAME_COMMAND } from './plugins/IframePlugin';
 
 export interface ToolbarProps {
   wordCount: number;
@@ -96,7 +96,7 @@ const Toolbar: React.FC<ToolbarProps> = ({ wordCount, charCount, isAutoSaved }) 
   const insertIframe = () => {
     const src = prompt('Enter iframe URL:');
     if (!src) return;
-    editor.dispatchCommand(INSERT_YOUTUBE_COMMAND, src);
+    editor.dispatchCommand(INSERT_IFRAME_COMMAND, src);
   };
 
   return (
@@ -176,9 +176,8 @@ const Toolbar: React.FC<ToolbarProps> = ({ wordCount, charCount, isAutoSaved }) 
             <RotateCcw size={16} />
           </ToolbarButton>
 
-          {/* 👇 New iframe button */}
           <ToolbarButton onClick={insertIframe} title="Insert Iframe">
-            <MonitorPlay size={16} />
+            <Code size={16} />
           </ToolbarButton>
         </div>
 

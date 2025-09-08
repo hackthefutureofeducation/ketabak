@@ -16,7 +16,7 @@ import {
 import React, { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import { useEpubManager } from '../../../providers/EpubManager';
 import Toolbar from './Toolbar';
-import YouTubePlugin from './plugins/YouTubePlugin';
+import IframePlugin from './plugins/IframePlugin';
 import { initialConfig } from './theme';
 
 const ContentUpdaterPlugin: React.FC<{ initialEditorState: EpubPage }> = ({
@@ -117,7 +117,7 @@ const LexicalEditor: React.FC = () => {
           <OnChangePlugin onChange={onChange} />
           <HistoryPlugin />
           <ListPlugin />
-          <YouTubePlugin />
+          <IframePlugin />
         </div>
       </LexicalComposer>
     </div>
