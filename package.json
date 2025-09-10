@@ -18,7 +18,7 @@
     "lint:check": "eslint src --ext .js,.jsx,.ts,.tsx --max-warnings 0"
   },
   "dependencies": {
-    "@lexical/code": "^0.33.1",
+    "@lexical/code": "^0.35.0",
     "@lexical/history": "^0.33.1",
     "@lexical/link": "^0.33.1",
     "@lexical/list": "^0.33.1",
@@ -59,7 +59,7 @@
     "eslint-plugin-react-hooks": "^5.2.0",
     "prettier": "^3.6.2",
     "typescript": "^5.9.2",
-    "vite": "^6.3.6"
+    "vite": "^7.1.5"
   },
   "engines": {
     "node": ">=18",
