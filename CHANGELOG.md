@@ -1,3 +1,12 @@
+## [0.14.1](https://github.com/hackthefutureofeducation/ketabak/compare/v0.14.0...v0.14.1) (2025-09-10)
+
+
+### Bug Fixes
+
+* ensure active page is set only when it is null in EpubManagerProvider ([f7bf4cf](https://github.com/hackthefutureofeducation/ketabak/commit/f7bf4cf85350bc5d5660e09d4b47663c2979a4c0))
+
+
+
 # [0.14.0](https://github.com/hackthefutureofeducation/ketabak/compare/v0.13.0...v0.14.0) (2025-09-08)
 
 
@@ -31,15 +40,6 @@
 ### Features
 
 * Export as epub ([#29](https://github.com/hackthefutureofeducation/ketabak/issues/29)) ([0b78a71](https://github.com/hackthefutureofeducation/ketabak/commit/0b78a71bd356349a671248e2930eacdb2648901d))
-
-
-
-# [0.11.0](https://github.com/hackthefutureofeducation/ketabak/compare/v0.10.1...v0.11.0) (2025-08-20)
-
-
-### Features
-
-* Export page ([#28](https://github.com/hackthefutureofeducation/ketabak/issues/28)) ([a9fdfc7](https://github.com/hackthefutureofeducation/ketabak/commit/a9fdfc76b8eef03be8fa93db6139437b6eecb6eb))
 
 
 
