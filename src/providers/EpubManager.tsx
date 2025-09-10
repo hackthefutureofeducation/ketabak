@@ -97,7 +97,9 @@ export const EpubManagerProvider = ({ children }: { children: ReactNode }) => {
   useEffect(() => {
     if (fileUrl && content) {
       setPages(content.pages);
-      setActivePageId(content.pages[0]?.id ?? null);
+      if (activePage === null) {
+        setActivePageId(content.pages[0]?.id ?? null);
+      }
       setDirty(false); // not dirty since it's a fresh load
     }
   }, [fileUrl, content]);
