@@ -18,7 +18,7 @@
     "lint:check": "eslint src --ext .js,.jsx,.ts,.tsx --max-warnings 0"
   },
   "dependencies": {
-    "@lexical/code": "^0.33.1",
+    "@lexical/code": "^0.35.0",
     "@lexical/history": "^0.33.1",
     "@lexical/link": "^0.33.1",
     "@lexical/list": "^0.33.1",
