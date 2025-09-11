@@ -676,7 +676,7 @@
     lexical "0.33.1"
     react-error-boundary "^3.1.4"
 
-"@lexical/rich-text@0.33.1":
+"@lexical/rich-text@0.33.1", "@lexical/rich-text@^0.33.1":
   version "0.33.1"
   resolved "https://registry.yarnpkg.com/@lexical/rich-text/-/rich-text-0.33.1.tgz#9dbb656724206f251d6d665f6e802eeeb1659547"
   integrity sha512-ZBIsj4LwmamRBCGjJiPSLj7N/XkUDv/pnYn5Rp0BL42WpOiQLvOoGLrZxgUJZEmRPQnx42ZgLKVgrWHsyjuoAA==
@@ -685,16 +685,6 @@
     "@lexical/selection" "0.33.1"
     "@lexical/utils" "0.33.1"
     lexical "0.33.1"
-
-"@lexical/rich-text@^0.35.0":
-  version "0.35.0"
-  resolved "https://registry.yarnpkg.com/@lexical/rich-text/-/rich-text-0.35.0.tgz#23e6d399488fbe4d39d326093c62ffc955d64efa"
-  integrity sha512-qEHu8g7vOEzz9GUz1VIUxZBndZRJPh9iJUFI+qTDHj+tQqnd5LCs+G9yz6jgNfiuWWpezTp0i1Vz/udNEuDPKQ==
-  dependencies:
-    "@lexical/clipboard" "0.35.0"
-    "@lexical/selection" "0.35.0"
-    "@lexical/utils" "0.35.0"
-    lexical "0.35.0"
 
 "@lexical/selection@0.33.1", "@lexical/selection@^0.33.1":
   version "0.33.1"
@@ -2617,12 +2607,12 @@ levn@^0.4.1:
     prelude-ls "^1.2.1"
     type-check "~0.4.0"
 
-lexical@0.33.1:
+lexical@0.33.1, lexical@^0.33.1:
   version "0.33.1"
   resolved "https://registry.yarnpkg.com/lexical/-/lexical-0.33.1.tgz#cb4732298abfe4da882efd53b4980d6bf26794e4"
   integrity sha512-+kiCS/GshQmCs/meMb8MQT4AMvw3S3Ef0lSCv2Xi6Itvs59OD+NjQWNfYkDteIbKtVE/w0Yiqh56VyGwIb8UcA==
 
-lexical@0.35.0, lexical@^0.35.0:
+lexical@0.35.0:
   version "0.35.0"
   resolved "https://registry.yarnpkg.com/lexical/-/lexical-0.35.0.tgz#6e451aff97b88bc8cb5ba1312f225b62d01d2986"
   integrity sha512-3VuV8xXhh5xJA6tzvfDvE0YBCMkIZUmxtRilJQDDdCgJCc+eut6qAv2qbN+pbqvarqcQqPN1UF+8YvsjmyOZpw==
