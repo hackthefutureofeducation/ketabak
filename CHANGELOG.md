@@ -1,3 +1,12 @@
+# [0.17.0](https://github.com/hackthefutureofeducation/ketabak/compare/v0.16.0...v0.17.0) (2025-09-11)
+
+
+### Features
+
+* add text direction controls to Toolbar ([#45](https://github.com/hackthefutureofeducation/ketabak/issues/45)) ([22457f4](https://github.com/hackthefutureofeducation/ketabak/commit/22457f49ad87faad4466636a73c659f30ed4f8f8))
+
+
+
 # [0.16.0](https://github.com/hackthefutureofeducation/ketabak/compare/v0.15.0...v0.16.0) (2025-09-11)
 
 
@@ -31,15 +40,6 @@
 ### Features
 
 * add text alignment options to Toolbar component ([#32](https://github.com/hackthefutureofeducation/ketabak/issues/32)) ([6454fc9](https://github.com/hackthefutureofeducation/ketabak/commit/6454fc9c39ffed3156ec72fa1722a317e6ed7634))
-
-
-
-# [0.13.0](https://github.com/hackthefutureofeducation/ketabak/compare/v0.12.1...v0.13.0) (2025-09-08)
-
-
-### Features
-
-* Iframe Plugin ([#31](https://github.com/hackthefutureofeducation/ketabak/issues/31)) ([d098f4a](https://github.com/hackthefutureofeducation/ketabak/commit/d098f4a16f5126e2baedb0ac08693f296845b54e))
 
 
 
