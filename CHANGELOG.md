@@ -1,3 +1,12 @@
+# [0.16.0](https://github.com/hackthefutureofeducation/ketabak/compare/v0.15.0...v0.16.0) (2025-09-11)
+
+
+### Features
+
+* update [@lexical](https://github.com/lexical) dependencies to version 0.35.0 ([5d34b5a](https://github.com/hackthefutureofeducation/ketabak/commit/5d34b5a7becdad3077b6962fd33cf846592afa39))
+
+
+
 # [0.15.0](https://github.com/hackthefutureofeducation/ketabak/compare/v0.14.1...v0.15.0) (2025-09-11)
 
 
@@ -31,15 +40,6 @@
 ### Features
 
 * Iframe Plugin ([#31](https://github.com/hackthefutureofeducation/ketabak/issues/31)) ([d098f4a](https://github.com/hackthefutureofeducation/ketabak/commit/d098f4a16f5126e2baedb0ac08693f296845b54e))
-
-
-
-## [0.12.1](https://github.com/hackthefutureofeducation/ketabak/compare/v0.12.0...v0.12.1) (2025-08-25)
-
-
-### Bug Fixes
-
-* add readme ([#30](https://github.com/hackthefutureofeducation/ketabak/issues/30)) ([8ac10b2](https://github.com/hackthefutureofeducation/ketabak/commit/8ac10b2656c1fe0c53fa7d17af3d44192b373d9e))
 
 
 
