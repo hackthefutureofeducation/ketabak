@@ -99,6 +99,21 @@ const Toolbar: React.FC<ToolbarProps> = ({ wordCount, charCount, isAutoSaved }) 
     editor.dispatchCommand(CLEAR_HISTORY_COMMAND, undefined);
   };
 
+  const setDirection = (dir: 'ltr' | 'rtl') => {
+    editor.update(() => {
+      const selection = $getSelection();
+      if ($isRangeSelection(selection)) {
+        const nodes = selection.getNodes();
+        for (const node of nodes) {
+          const element = node.getParentOrThrow();
+          if (element) {
+            element.setDirection(dir);
+          }
+        }
+      }
+    });
+  };
+
   return (
     <div className="border-b border-primary bg-background/50">
       <div className="px-4 py-3">
@@ -181,6 +196,15 @@ const Toolbar: React.FC<ToolbarProps> = ({ wordCount, charCount, isAutoSaved }) 
               title="Justify"
             >
               <AlignJustify size={16} />
+            </ToolbarButton>
+          </div>
+
+          <div className="flex items-center gap-1 mr-4">
+            <ToolbarButton onClick={() => setDirection('ltr')} title="Left-to-Right">
+              <span className="font-bold text-xs">LTR</span>
+            </ToolbarButton>
+            <ToolbarButton onClick={() => setDirection('rtl')} title="Right-to-Left">
+              <span className="font-bold text-xs">RTL</span>
             </ToolbarButton>
           </div>
 
