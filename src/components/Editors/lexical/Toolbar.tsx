@@ -49,6 +49,7 @@ const Toolbar: React.FC<ToolbarProps> = ({ wordCount, charCount, isAutoSaved }) 
   const [isUnderline, setIsUnderline] = useState(false);
   const [isStrikethrough, setIsStrikethrough] = useState(false);
   const [showIframeModal, setShowIframeModal] = useState(false);
+  const [dir, setDir] = useState<'ltr' | 'rtl'>('ltr');
 
   const updateToolbar = useCallback(() => {
     const selection = $getSelection();
@@ -57,6 +58,14 @@ const Toolbar: React.FC<ToolbarProps> = ({ wordCount, charCount, isAutoSaved }) 
       setIsItalic(selection.hasFormat('italic'));
       setIsUnderline(selection.hasFormat('underline'));
       setIsStrikethrough(selection.hasFormat('strikethrough'));
+      const nodes = selection.getNodes();
+      for (const node of nodes) {
+        const element = node.getParentOrThrow();
+        if (element) {
+          setDir(element.getDirection() || 'ltr');
+          break; // Only need to check the first node's parent for direction
+        }
+      }
     }
   }, []);
 
@@ -200,10 +209,18 @@ const Toolbar: React.FC<ToolbarProps> = ({ wordCount, charCount, isAutoSaved }) 
           </div>
 
           <div className="flex items-center gap-1 mr-4">
-            <ToolbarButton onClick={() => setDirection('ltr')} title="Left-to-Right">
+            <ToolbarButton
+              onClick={() => setDirection('ltr')}
+              title="Left-to-Right"
+              active={dir === 'ltr'}
+            >
               <span className="font-bold text-xs">LTR</span>
             </ToolbarButton>
-            <ToolbarButton onClick={() => setDirection('rtl')} title="Right-to-Left">
+            <ToolbarButton
+              onClick={() => setDirection('rtl')}
+              title="Right-to-Left"
+              active={dir === 'rtl'}
+            >
               <span className="font-bold text-xs">RTL</span>
             </ToolbarButton>
           </div>
