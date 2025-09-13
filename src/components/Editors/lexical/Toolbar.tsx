@@ -13,6 +13,7 @@ import {
   REDO_COMMAND,
   TextFormatType,
   UNDO_COMMAND,
+  type ElementFormatType,
 } from 'lexical';
 import {
   AlignLeft,
@@ -50,6 +51,7 @@ const Toolbar: React.FC<ToolbarProps> = ({ wordCount, charCount, isAutoSaved }) 
   const [isStrikethrough, setIsStrikethrough] = useState(false);
   const [showIframeModal, setShowIframeModal] = useState(false);
   const [dir, setDir] = useState<'ltr' | 'rtl'>('ltr');
+  const [align, setAlign] = useState<ElementFormatType>('left');
 
   const updateToolbar = useCallback(() => {
     const selection = $getSelection();
@@ -63,6 +65,7 @@ const Toolbar: React.FC<ToolbarProps> = ({ wordCount, charCount, isAutoSaved }) 
         const element = node.getParentOrThrow();
         if (element) {
           setDir(element.getDirection() || 'ltr');
+          setAlign(element.getFormatType());
           break; // Only need to check the first node's parent for direction
         }
       }
@@ -185,24 +188,28 @@ const Toolbar: React.FC<ToolbarProps> = ({ wordCount, charCount, isAutoSaved }) 
             <ToolbarButton
               onClick={() => editor.dispatchCommand(FORMAT_ELEMENT_COMMAND, 'left')}
               title="Align Left"
+              active={align === 'left'}
             >
               <AlignLeft size={16} />
             </ToolbarButton>
             <ToolbarButton
               onClick={() => editor.dispatchCommand(FORMAT_ELEMENT_COMMAND, 'center')}
               title="Align Center"
+              active={align === 'center'}
             >
               <AlignCenter size={16} />
             </ToolbarButton>
             <ToolbarButton
               onClick={() => editor.dispatchCommand(FORMAT_ELEMENT_COMMAND, 'right')}
               title="Align Right"
+              active={align === 'right'}
             >
               <AlignRight size={16} />
             </ToolbarButton>
             <ToolbarButton
               onClick={() => editor.dispatchCommand(FORMAT_ELEMENT_COMMAND, 'justify')}
               title="Justify"
+              active={align === 'justify'}
             >
               <AlignJustify size={16} />
             </ToolbarButton>
