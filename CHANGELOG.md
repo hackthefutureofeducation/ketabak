@@ -1,3 +1,12 @@
+## [0.17.2](https://github.com/hackthefutureofeducation/ketabak/compare/v0.17.1...v0.17.2) (2025-09-13)
+
+
+### Bug Fixes
+
+* implement text alignment state management in Toolbar ([10bcb99](https://github.com/hackthefutureofeducation/ketabak/commit/10bcb99658fb03419cd56c61419efb4da83f0774))
+
+
+
 ## [0.17.1](https://github.com/hackthefutureofeducation/ketabak/compare/v0.17.0...v0.17.1) (2025-09-12)
 
 
@@ -31,15 +40,6 @@
 ### Features
 
 * Update deps ([#43](https://github.com/hackthefutureofeducation/ketabak/issues/43)) ([707b387](https://github.com/hackthefutureofeducation/ketabak/commit/707b3879747edabf971da1fa3d391231774c7885)), closes [#36](https://github.com/hackthefutureofeducation/ketabak/issues/36)
-
-
-
-## [0.14.1](https://github.com/hackthefutureofeducation/ketabak/compare/v0.14.0...v0.14.1) (2025-09-10)
-
-
-### Bug Fixes
-
-* ensure active page is set only when it is null in EpubManagerProvider ([f7bf4cf](https://github.com/hackthefutureofeducation/ketabak/commit/f7bf4cf85350bc5d5660e09d4b47663c2979a4c0))
 
 
 
