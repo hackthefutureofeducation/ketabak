@@ -250,7 +250,7 @@ const Toolbar: React.FC<ToolbarProps> = ({ wordCount, charCount, isAutoSaved }) 
         <div className="flex flex-wrap items-center gap-1 mb-3">
           {/* Text format buttons */}
           <div className="flex items-center gap-1 mr-4">
-            {textFormatButtons.map(btn => (
+            {textFormatButtons.map((btn) => (
               <ToolbarButton
                 key={btn.key}
                 onClick={btn.onClick}
@@ -274,20 +274,18 @@ const Toolbar: React.FC<ToolbarProps> = ({ wordCount, charCount, isAutoSaved }) 
               className="px-3 py-1 border border-primary rounded-md text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 text-primary bg-transparent"
               defaultValue=""
             >
-              {headingOptions.map(opt => (
-                <option key={opt.value} value={opt.value}>{opt.label}</option>
+              {headingOptions.map((opt) => (
+                <option key={opt.value} value={opt.value}>
+                  {opt.label}
+                </option>
               ))}
             </select>
           </div>
 
           {/* List buttons */}
           <div className="flex items-center gap-1 mr-4">
-            {listButtons.map(btn => (
-              <ToolbarButton
-                key={btn.key}
-                onClick={btn.onClick}
-                title={btn.title}
-              >
+            {listButtons.map((btn) => (
+              <ToolbarButton key={btn.key} onClick={btn.onClick} title={btn.title}>
                 {btn.icon}
               </ToolbarButton>
             ))}
@@ -295,7 +293,7 @@ const Toolbar: React.FC<ToolbarProps> = ({ wordCount, charCount, isAutoSaved }) 
 
           {/* Align buttons */}
           <div className="flex items-center gap-1 mr-4">
-            {alignButtons.map(btn => (
+            {alignButtons.map((btn) => (
               <ToolbarButton
                 key={btn.key}
                 onClick={btn.onClick}
@@ -309,7 +307,7 @@ const Toolbar: React.FC<ToolbarProps> = ({ wordCount, charCount, isAutoSaved }) 
 
           {/* Direction buttons */}
           <div className="flex items-center gap-1 mr-4">
-            {directionButtons.map(btn => (
+            {directionButtons.map((btn) => (
               <ToolbarButton
                 key={btn.key}
                 onClick={btn.onClick}
@@ -323,12 +321,8 @@ const Toolbar: React.FC<ToolbarProps> = ({ wordCount, charCount, isAutoSaved }) 
 
           {/* Undo/Redo buttons */}
           <div className="flex items-center gap-1 mr-4">
-            {undoRedoButtons.map(btn => (
-              <ToolbarButton
-                key={btn.key}
-                onClick={btn.onClick}
-                title={btn.title}
-              >
+            {undoRedoButtons.map((btn) => (
+              <ToolbarButton key={btn.key} onClick={btn.onClick} title={btn.title}>
                 {btn.icon}
               </ToolbarButton>
             ))}
