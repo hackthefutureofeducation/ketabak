@@ -11,9 +11,9 @@ import {
   FORMAT_ELEMENT_COMMAND,
   FORMAT_TEXT_COMMAND,
   REDO_COMMAND,
-  TextFormatType,
   UNDO_COMMAND,
   type ElementFormatType,
+  type TextFormatType,
 } from 'lexical';
 import {
   AlignLeft,
