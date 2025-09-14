@@ -1,3 +1,12 @@
+## [0.17.4](https://github.com/hackthefutureofeducation/ketabak/compare/v0.17.3...v0.17.4) (2025-09-14)
+
+
+### Bug Fixes
+
+* format ([e7dba9c](https://github.com/hackthefutureofeducation/ketabak/commit/e7dba9cde86a3eebe493a6c1e864bee9418f27fb))
+
+
+
 ## [0.17.3](https://github.com/hackthefutureofeducation/ketabak/compare/v0.17.2...v0.17.3) (2025-09-14)
 
 
@@ -31,15 +40,6 @@
 ### Features
 
 * add text direction controls to Toolbar ([#45](https://github.com/hackthefutureofeducation/ketabak/issues/45)) ([22457f4](https://github.com/hackthefutureofeducation/ketabak/commit/22457f49ad87faad4466636a73c659f30ed4f8f8))
-
-
-
-# [0.16.0](https://github.com/hackthefutureofeducation/ketabak/compare/v0.15.0...v0.16.0) (2025-09-11)
-
-
-### Features
-
-* update [@lexical](https://github.com/lexical) dependencies to version 0.35.0 ([5d34b5a](https://github.com/hackthefutureofeducation/ketabak/commit/5d34b5a7becdad3077b6962fd33cf846592afa39))
 
 
 
