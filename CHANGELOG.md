@@ -1,3 +1,12 @@
+## [0.17.3](https://github.com/hackthefutureofeducation/ketabak/compare/v0.17.2...v0.17.3) (2025-09-14)
+
+
+### Bug Fixes
+
+* restructure Toolbar component for better button management ([f5719dc](https://github.com/hackthefutureofeducation/ketabak/commit/f5719dcc3732b3eb8fc381ef937c8c505101e22a))
+
+
+
 ## [0.17.2](https://github.com/hackthefutureofeducation/ketabak/compare/v0.17.1...v0.17.2) (2025-09-13)
 
 
@@ -31,15 +40,6 @@
 ### Features
 
 * update [@lexical](https://github.com/lexical) dependencies to version 0.35.0 ([5d34b5a](https://github.com/hackthefutureofeducation/ketabak/commit/5d34b5a7becdad3077b6962fd33cf846592afa39))
-
-
-
-# [0.15.0](https://github.com/hackthefutureofeducation/ketabak/compare/v0.14.1...v0.15.0) (2025-09-11)
-
-
-### Features
-
-* Update deps ([#43](https://github.com/hackthefutureofeducation/ketabak/issues/43)) ([707b387](https://github.com/hackthefutureofeducation/ketabak/commit/707b3879747edabf971da1fa3d391231774c7885)), closes [#36](https://github.com/hackthefutureofeducation/ketabak/issues/36)
 
 
 
