@@ -1,3 +1,12 @@
+## [0.17.5](https://github.com/hackthefutureofeducation/ketabak/compare/v0.17.4...v0.17.5) (2025-09-18)
+
+
+### Bug Fixes
+
+* assign it to the deps branch ([cd1dc0f](https://github.com/hackthefutureofeducation/ketabak/commit/cd1dc0ff7356cba1d60a3bda5ad10d1df7a9f08c))
+
+
+
 ## [0.17.4](https://github.com/hackthefutureofeducation/ketabak/compare/v0.17.3...v0.17.4) (2025-09-14)
 
 
@@ -31,15 +40,6 @@
 ### Bug Fixes
 
 * implement text direction state management in Toolbar ([#46](https://github.com/hackthefutureofeducation/ketabak/issues/46)) ([4ddcb0f](https://github.com/hackthefutureofeducation/ketabak/commit/4ddcb0f6a7d62254322988c72c7a2fafb8605430))
-
-
-
-# [0.17.0](https://github.com/hackthefutureofeducation/ketabak/compare/v0.16.0...v0.17.0) (2025-09-11)
-
-
-### Features
-
-* add text direction controls to Toolbar ([#45](https://github.com/hackthefutureofeducation/ketabak/issues/45)) ([22457f4](https://github.com/hackthefutureofeducation/ketabak/commit/22457f49ad87faad4466636a73c659f30ed4f8f8))
 
 
 
