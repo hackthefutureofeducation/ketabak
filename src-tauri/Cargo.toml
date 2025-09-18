@@ -1,6 +1,6 @@
 [package]
 name = "ketabak"
-version = "0.17.4"
+version = "0.17.5"
 description = "An open-source eBook creator that lets you write, design, and publish interactive digital books with ease."
 authors = ["Adam Naji"]
 edition = "2021"
