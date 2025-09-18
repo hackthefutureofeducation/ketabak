@@ -638,45 +638,17 @@
     lexical "0.35.0"
     react-error-boundary "^3.1.4"
 
-<<<<<<< HEAD
 "@lexical/rich-text@0.35.0", "@lexical/rich-text@^0.35.0":
   version "0.35.0"
   resolved "https://registry.yarnpkg.com/@lexical/rich-text/-/rich-text-0.35.0.tgz#23e6d399488fbe4d39d326093c62ffc955d64efa"
   integrity sha512-qEHu8g7vOEzz9GUz1VIUxZBndZRJPh9iJUFI+qTDHj+tQqnd5LCs+G9yz6jgNfiuWWpezTp0i1Vz/udNEuDPKQ==
-=======
-"@lexical/rich-text@0.33.1":
-  version "0.33.1"
-  resolved "https://registry.yarnpkg.com/@lexical/rich-text/-/rich-text-0.33.1.tgz#9dbb656724206f251d6d665f6e802eeeb1659547"
-  integrity sha512-ZBIsj4LwmamRBCGjJiPSLj7N/XkUDv/pnYn5Rp0BL42WpOiQLvOoGLrZxgUJZEmRPQnx42ZgLKVgrWHsyjuoAA==
->>>>>>> 6f897b7 (chore(deps): bump @lexical/rich-text from 0.33.1 to 0.35.0 (#38))
   dependencies:
     "@lexical/clipboard" "0.35.0"
     "@lexical/selection" "0.35.0"
     "@lexical/utils" "0.35.0"
     lexical "0.35.0"
 
-<<<<<<< HEAD
 "@lexical/selection@0.35.0", "@lexical/selection@^0.35.0":
-=======
-"@lexical/rich-text@^0.35.0":
-  version "0.35.0"
-  resolved "https://registry.yarnpkg.com/@lexical/rich-text/-/rich-text-0.35.0.tgz#23e6d399488fbe4d39d326093c62ffc955d64efa"
-  integrity sha512-qEHu8g7vOEzz9GUz1VIUxZBndZRJPh9iJUFI+qTDHj+tQqnd5LCs+G9yz6jgNfiuWWpezTp0i1Vz/udNEuDPKQ==
-  dependencies:
-    "@lexical/clipboard" "0.35.0"
-    "@lexical/selection" "0.35.0"
-    "@lexical/utils" "0.35.0"
-    lexical "0.35.0"
-
-"@lexical/selection@0.33.1", "@lexical/selection@^0.33.1":
-  version "0.33.1"
-  resolved "https://registry.yarnpkg.com/@lexical/selection/-/selection-0.33.1.tgz#e284825c2b26486927aaf350057c9afb60b036be"
-  integrity sha512-KXPkdCDdVfIUXmkwePu9DAd3kLjL0aAqL5G9CMCFsj7RG9lLvvKk7kpivrAIbRbcsDzO44QwsFPisZHbX4ioXA==
-  dependencies:
-    lexical "0.33.1"
-
-"@lexical/selection@0.35.0":
->>>>>>> 6f897b7 (chore(deps): bump @lexical/rich-text from 0.33.1 to 0.35.0 (#38))
   version "0.35.0"
   resolved "https://registry.yarnpkg.com/@lexical/selection/-/selection-0.35.0.tgz#e3844433641a4e1824d9d611cc71e5b2bdd30877"
   integrity sha512-mMtDE7Q0nycXdFTTH/+ta6EBrBwxBB4Tg8QwsGntzQ1Cq//d838dpXpFjJOqHEeVHUqXpiuj+cBG8+bvz/rPRw==
