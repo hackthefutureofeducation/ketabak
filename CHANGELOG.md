@@ -1,3 +1,13 @@
+## [0.17.6](https://github.com/hackthefutureofeducation/ketabak/compare/v0.17.5...v0.17.6) (2025-09-19)
+
+
+### Bug Fixes
+
+* add key prop to language selection input for better rendering ([258f533](https://github.com/hackthefutureofeducation/ketabak/commit/258f533512e874788ea76c2f6516d3d718be28a7))
+* improve toolbar update logic for text formatting and alignment ([6b8e373](https://github.com/hackthefutureofeducation/ketabak/commit/6b8e3739692e826d4055dae5f1cbbde838a6d097))
+
+
+
 ## [0.17.5](https://github.com/hackthefutureofeducation/ketabak/compare/v0.17.4...v0.17.5) (2025-09-18)
 
 
@@ -31,15 +41,6 @@
 ### Bug Fixes
 
 * implement text alignment state management in Toolbar ([10bcb99](https://github.com/hackthefutureofeducation/ketabak/commit/10bcb99658fb03419cd56c61419efb4da83f0774))
-
-
-
-## [0.17.1](https://github.com/hackthefutureofeducation/ketabak/compare/v0.17.0...v0.17.1) (2025-09-12)
-
-
-### Bug Fixes
-
-* implement text direction state management in Toolbar ([#46](https://github.com/hackthefutureofeducation/ketabak/issues/46)) ([4ddcb0f](https://github.com/hackthefutureofeducation/ketabak/commit/4ddcb0f6a7d62254322988c72c7a2fafb8605430))
 
 
 
