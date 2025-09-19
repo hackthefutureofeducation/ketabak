@@ -52,6 +52,7 @@ export function EpubSettings() {
                 options={languages}
                 selectedOption={localMeta.language}
                 onSelectOption={(s) => setLocalMeta({ ...localMeta, language: s })}
+                key={input.key}
               />
             ) : (
               <Input
