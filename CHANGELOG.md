@@ -1,3 +1,12 @@
+# [0.18.0](https://github.com/hackthefutureofeducation/ketabak/compare/v0.17.6...v0.18.0) (2025-09-26)
+
+
+### Features
+
+* BUMP DEPS - 9/23/2025 ([#58](https://github.com/hackthefutureofeducation/ketabak/issues/58)) ([1a9ce34](https://github.com/hackthefutureofeducation/ketabak/commit/1a9ce345574995a33a099b909dfee33fc185c9d9)), closes [#52](https://github.com/hackthefutureofeducation/ketabak/issues/52)
+
+
+
 ## [0.17.6](https://github.com/hackthefutureofeducation/ketabak/compare/v0.17.5...v0.17.6) (2025-09-19)
 
 
@@ -32,15 +41,6 @@
 ### Bug Fixes
 
 * restructure Toolbar component for better button management ([f5719dc](https://github.com/hackthefutureofeducation/ketabak/commit/f5719dcc3732b3eb8fc381ef937c8c505101e22a))
-
-
-
-## [0.17.2](https://github.com/hackthefutureofeducation/ketabak/compare/v0.17.1...v0.17.2) (2025-09-13)
-
-
-### Bug Fixes
-
-* implement text alignment state management in Toolbar ([10bcb99](https://github.com/hackthefutureofeducation/ketabak/commit/10bcb99658fb03419cd56c61419efb4da83f0774))
 
 
 
