@@ -55,21 +55,38 @@ const Toolbar: React.FC<ToolbarProps> = ({ wordCount, charCount, isAutoSaved }) 
 
   const updateToolbar = useCallback(() => {
     const selection = $getSelection();
-    if ($isRangeSelection(selection)) {
-      setIsBold(selection.hasFormat('bold'));
-      setIsItalic(selection.hasFormat('italic'));
-      setIsUnderline(selection.hasFormat('underline'));
-      setIsStrikethrough(selection.hasFormat('strikethrough'));
-      const nodes = selection.getNodes();
-      for (const node of nodes) {
-        const element = node.getParentOrThrow();
-        if (element) {
-          setDir(element.getDirection() || 'ltr');
-          setAlign(element.getFormatType());
-          break; // Only need to check the first node's parent for direction
-        }
+
+    if (!$isRangeSelection(selection)) {
+      setIsBold(false);
+      setIsItalic(false);
+      setIsUnderline(false);
+      setIsStrikethrough(false);
+      setDir('ltr');
+      setAlign('left');
+      return;
+    }
+
+    // Text formatting states
+    setIsBold(selection.hasFormat('bold'));
+    setIsItalic(selection.hasFormat('italic'));
+    setIsUnderline(selection.hasFormat('underline'));
+    setIsStrikethrough(selection.hasFormat('strikethrough'));
+
+    // Direction & alignment defaults
+    let dir: 'ltr' | 'rtl' = 'ltr';
+    let align: ElementFormatType = 'left';
+
+    const [firstNode] = selection.getNodes();
+    if (firstNode) {
+      const parent = firstNode.getParent();
+      if (parent) {
+        dir = parent.getDirection() || 'ltr';
+        align = parent.getFormatType();
       }
     }
+
+    setDir(dir);
+    setAlign(align);
   }, []);
 
   useEffect(() => {
