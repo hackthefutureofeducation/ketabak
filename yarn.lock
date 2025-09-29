@@ -494,6 +494,17 @@
     "@lexical/utils" "0.35.0"
     lexical "0.35.0"
 
+"@lexical/clipboard@0.36.1":
+  version "0.36.1"
+  resolved "https://registry.yarnpkg.com/@lexical/clipboard/-/clipboard-0.36.1.tgz#a337cd7dda03a12050502161ccca2d6aa4c2cc75"
+  integrity sha512-qwOereYfHm1MgLu4Kq+nTsHwCoHtZE/PEMrs5k3lbsNk4SEZ8MLHI/Bx9TYijh24MnJhIoWdMLdAmhIaVs/IHg==
+  dependencies:
+    "@lexical/html" "0.36.1"
+    "@lexical/list" "0.36.1"
+    "@lexical/selection" "0.36.1"
+    "@lexical/utils" "0.36.1"
+    lexical "0.36.1"
+
 "@lexical/code@0.35.0", "@lexical/code@^0.35.0":
   version "0.35.0"
   resolved "https://registry.yarnpkg.com/@lexical/code/-/code-0.35.0.tgz#2634ccf227914e6b9257fefa4bca0f1dfb373acb"
@@ -522,6 +533,15 @@
   dependencies:
     lexical "0.35.0"
 
+"@lexical/extension@0.36.1":
+  version "0.36.1"
+  resolved "https://registry.yarnpkg.com/@lexical/extension/-/extension-0.36.1.tgz#3ba552f6d4bae67b654f9bff0d119f07a88d6860"
+  integrity sha512-8QBYPda+tFpSkXZ6DFHk01gpqbri0Q8UvuivJfHsSBso6OVzub9q/7xg+0b7bezY9mjajAK8b5rqIQvhAsSlTg==
+  dependencies:
+    "@lexical/utils" "0.36.1"
+    "@preact/signals-core" "^1.11.0"
+    lexical "0.36.1"
+
 "@lexical/hashtag@0.35.0":
   version "0.35.0"
   resolved "https://registry.yarnpkg.com/@lexical/hashtag/-/hashtag-0.35.0.tgz#9fe0267004b22bff74199d2a53248e7e9dddee84"
@@ -547,6 +567,15 @@
     "@lexical/utils" "0.35.0"
     lexical "0.35.0"
 
+"@lexical/html@0.36.1":
+  version "0.36.1"
+  resolved "https://registry.yarnpkg.com/@lexical/html/-/html-0.36.1.tgz#d25fbfc2a4a61b5673790b2da4843a930949cdd0"
+  integrity sha512-Uk83ot7033YRJmrnERgqg7Z0wT2T2VtCTcBYTdagLq3PGrka6B8eCBpj2ALmwAANU40Cy3JyL+p83m4bldObYA==
+  dependencies:
+    "@lexical/selection" "0.36.1"
+    "@lexical/utils" "0.36.1"
+    lexical "0.36.1"
+
 "@lexical/link@0.35.0", "@lexical/link@^0.35.0":
   version "0.35.0"
   resolved "https://registry.yarnpkg.com/@lexical/link/-/link-0.35.0.tgz#13daba7622d9f8f292c99469bdde93f287715d7c"
@@ -564,13 +593,31 @@
     "@lexical/utils" "0.35.0"
     lexical "0.35.0"
 
-"@lexical/mark@0.35.0", "@lexical/mark@^0.35.0":
+"@lexical/list@0.36.1":
+  version "0.36.1"
+  resolved "https://registry.yarnpkg.com/@lexical/list/-/list-0.36.1.tgz#e4d35ce8fc09ec091c7a0c6a66c2431d29d3d693"
+  integrity sha512-7/9dxrAZyCU7CpEUhOxRIDjaYIjKVt4KJrZrd2BsgQKhruSH3pdB62kyObRVXMeq1ZJiOz+u43/1DUVHTqZJrw==
+  dependencies:
+    "@lexical/extension" "0.36.1"
+    "@lexical/selection" "0.36.1"
+    "@lexical/utils" "0.36.1"
+    lexical "0.36.1"
+
+"@lexical/mark@0.35.0":
   version "0.35.0"
   resolved "https://registry.yarnpkg.com/@lexical/mark/-/mark-0.35.0.tgz#463d6438a9e21229b18d1424ce0f5bf231e1802a"
   integrity sha512-W0hwMTAVeexvpk9/+J6n1G/sNkpI/Meq1yeDazahFLLAwXLHtvhIAq2P/klgFknDy1hr8X7rcsQuN/bqKcKHYg==
   dependencies:
     "@lexical/utils" "0.35.0"
     lexical "0.35.0"
+
+"@lexical/mark@^0.36.1":
+  version "0.36.1"
+  resolved "https://registry.yarnpkg.com/@lexical/mark/-/mark-0.36.1.tgz#b75d561677f73481a5c51f85bf209ff379eafe9b"
+  integrity sha512-PwwuNU1KvXtAmgFECUOdt9GYj6ncUs4TbmsjHHjVnBEGFJBITm7vJq7uGf89vDRgA5Bhb5iaVV2uK4pnk9c7VA==
+  dependencies:
+    "@lexical/utils" "0.36.1"
+    lexical "0.36.1"
 
 "@lexical/markdown@0.35.0":
   version "0.35.0"
@@ -650,6 +697,13 @@
   dependencies:
     lexical "0.35.0"
 
+"@lexical/selection@0.36.1":
+  version "0.36.1"
+  resolved "https://registry.yarnpkg.com/@lexical/selection/-/selection-0.36.1.tgz#1531a9698b730d3ea54690da3a26d9fe24bbad8a"
+  integrity sha512-wIZJsTneNhmB61BiOb0y6scgrS4GOiGUVoBQCpP++xfesh0Vife8Zq0oc7NaD0l0E6tvFW3CjMd8ITZ66Zg78A==
+  dependencies:
+    lexical "0.36.1"
+
 "@lexical/table@0.35.0":
   version "0.35.0"
   resolved "https://registry.yarnpkg.com/@lexical/table/-/table-0.35.0.tgz#657b735928c50a6abd5acdb857607fc9f8830dec"
@@ -658,6 +712,16 @@
     "@lexical/clipboard" "0.35.0"
     "@lexical/utils" "0.35.0"
     lexical "0.35.0"
+
+"@lexical/table@0.36.1":
+  version "0.36.1"
+  resolved "https://registry.yarnpkg.com/@lexical/table/-/table-0.36.1.tgz#53e5041a937bbd8efab86f871925014fe150df39"
+  integrity sha512-7+wP0249pk+TnbzhX459Txu0JA66PXQK7zGJJLBS1f6JXycYba0hfaBhGCsTKQMOXkgCSMkVyhA2pkbRrUP+Hg==
+  dependencies:
+    "@lexical/clipboard" "0.36.1"
+    "@lexical/extension" "0.36.1"
+    "@lexical/utils" "0.36.1"
+    lexical "0.36.1"
 
 "@lexical/text@0.35.0":
   version "0.35.0"
@@ -675,6 +739,16 @@
     "@lexical/selection" "0.35.0"
     "@lexical/table" "0.35.0"
     lexical "0.35.0"
+
+"@lexical/utils@0.36.1":
+  version "0.36.1"
+  resolved "https://registry.yarnpkg.com/@lexical/utils/-/utils-0.36.1.tgz#5297e2f0d3b60f0e4f3bf12ca9b114262778a520"
+  integrity sha512-Uv3Mr4cFktJKEcMb8NLMo1mhYzcpOkwu2oGEhsFeYgSnWSb1BrVYsDp2yfkWfI8gZzqXH1v9s82NW2Skg42RPQ==
+  dependencies:
+    "@lexical/list" "0.36.1"
+    "@lexical/selection" "0.36.1"
+    "@lexical/table" "0.36.1"
+    lexical "0.36.1"
 
 "@lexical/yjs@0.35.0":
   version "0.35.0"
@@ -719,6 +793,11 @@
   version "0.2.9"
   resolved "https://registry.yarnpkg.com/@pkgr/core/-/core-0.2.9.tgz#d229a7b7f9dac167a156992ef23c7f023653f53b"
   integrity sha512-QNqXyfVS2wm9hweSYD2O7F0G06uurj9kZ96TRQE5Y9hU7+tgdZwIkbAKc5Ocy1HxEY2kuDQa6cQ1WRs/O5LFKA==
+
+"@preact/signals-core@^1.11.0":
+  version "1.12.1"
+  resolved "https://registry.yarnpkg.com/@preact/signals-core/-/signals-core-1.12.1.tgz#714b489bb35d9874cc44b35706a9dc27da8d21c4"
+  integrity sha512-BwbTXpj+9QutoZLQvbttRg5x3l5468qaV2kufh+51yha1c53ep5dY4kTuZR35+3pAZxpfQerGJiQqg34ZNZ6uA==
 
 "@rolldown/pluginutils@1.0.0-beta.27":
   version "1.0.0-beta.27"
@@ -2541,6 +2620,11 @@ lexical@0.35.0, lexical@^0.35.0:
   version "0.35.0"
   resolved "https://registry.yarnpkg.com/lexical/-/lexical-0.35.0.tgz#6e451aff97b88bc8cb5ba1312f225b62d01d2986"
   integrity sha512-3VuV8xXhh5xJA6tzvfDvE0YBCMkIZUmxtRilJQDDdCgJCc+eut6qAv2qbN+pbqvarqcQqPN1UF+8YvsjmyOZpw==
+
+lexical@0.36.1:
+  version "0.36.1"
+  resolved "https://registry.yarnpkg.com/lexical/-/lexical-0.36.1.tgz#008bbcde9be07746e7036e077b6283d152dd3b43"
+  integrity sha512-VD/rxRp40IvaKGgD+AfWAEPzovm7RTEp++j0P96iaBgiUAq8tDdW3GvPwA5pLk83aQZ5IV10jzEIvzAJkLw+pA==
 
 lightningcss-darwin-arm64@1.30.1:
   version "1.30.1"
