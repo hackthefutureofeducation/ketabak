@@ -2691,7 +2691,7 @@ levn@^0.4.1:
     prelude-ls "^1.2.1"
     type-check "~0.4.0"
 
-lexical@0.35.0, lexical@^0.35.0:
+lexical@0.35.0:
   version "0.35.0"
   resolved "https://registry.yarnpkg.com/lexical/-/lexical-0.35.0.tgz#6e451aff97b88bc8cb5ba1312f225b62d01d2986"
   integrity sha512-3VuV8xXhh5xJA6tzvfDvE0YBCMkIZUmxtRilJQDDdCgJCc+eut6qAv2qbN+pbqvarqcQqPN1UF+8YvsjmyOZpw==
@@ -2701,7 +2701,7 @@ lexical@0.36.1:
   resolved "https://registry.yarnpkg.com/lexical/-/lexical-0.36.1.tgz#008bbcde9be07746e7036e077b6283d152dd3b43"
   integrity sha512-VD/rxRp40IvaKGgD+AfWAEPzovm7RTEp++j0P96iaBgiUAq8tDdW3GvPwA5pLk83aQZ5IV10jzEIvzAJkLw+pA==
 
-lexical@0.36.2:
+lexical@0.36.2, lexical@^0.36.2:
   version "0.36.2"
   resolved "https://registry.yarnpkg.com/lexical/-/lexical-0.36.2.tgz#07b21a3f78e885499e4713ef9a8bfa286373333a"
   integrity sha512-gIDJCmSAhtxD7h95WK17Nz19wCZu92Zn0p1/R45X01S/KAsLCwEtVJ2fTvIJNFTyx3QNJTuGcm5mYgRMUwq8rg==
