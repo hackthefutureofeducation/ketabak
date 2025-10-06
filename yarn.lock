@@ -738,7 +738,7 @@
     "@lexical/utils" "0.35.0"
     lexical "0.35.0"
 
-"@lexical/selection@0.35.0", "@lexical/selection@^0.35.0":
+"@lexical/selection@0.35.0":
   version "0.35.0"
   resolved "https://registry.yarnpkg.com/@lexical/selection/-/selection-0.35.0.tgz#e3844433641a4e1824d9d611cc71e5b2bdd30877"
   integrity sha512-mMtDE7Q0nycXdFTTH/+ta6EBrBwxBB4Tg8QwsGntzQ1Cq//d838dpXpFjJOqHEeVHUqXpiuj+cBG8+bvz/rPRw==
@@ -752,7 +752,7 @@
   dependencies:
     lexical "0.36.1"
 
-"@lexical/selection@0.36.2":
+"@lexical/selection@0.36.2", "@lexical/selection@^0.36.2":
   version "0.36.2"
   resolved "https://registry.yarnpkg.com/@lexical/selection/-/selection-0.36.2.tgz#71cda7001b674952a5a4c8bd492c75940e061beb"
   integrity sha512-n96joW3HCKBmPeESR172BxVE+m8V9SdidQm4kKb9jOZ1Ota+tnam2386TeI6795TWwgjDQJPK3HZNKcX6Gb+Bg==
