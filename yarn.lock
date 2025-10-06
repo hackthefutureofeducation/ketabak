@@ -544,6 +544,14 @@
   dependencies:
     lexical "0.35.0"
 
+"@lexical/dragon@0.36.2":
+  version "0.36.2"
+  resolved "https://registry.yarnpkg.com/@lexical/dragon/-/dragon-0.36.2.tgz#9319e0000e596967471acb30110accd548aee775"
+  integrity sha512-VWNjYaH74uQ8MFKkl80pTofojpEnTYSX2sgHyZmo1Lk1cKLHK25pMnWgAxPAMLQD5/RW/2PtZcK+j0Kfoe5lSQ==
+  dependencies:
+    "@lexical/extension" "0.36.2"
+    lexical "0.36.2"
+
 "@lexical/extension@0.36.1":
   version "0.36.1"
   resolved "https://registry.yarnpkg.com/@lexical/extension/-/extension-0.36.1.tgz#3ba552f6d4bae67b654f9bff0d119f07a88d6860"
@@ -728,7 +736,7 @@
     lexical "0.35.0"
     react-error-boundary "^3.1.4"
 
-"@lexical/rich-text@0.35.0", "@lexical/rich-text@^0.35.0":
+"@lexical/rich-text@0.35.0":
   version "0.35.0"
   resolved "https://registry.yarnpkg.com/@lexical/rich-text/-/rich-text-0.35.0.tgz#23e6d399488fbe4d39d326093c62ffc955d64efa"
   integrity sha512-qEHu8g7vOEzz9GUz1VIUxZBndZRJPh9iJUFI+qTDHj+tQqnd5LCs+G9yz6jgNfiuWWpezTp0i1Vz/udNEuDPKQ==
@@ -737,6 +745,17 @@
     "@lexical/selection" "0.35.0"
     "@lexical/utils" "0.35.0"
     lexical "0.35.0"
+
+"@lexical/rich-text@^0.36.2":
+  version "0.36.2"
+  resolved "https://registry.yarnpkg.com/@lexical/rich-text/-/rich-text-0.36.2.tgz#a13579db6946cc517211c5602f19c166a5fa8135"
+  integrity sha512-dZ7zAIv5NBrh1ApxIT9bayn96zfQHHdnT+oaqmR+q100Vo2uROeR/ZF5igeAuwYGM1Z3ZWDBvNxRKd1d6FWiZw==
+  dependencies:
+    "@lexical/clipboard" "0.36.2"
+    "@lexical/dragon" "0.36.2"
+    "@lexical/selection" "0.36.2"
+    "@lexical/utils" "0.36.2"
+    lexical "0.36.2"
 
 "@lexical/selection@0.35.0", "@lexical/selection@^0.35.0":
   version "0.35.0"
