@@ -10,3 +10,8 @@ updates:
     schedule:
       interval: 'weekly'
     target-branch: 'deps'
+  - package-ecosystem: 'cargo'
+    directory: '/src-tauri'
+    schedule:
+      interval: 'weekly'
+    target-branch: 'deps'
