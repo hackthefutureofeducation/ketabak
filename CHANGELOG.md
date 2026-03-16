@@ -1,3 +1,12 @@
+# [0.20.0](https://github.com/hackthefutureofeducation/ketabak/compare/v0.19.0...v0.20.0) (2026-03-16)
+
+
+### Features
+
+* enhance DarkModeProvider with gradient background and improved styling ([c82403c](https://github.com/hackthefutureofeducation/ketabak/commit/c82403cb10e4a4db2d664b390a4be2416ff91822))
+
+
+
 # [0.19.0](https://github.com/hackthefutureofeducation/ketabak/compare/v0.18.0...v0.19.0) (2026-03-16)
 
 
@@ -32,15 +41,6 @@
 ### Bug Fixes
 
 * assign it to the deps branch ([cd1dc0f](https://github.com/hackthefutureofeducation/ketabak/commit/cd1dc0ff7356cba1d60a3bda5ad10d1df7a9f08c))
-
-
-
-## [0.17.4](https://github.com/hackthefutureofeducation/ketabak/compare/v0.17.3...v0.17.4) (2025-09-14)
-
-
-### Bug Fixes
-
-* format ([e7dba9c](https://github.com/hackthefutureofeducation/ketabak/commit/e7dba9cde86a3eebe493a6c1e864bee9418f27fb))
 
 
 
