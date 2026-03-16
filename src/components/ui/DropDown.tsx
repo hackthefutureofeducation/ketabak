@@ -28,7 +28,7 @@ const DropDown: React.FC<DropDownProps> = ({ options, selectedOption, onSelectOp
       {isOpen && (
         <div
           className="absolute top-full left-0 mt-2 w-full px-4 py-3 border border-gray-300 dark:border-gray-600 text-center
-        bg-white dark:bg-gray-800 text-gray-900 dark:text-white shadow-md rounded-md"
+        bg-white dark:bg-gray-800 text-gray-900 dark:text-white shadow-md rounded-md z-10"
         >
           {options.map((option) => (
             <div

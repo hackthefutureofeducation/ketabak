@@ -60,7 +60,7 @@ const Modal: React.FC<ModalProps> = ({
       {/* Modal */}
       <div
         className={`
-        relative w-full ${maxWidth} bg-background rounded-2xl shadow-2xl
+        relative w-full ${maxWidth} bg-glossy rounded-2xl shadow-2xl
         transform transition-all duration-300 ease-out h-full w-full overflow-auto
       `}
         style={height ? { height } : undefined}
@@ -72,9 +72,23 @@ const Modal: React.FC<ModalProps> = ({
           </h2>
           <button
             onClick={onClose}
-            className="p-2 rounded-full hover:bg-gray-100 hover:text-black transition-colors duration-200 group text-white w-10"
+            aria-label="Close modal"
+            className="p-2 rounded-full hover:bg-gray-200 hover:text-black transition-colors duration-200 text-gray-600 focus:outline-none focus:ring-2 focus:ring-blue-500"
+            type="button"
           >
-            X
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              className="h-5 w-5"
+              viewBox="0 0 20 20"
+              fill="currentColor"
+              aria-hidden="true"
+            >
+              <path
+                fillRule="evenodd"
+                d="M10 8.586l4.95-4.95a1 1 0 111.414 1.414L11.414 10l4.95 4.95a1 1 0 01-1.414 1.414L10 11.414l-4.95 4.95a1 1 0 01-1.414-1.414L8.586 10l-4.95-4.95A1 1 0 115.05 3.636L10 8.586z"
+                clipRule="evenodd"
+              />
+            </svg>
           </button>
         </div>
 

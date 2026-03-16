@@ -19,7 +19,6 @@ const NavBar: React.FC<{ onNavigate: React.Dispatch<React.SetStateAction<'home' 
     <nav
       className="
       w-full flex items-center justify-between px-6 py-4
-      bg-background
       shadow
       transition-colors
     "
@@ -27,7 +26,7 @@ const NavBar: React.FC<{ onNavigate: React.Dispatch<React.SetStateAction<'home' 
       <div
         className="
         text-xl font-bold
-        text-foreground
+        dark:text-white text-foreground
         transition-colors
         cursor-pointer
       "
