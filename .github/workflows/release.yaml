@@ -177,9 +177,9 @@ jobs:
       - name: Publish GitHub Release
         uses: softprops/action-gh-release@v2
         with:
-          tag_name: ${{ needs.changelog.outputs.tag }}
-          name: 'Ketabak ${{ needs.changelog.outputs.tag }}'
-          body: ${{ needs.changelog.outputs.changelog }}
+          name: Ketabak
           draft: false
+          overwrite_files: true
+          token: ${{ secrets.GITHUB_TOKEN }}
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
