@@ -11,7 +11,6 @@ export function EditorLayout() {
           <Editors />
         </div>
       </section>
-      </section>
     </EpubManagerProvider>
   );
 }
