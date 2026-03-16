@@ -40,9 +40,7 @@ export const DarkModeProvider = ({ children }: { children: ReactNode }) => {
 
   return (
     <DarkModeContext.Provider value={{ darkMode, toggleDarkMode }}>
-      <div
-        className="min-h-screen overflow-clip transition-all duration-300 dark:bg-slate-900 bg-[#f2f4f8] selection:bg-gray-200 print:bg-white print:pb-1"
-      >
+      <div className="min-h-screen overflow-clip transition-all duration-300 dark:bg-slate-900 bg-[#f2f4f8] selection:bg-gray-200 print:bg-white print:pb-1">
         {/* Colly (colorful wavy) gradient full-background */}
         <div
           className="fixed inset-0 pointer-events-none z-0"

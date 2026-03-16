@@ -52,10 +52,7 @@ export const Sidebar: React.FC<EpubSidebarProps> = ({ className = '' }) => {
       {/* Header */}
       <div className="p-4 border-b border-gray-800">
         <h2 className="text-lg font-semibold text-primary">Pages</h2>
-        <Button
-          onClick={() => setIsCreating(true)}
-          icon={<Plus size={16} />}
-        >
+        <Button onClick={() => setIsCreating(true)} icon={<Plus size={16} />}>
           Add Page
         </Button>
       </div>
@@ -84,7 +81,7 @@ export const Sidebar: React.FC<EpubSidebarProps> = ({ className = '' }) => {
               onClick={handleCreatePage}
               disabled={!newPageTitle.trim()}
               className="px-2 py-1 bg-green-600 text-white rounded text-xs hover:bg-green-700 disabled:bg-gray-500"
-              >
+            >
               Create
             </button>
             <button
@@ -145,13 +142,17 @@ export const Sidebar: React.FC<EpubSidebarProps> = ({ className = '' }) => {
                 ) : (
                   <div
                     className={`p-3 cursor-pointer transition-colors ${
-                      activePageId === page.id ? 'bg-primary/50 border-r-2' : 'hover:bg-gray-800 group'
+                      activePageId === page.id
+                        ? 'bg-primary/50 border-r-2'
+                        : 'hover:bg-gray-800 group'
                     }`}
                     onClick={() => setActivePage(page.id)}
                   >
                     <div className="flex items-center justify-between">
-                      <span className={`text-sm font-medium truncate flex-1 group-hover:text-white dark:text-white text-foreground
-`}>
+                      <span
+                        className={`text-sm font-medium truncate flex-1 group-hover:text-white dark:text-white text-foreground
+`}
+                      >
                         {page.title || 'Untitled'}
                       </span>
                       <button
@@ -161,7 +162,8 @@ export const Sidebar: React.FC<EpubSidebarProps> = ({ className = '' }) => {
                         }}
                         className={cn(
                           'opacity-0 group-hover:opacity-100 ml-2 p-1 text-gray-400 hover:text-white transition-opacity',
-                          activePageId === page.id && 'opacity-100         dark:text-white text-foreground'
+                          activePageId === page.id &&
+                            'opacity-100         dark:text-white text-foreground'
                         )}
                         title="Edit title"
                       >
@@ -169,7 +171,9 @@ export const Sidebar: React.FC<EpubSidebarProps> = ({ className = '' }) => {
                       </button>
                     </div>
                     {activePageId === page.id && (
-                      <div className="mt-1 text-xs text-foreground dark:text-white">Currently active</div>
+                      <div className="mt-1 text-xs text-foreground dark:text-white">
+                        Currently active
+                      </div>
                     )}
                   </div>
                 )}
