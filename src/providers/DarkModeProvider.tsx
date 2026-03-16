@@ -40,7 +40,25 @@ export const DarkModeProvider = ({ children }: { children: ReactNode }) => {
 
   return (
     <DarkModeContext.Provider value={{ darkMode, toggleDarkMode }}>
-      {children}
+      <div
+        className={`min-h-screen overflow-clip  transition-all duration-300 dark:bg-slate-900 bg-[#f2f4f8]  selection:bg-gray-200   print:bg-white print:pb-1`}
+      >
+        {/* Colly (colorful wavy) gradient full-background */}
+        <div
+          className="fixed inset-0 pointer-events-none z-0"
+          style={{
+            background:
+              'linear-gradient(120deg, #a78bfa 0%, #f472b6 33%, #38bdf8 66%, #34d399 100%)',
+            opacity: 0.22,
+            zIndex: 0,
+            width: '100vw',
+            height: '100vh',
+            /* Add a smooth "wavy" effect with SVG overlay if desired, else just soft multi-color */
+            /* filter: "blur(4px)", */
+          }}
+        ></div>
+        {children}
+      </div>
     </DarkModeContext.Provider>
   );
 };
