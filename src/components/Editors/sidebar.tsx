@@ -143,7 +143,7 @@ export const Sidebar: React.FC<EpubSidebarProps> = ({ className = '' }) => {
                   <div
                     className={`p-3 cursor-pointer transition-colors ${
                       activePageId === page.id
-                        ? 'bg-primary/50 border-r-2'
+                        ? 'bg-primary/50 border-r-2 border-primary'
                         : 'hover:bg-gray-800 group'
                     }`}
                     onClick={() => setActivePage(page.id)}
