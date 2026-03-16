@@ -7,7 +7,10 @@ export function EditorLayout() {
     <EpubManagerProvider>
       <section className="w-full flex gap-5 py-5">
         <Sidebar />
-        <Editors />
+        <div className="flex-1 min-w-0">
+          <Editors />
+        </div>
+      </section>
       </section>
     </EpubManagerProvider>
   );
