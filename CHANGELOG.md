@@ -1,3 +1,12 @@
+# [0.23.0](https://github.com/hackthefutureofeducation/ketabak/compare/v0.22.0...v0.23.0) (2026-03-16)
+
+
+### Features
+
+* integrate Bites Theme ([#85](https://github.com/hackthefutureofeducation/ketabak/issues/85)) ([3dbad64](https://github.com/hackthefutureofeducation/ketabak/commit/3dbad64556fdc946dc3661a72f4b7ded01946522))
+
+
+
 # [0.22.0](https://github.com/hackthefutureofeducation/ketabak/compare/v0.21.0...v0.22.0) (2026-03-16)
 
 
@@ -39,15 +48,6 @@
 * bump tar from 7.4.3 to 7.5.11 ([77d2988](https://github.com/hackthefutureofeducation/ketabak/commit/77d2988c303efc1baaa5ef081fa98433fcd381f4))
 * enhance DarkModeProvider with gradient background and improved styling ([c82403c](https://github.com/hackthefutureofeducation/ketabak/commit/c82403cb10e4a4db2d664b390a4be2416ff91822))
 * update Button component to support loading state and icons, enhance UI in various components ([4a469ae](https://github.com/hackthefutureofeducation/ketabak/commit/4a469aee23c63c5c6fed807a23517e378ae115ae))
-
-
-
-# [0.18.0](https://github.com/hackthefutureofeducation/ketabak/compare/v0.17.6...v0.18.0) (2025-09-26)
-
-
-### Features
-
-* BUMP DEPS - 9/23/2025 ([#58](https://github.com/hackthefutureofeducation/ketabak/issues/58)) ([1a9ce34](https://github.com/hackthefutureofeducation/ketabak/commit/1a9ce345574995a33a099b909dfee33fc185c9d9)), closes [#52](https://github.com/hackthefutureofeducation/ketabak/issues/52)
 
 
 
