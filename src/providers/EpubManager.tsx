@@ -20,7 +20,6 @@ interface EpubManagerContextProps {
   editPage: (content: SerializedEditorState) => Promise<boolean>;
   editPageTitle: (title: string) => boolean;
   uploadDump: (dump: EpubPage[]) => void;
-  loading: boolean;
 }
 
 const EpubManagerContext = createContext<EpubManagerContextProps | undefined>(undefined);
@@ -37,7 +36,6 @@ export const EpubManagerProvider = ({ children }: { children: ReactNode }) => {
   const [pages, setPages] = useState<EpubPage[]>([]);
   const [activePageId, setActivePageId] = useState<string | null>(null);
   const [dirty, setDirty] = useState(false); // Track if user made changes
-  const [loading, setLoading] = useState<boolean>(true); // Loading state for fetching pages
   const { fileUrl, sync, content } = useFile();
 
   const activePage = useMemo(
@@ -98,18 +96,11 @@ export const EpubManagerProvider = ({ children }: { children: ReactNode }) => {
   // Load pages from file content when fileUrl changes
   useEffect(() => {
     if (fileUrl && content) {
-      setLoading(true);
       setPages(content.pages);
       if (activePage === null) {
         setActivePageId(content.pages[0]?.id ?? null);
       }
       setDirty(false); // not dirty since it's a fresh load
-      setLoading(false);
-    } else if (!fileUrl || !content) {
-      setLoading(true);
-      setPages([]);
-      setActivePageId(null);
-      setDirty(false);
     }
   }, [fileUrl, content]);
 
@@ -131,7 +122,6 @@ export const EpubManagerProvider = ({ children }: { children: ReactNode }) => {
       editPage,
       editPageTitle,
       uploadDump,
-      loading,
     }),
     [
       pages,
@@ -142,7 +132,6 @@ export const EpubManagerProvider = ({ children }: { children: ReactNode }) => {
       editPage,
       editPageTitle,
       uploadDump,
-      loading,
     ]
   );
 
