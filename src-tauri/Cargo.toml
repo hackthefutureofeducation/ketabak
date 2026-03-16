@@ -1,6 +1,6 @@
 [package]
 name = "ketabak"
-version = "0.21.0"
+version = "0.22.0"
 description = "An open-source eBook creator that lets you write, design, and publish interactive digital books with ease."
 authors = [ "Adam Naji",]
 edition = "2021"
@@ -20,10 +20,6 @@ anyhow = "1.0.99"
 regex = "1.11.1"
 eyre = "0.6.12"
 
-[build-dependencies.tauri-build]
-version = "2"
-features = []
-
 [dependencies.tauri]
 version = "2"
 features = []
@@ -35,3 +31,7 @@ features = [ "derive",]
 [dependencies.chrono]
 version = "0.4.41"
 features = [ "serde",]
+
+[build-dependencies.tauri-build]
+version = "2"
+features = []
