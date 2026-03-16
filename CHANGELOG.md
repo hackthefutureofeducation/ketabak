@@ -1,3 +1,12 @@
+# [0.19.0](https://github.com/hackthefutureofeducation/ketabak/compare/v0.18.0...v0.19.0) (2026-03-16)
+
+
+### Features
+
+* bump tar from 7.4.3 to 7.5.11 ([77d2988](https://github.com/hackthefutureofeducation/ketabak/commit/77d2988c303efc1baaa5ef081fa98433fcd381f4))
+
+
+
 # [0.18.0](https://github.com/hackthefutureofeducation/ketabak/compare/v0.17.6...v0.18.0) (2025-09-26)
 
 
@@ -32,15 +41,6 @@
 ### Bug Fixes
 
 * format ([e7dba9c](https://github.com/hackthefutureofeducation/ketabak/commit/e7dba9cde86a3eebe493a6c1e864bee9418f27fb))
-
-
-
-## [0.17.3](https://github.com/hackthefutureofeducation/ketabak/compare/v0.17.2...v0.17.3) (2025-09-14)
-
-
-### Bug Fixes
-
-* restructure Toolbar component for better button management ([f5719dc](https://github.com/hackthefutureofeducation/ketabak/commit/f5719dcc3732b3eb8fc381ef937c8c505101e22a))
 
 
 
