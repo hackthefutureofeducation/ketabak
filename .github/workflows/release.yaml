@@ -169,17 +169,4 @@ jobs:
           prerelease: false
           args: ${{ matrix.args }}
 
-  publish-release:
-    needs: [changelog, build-tauri]
-    if: needs.changelog.outputs.committed == 'true'
-    runs-on: ubuntu-latest
-    steps:
-      - name: Publish GitHub Release
-        uses: softprops/action-gh-release@v2
-        with:
-          name: Ketabak
-          draft: false
-          overwrite_files: true
-          token: ${{ secrets.GITHUB_TOKEN }}
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+  # Remove the separate publish-release job to ensure the release is created only by tauri-action in build-tauri above
