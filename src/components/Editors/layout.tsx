@@ -8,12 +8,12 @@ import { useEpubManager } from '../../providers/EpubManager';
 function LayoutInner() {
   const { pages } = useEpubManager();
   const isNoPages = pages.length === 0;
-  if (isNoPages) return <CreateNewPageWelcome/>
+  if (isNoPages) return <CreateNewPageWelcome />;
 
   return (
     <section className="w-full grid grid-cols-[250px_1fr]">
       <Sidebar />
-        <Editors/>
+      <Editors />
     </section>
   );
 }
