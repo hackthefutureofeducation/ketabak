@@ -99,7 +99,7 @@ const LexicalEditor: React.FC = () => {
   );
 
   return (
-    <div className="w-full mx-auto bg-background border-primary border rounded-lg shadow-lg overflow-hidden rounded-b-none">
+    <div className="w-full mx-auto bg-background/10 border-primary border rounded-lg shadow-lg overflow-hidden rounded-b-none">
       <LexicalComposer initialConfig={initialConfig}>
         <Toolbar wordCount={wordCount} charCount={charCount} isAutoSaved={isAutoSaved} />
         <div className="relative">

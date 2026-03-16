@@ -1,19 +1,77 @@
 @import 'tailwindcss';
 @tailwind utilities;
 @custom-variant dark (&:where(.dark, .dark *));
+
 @theme {
-  --color-background: #ffffff;
-  --color-foreground: #1f2937;
-  --color-primary: #f97316;
-  --color-primary-hover: #c2410c;
+  /* Light mode: soft purplish pastel shades */
+  --color-background: #f3f0ff;          /* Soft lavender */
+  --color-foreground: #3e3364;          /* Muted purple/blue for text */
+  --color-primary: #a78bfa;             /* Purple (TW indigo-400) */
+  --color-primary-hover: #7c3aed;       /* Purple (TW indigo-600) */
 }
+
 @layer theme {
   :root {
     @variant dark {
-      --color-background: #0f172a;
-      --color-foreground: #f8fafc;
-      --color-primary: #fdba74;
-      --color-primary-hover: #ea580c;
+      /* Dark mode: even softer, deep purples with bright accents */
+      --color-background: #312e81;       /* Very deep indigo/purple */
+      --color-foreground: #f4f3ff;       /* Pale lavender for text */
+      --color-primary: #c4b5fd;          /* Light purple accent */
+      --color-primary-hover: #a78bfa;    /* Main purple accent */
     }
   }
+}
+
+/* Glassmorphic subtle background class (less glossy) */
+.bg-glossy {
+  background: linear-gradient(
+    to bottom right,
+    rgba(255, 255, 255, 0.6),
+    rgba(255, 255, 255, 0.4),
+    rgba(255, 255, 255, 0.2)
+  );
+  backdrop-filter: blur(10px) saturate(120%);
+  -webkit-backdrop-filter: blur(10px) saturate(120%);
+  border: 1px solid rgba(255, 255, 255, 0.28);
+  box-shadow: 0 4px 16px 0 rgba(0, 0, 0, 0.04);
+}
+
+.bg-glossy::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background: linear-gradient(to bottom right, rgba(255, 255, 255, 0.08), transparent, transparent);
+  pointer-events: none;
+  opacity: 0.3;
+}
+
+.bg-glossy::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background: radial-gradient(circle at 20% 30%, rgba(255, 255, 255, 0.05) 0%, transparent 60%),
+    radial-gradient(circle at 80% 70%, rgba(147, 197, 253, 0.05) 0%, transparent 60%);
+  pointer-events: none;
+  opacity: 0.2;
+}
+
+.dark .bg-glossy {
+  background: linear-gradient(
+    to bottom right,
+    rgba(15, 23, 42, 0.75),
+    rgba(30, 41, 59, 0.6),
+    rgba(15, 23, 42, 0.45)
+  );
+  border-color: rgba(255, 255, 255, 0.05);
+  box-shadow: 0 4px 18px 0 rgba(0, 0, 0, 0.18);
+}
+
+.dark .bg-glossy::before {
+  background: linear-gradient(to bottom right, rgba(255, 255, 255, 0.01), transparent, transparent);
+}
+
+.dark .bg-glossy::after {
+  opacity: 0.08;
 }
