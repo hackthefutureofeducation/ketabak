@@ -27,12 +27,10 @@ export const Start = () => {
       </p>
 
       <div className="grid grid-cols-2 gap-2">
-        <Button onClick={selectFile} variant="secondary">
-          <File size={24} />
+        <Button onClick={selectFile} variant="secondary" icon={<File size={24} />}>
           <span className="text-lg font-medium">Open File</span>
         </Button>
-        <Button onClick={() => setShowNewProject(true)} variant="secondary">
-          <FilePlus size={24} />
+        <Button onClick={() => setShowNewProject(true)} variant="secondary" icon={<FilePlus size={24} />}>
           <span className="text-lg font-medium">New Project</span>
         </Button>
       </div>

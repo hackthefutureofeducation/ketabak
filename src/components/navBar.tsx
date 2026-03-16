@@ -37,9 +37,11 @@ const NavBar: React.FC<{ onNavigate: React.Dispatch<React.SetStateAction<'home' 
       </div>
       <div className="flex space-x-2">
         <ProjectOptions onNavigate={onNavigate} />
-        <Button onClick={toggleDarkMode} aria-label="Toggle dark mode">
-          {darkMode ? <Moon size={20} /> : <Sun size={20} />}
-        </Button>
+        <Button
+          onClick={toggleDarkMode}
+          aria-label="Toggle dark mode"
+          icon={darkMode ? <Moon size={20} /> : <Sun size={20} />}
+        />
       </div>
     </nav>
   );

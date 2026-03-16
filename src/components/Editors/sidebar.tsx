@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useEpubManager } from '../../providers/EpubManager';
 import Button from '../ui/Button';
-import { Pen } from 'lucide-react';
+import { Pen, Plus } from 'lucide-react';
 import { cn } from '../../lib/utils';
 
 interface EpubSidebarProps {
@@ -55,8 +55,9 @@ export const Sidebar: React.FC<EpubSidebarProps> = ({ className = '' }) => {
         <Button
           onClick={() => setIsCreating(true)}
           className="w-full mt-2 bg-primary hover:bg-primary/50 text-white"
+          icon={<Plus size={16} />}
         >
-          + Add Page
+          Add Page
         </Button>
       </div>
 
