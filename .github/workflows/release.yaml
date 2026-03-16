@@ -5,26 +5,40 @@ on:
     branches:
       - main
 
+concurrency:
+  # Prevents multiple releases running concurrently on main branch.
+  group: release-main
+  cancel-in-progress: true
+
 jobs:
+  # Changelog + Version Sync + Tagging
   changelog:
     if: github.repository == 'hackthefutureofeducation/ketabak'
     runs-on: ubuntu-latest
     outputs:
       version: ${{ steps.changelog.outputs.version }}
       tag: ${{ steps.changelog.outputs.tag }}
-      changelog: ${{ steps.changelog.outputs.clean_changelog }}
       committed: ${{ steps.commit.outputs.committed }}
 
     steps:
+      # Do not trigger on bot's own commits (prevents workflow loops)
+      - name: Block CI Loop on bot commits
+        if: startsWith(github.event.head_commit.author.name, 'github-actions[bot]')
+        run: |
+          echo "Exiting to prevent CI loop."
+          exit 1
+
       - name: Checkout repository
         uses: actions/checkout@v4
         with:
           fetch-depth: 0
 
-      - name: Install jq
-        run: sudo apt-get install -y jq
+      - name: Set up required tools
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y jq
 
-      # Generate changelog + get new version (but don’t commit)
+      # Generate changelog + next version (does not commit)
       - name: Generate Changelog
         id: changelog
         uses: TriPSs/conventional-changelog-action@v5
@@ -34,45 +48,59 @@ jobs:
           skip-commit: true
           skip-git-pull: true
 
-      # Bump package.json version to match changelog
-      - name: Bump package.json version
+      # === VERSION SYNCHRONIZATION SECTION ===
+      - name: Sync version
+        id: version_sync
         run: |
-          jq --arg v "${{ steps.changelog.outputs.version }}" '.version = $v' package.json > tmp.json && mv tmp.json package.json
+          set -e
 
-      # Update Cargo.toml + Cargo.lock
-      - name: Update Cargo.toml version
-        run: |
-          sed -i "s/^version = \".*\"/version = \"${{ steps.changelog.outputs.version }}\"/" src-tauri/Cargo.toml
+          version="${{ steps.changelog.outputs.version }}"
+          # 1. Update package.json version (safe overwrite)
+          jq --arg v "$version" '.version = $v' package.json > package.tmp.json
+          mv package.tmp.json package.json
+
+          # 2. Update Cargo.toml version using bump.py (TOML-aware)
+          pip install toml > /dev/null 2>&1
+          python3 scripts/bump.py --version "$version"
+          # 3. Update tauri.conf.json version
+          jq --arg v "$version" '.version = $v' src-tauri/tauri.conf.json > tmp.conf.json
+          mv tmp.conf.json src-tauri/tauri.conf.json
+
+          # 4. Update Cargo.lock only if it exists
           if [ -f src-tauri/Cargo.lock ]; then
             cargo update --manifest-path src-tauri/Cargo.toml
           fi
 
-      # Update Tauri config version
-      - name: Update Tauri config version
-        run: |
-          jq --arg v "${{ steps.changelog.outputs.version }}" '.version = $v' src-tauri/tauri.conf.json > tmp.json && mv tmp.json src-tauri/tauri.conf.json
-
-      # Commit everything together
-      - name: Commit all changes
+      # === GIT COMMIT & TAG WORKFLOW ===
+      - name: Commit and push version bump + changelog
         id: commit
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
-          git add CHANGELOG.md package.json src-tauri/Cargo.toml src-tauri/tauri.conf.json src-tauri/Cargo.lock
+          git add CHANGELOG.md package.json src-tauri/Cargo.toml src-tauri/tauri.conf.json src-tauri/Cargo.lock || true
           if git diff --cached --quiet; then
             echo "No changes to commit"
             echo "committed=false" >> $GITHUB_OUTPUT
           else
             git commit -m "chore: release version ${{ steps.changelog.outputs.version }}"
-            git push origin main
+            git push origin HEAD:main
             echo "committed=true" >> $GITHUB_OUTPUT
           fi
-      - name: Create and push tag
+
+      - name: Create and push tag (only if new version was committed)
         if: steps.commit.outputs.committed == 'true'
         run: |
-          git tag ${{ steps.changelog.outputs.tag }}
-          git push origin ${{ steps.changelog.outputs.tag }}
+          set -e
+          tag="${{ steps.changelog.outputs.tag }}"
+          # Only create tag if it does not exist already
+          if git rev-parse "$tag" >/dev/null 2>&1; then
+            echo "Tag $tag already exists, skipping tag creation."
+          else
+            git tag "$tag"
+            git push origin "$tag"
+          fi
 
+  # --- Tauri Build and Release (matrix) ---
   build-tauri:
     needs: changelog
     if: needs.changelog.outputs.committed == 'true'
@@ -91,42 +119,40 @@ jobs:
             args: ''
 
     steps:
-      - uses: actions/checkout@v4
-
-      # Cache Node modules (Yarn)
-      - name: Cache Node modules
-        uses: actions/cache@v3
+      # Only checkout after version bump/tag are present.
+      - name: Checkout repository
+        uses: actions/checkout@v4
         with:
-          path: |
-            ~/.yarn/cache
-            .yarn/cache
-            node_modules
-          key: ${{ runner.os }}-yarn-${{ hashFiles('**/yarn.lock') }}
-          restore-keys: |
-            ${{ runner.os }}-yarn-
+          fetch-depth: 0
 
-      # Cache Cargo registry & git sources
-      - name: Cache Cargo registry
-        uses: actions/cache@v3
+      # Improved Node and Yarn caching for rapid installs
+      - name: Setup and cache Node & Yarn
+        uses: actions/setup-node@v4
         with:
-          path: |
-            ~/.cargo/registry
-            ~/.cargo/git
-          key: ${{ runner.os }}-cargo-${{ hashFiles('**/Cargo.lock') }}
-          restore-keys: |
-            ${{ runner.os }}-cargo-
+          node-version: lts/*
+          cache: 'yarn'
 
-      # Cache linuxdeploy for Linux
+      # Optimized Rust and Cargo caching
+      - name: Setup Rust
+        uses: dtolnay/rust-toolchain@stable
+      - name: Rust cache
+        uses: swatinem/rust-cache@v2
+        with:
+          workspaces: |
+            src-tauri
+
+      # Additional cache for linuxdeploy (Linux only)
       - name: Cache linuxdeploy (Linux only)
-        if: matrix.platform == 'ubuntu-22.04'
+        if: runner.os == 'Linux'
         id: cache-linuxdeploy
         uses: actions/cache@v3
         with:
           path: /usr/local/bin/linuxdeploy
           key: linuxdeploy-v1
 
-      - name: Install dependencies (Linux only)
-        if: matrix.platform == 'ubuntu-22.04'
+      # Platform specific dependencies (Linux)
+      - name: Install Linux build dependencies
+        if: runner.os == 'Linux'
         run: |
           sudo apt-get update
           sudo apt-get install -y \
@@ -136,29 +162,25 @@ jobs:
             librsvg2-dev \
             patchelf
 
-      - name: Download linuxdeploy if not cached
-        if: matrix.platform == 'ubuntu-22.04' && steps.cache-linuxdeploy.outputs.cache-hit != 'true'
+      # Download linuxdeploy if missing (Linux-only)
+      - name: Download linuxdeploy if missing
+        if: runner.os == 'Linux' && steps.cache-linuxdeploy.outputs.cache-hit != 'true'
         run: |
           wget https://github.com/tauri-apps/binary-releases/releases/download/linuxdeploy/linuxdeploy-x86_64.AppImage -O linuxdeploy
           chmod +x linuxdeploy
           sudo mv linuxdeploy /usr/local/bin/linuxdeploy
 
-      - uses: actions/setup-node@v4
-        with:
-          node-version: lts/*
-          cache: yarn
-
-      - uses: dtolnay/rust-toolchain@stable
-      - uses: swatinem/rust-cache@v2
-
-      - name: Install Rust target (macOS Intel)
+      # Add macOS targets as needed
+      - name: Install Rust macOS target (Intel only)
         if: matrix.args == '--target x86_64-apple-darwin'
         run: rustup target add x86_64-apple-darwin
 
-      - name: Install frontend deps
+      # Install frontend dependencies with lockfile
+      - name: Install frontend dependencies
         run: yarn install --frozen-lockfile
 
-      - name: Build Tauri app
+      # Build and Release via tauri-action (handles cross-platform artifacts and release draft)
+      - name: Build & Publish Tauri App
         uses: tauri-apps/tauri-action@v0
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
@@ -168,5 +190,3 @@ jobs:
           releaseDraft: true
           prerelease: false
           args: ${{ matrix.args }}
-
-  # Remove the separate publish-release job to ensure the release is created only by tauri-action in build-tauri above
