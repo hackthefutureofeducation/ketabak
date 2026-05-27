@@ -1,3 +1,12 @@
+# [0.24.0](https://github.com/hackthefutureofeducation/ketabak/compare/v0.23.0...v0.24.0) (2026-05-27)
+
+
+### Features
+
+* bump postcss from 8.5.8 to 8.5.15 ([#90](https://github.com/hackthefutureofeducation/ketabak/issues/90)) ([6ad1bb8](https://github.com/hackthefutureofeducation/ketabak/commit/6ad1bb85d395db5acf8167410f70467d9bbcf09f))
+
+
+
 # [0.23.0](https://github.com/hackthefutureofeducation/ketabak/compare/v0.22.0...v0.23.0) (2026-03-16)
 
 
@@ -31,23 +40,6 @@
 ### Features
 
 * enhance GitHub Actions release workflow with version synchronization and caching improvements ([4a6e91f](https://github.com/hackthefutureofeducation/ketabak/commit/4a6e91f987df3a09d75d1a3cc1d56b2521c93f12))
-
-
-
-# [0.19.0](https://github.com/hackthefutureofeducation/ketabak/compare/v0.18.0...v0.19.0) (2026-03-16)
-
-
-### Bug Fixes
-
-* format ([89b2df2](https://github.com/hackthefutureofeducation/ketabak/commit/89b2df23a310b8c2b56ce49fb04bea150597f859))
-* remove separate publish-release job from GitHub Actions workflow to streamline release process ([0301e84](https://github.com/hackthefutureofeducation/ketabak/commit/0301e84385a3379421f5dc108a6b8971c7c706ce))
-
-
-### Features
-
-* bump tar from 7.4.3 to 7.5.11 ([77d2988](https://github.com/hackthefutureofeducation/ketabak/commit/77d2988c303efc1baaa5ef081fa98433fcd381f4))
-* enhance DarkModeProvider with gradient background and improved styling ([c82403c](https://github.com/hackthefutureofeducation/ketabak/commit/c82403cb10e4a4db2d664b390a4be2416ff91822))
-* update Button component to support loading state and icons, enhance UI in various components ([4a469ae](https://github.com/hackthefutureofeducation/ketabak/commit/4a469aee23c63c5c6fed807a23517e378ae115ae))
 
 
 
